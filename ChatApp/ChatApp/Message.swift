@@ -7,12 +7,13 @@
 
 import Foundation
 
-struct RecievedMessage {
+struct RecievedMessage: Codable {
     let sourceUsername: String
     let timestamp: TimeInterval
     let content: String
 }
 
-struct SentMessage {
+struct SentMessage: Codable {
     let content: String
+    let chatId: String
 }

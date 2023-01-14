@@ -21,6 +21,8 @@
 		CD565F2F2972FD7000B26FC7 /* MessageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD565F2E2972FD7000B26FC7 /* MessageViewModel.swift */; };
 		CD565F312972FF2F00B26FC7 /* DateFormatters.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD565F302972FF2F00B26FC7 /* DateFormatters.swift */; };
 		CD565F332973018000B26FC7 /* MessageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD565F322973018000B26FC7 /* MessageViewCell.swift */; };
+		CD565F3529731A5500B26FC7 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD565F3429731A5500B26FC7 /* ChatService.swift */; };
+		CD565F3729731AEB00B26FC7 /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD565F3629731AEB00B26FC7 /* LoginModels.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +43,8 @@
 		CD565F2E2972FD7000B26FC7 /* MessageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewModel.swift; sourceTree = "<group>"; };
 		CD565F302972FF2F00B26FC7 /* DateFormatters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatters.swift; sourceTree = "<group>"; };
 		CD565F322973018000B26FC7 /* MessageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewCell.swift; sourceTree = "<group>"; };
+		CD565F3429731A5500B26FC7 /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
+		CD565F3629731AEB00B26FC7 /* LoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModels.swift; sourceTree = "<group>"; };
 		EFB45F5B0EEEE1DA855BD1D8 /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -106,6 +110,8 @@
 				CD565F2C2972FC1300B26FC7 /* Message.swift */,
 				CD565F2E2972FD7000B26FC7 /* MessageViewModel.swift */,
 				CD565F302972FF2F00B26FC7 /* DateFormatters.swift */,
+				CD565F3429731A5500B26FC7 /* ChatService.swift */,
+				CD565F3629731AEB00B26FC7 /* LoginModels.swift */,
 			);
 			path = ChatApp;
 			sourceTree = "<group>";
@@ -247,10 +253,12 @@
 				CD565F182972ED8800B26FC7 /* ChatApp.xcdatamodeld in Sources */,
 				CD565F2B2972FBF400B26FC7 /* ChatController.swift in Sources */,
 				CD565F2D2972FC1300B26FC7 /* Message.swift in Sources */,
+				CD565F3529731A5500B26FC7 /* ChatService.swift in Sources */,
 				CD565F0E2972ED8800B26FC7 /* AppDelegate.swift in Sources */,
 				CD565F332973018000B26FC7 /* MessageViewCell.swift in Sources */,
 				CD565F312972FF2F00B26FC7 /* DateFormatters.swift in Sources */,
 				CD565F102972ED8800B26FC7 /* SceneDelegate.swift in Sources */,
+				CD565F3729731AEB00B26FC7 /* LoginModels.swift in Sources */,
 				CD565F272972F3DE00B26FC7 /* ChatTableViewController.swift in Sources */,
 				CD565F292972F49200B26FC7 /* MessageInputView.swift in Sources */,
 			);
