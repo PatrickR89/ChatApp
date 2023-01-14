@@ -18,8 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let navigationController = UINavigationController()
         let mainViewController = ViewController()
+        let chatViewController = ChatTableViewController()
 
-        navigationController.viewControllers = [mainViewController]
+        navigationController.viewControllers = [chatViewController]
 
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
