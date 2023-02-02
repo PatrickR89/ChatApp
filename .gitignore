@@ -1,0 +1,68 @@
+ChatApp/Pods/Manifest.lock
+ChatApp/Pods/Alamofire/README.md
+ChatApp/Pods/Alamofire/Source/AFError.swift
+ChatApp/Pods/Alamofire/Source/Alamofire.swift
+ChatApp/Pods/Alamofire/Source/AlamofireExtended.swift
+ChatApp/Pods/Alamofire/Source/AuthenticationInterceptor.swift
+ChatApp/Pods/Alamofire/Source/CachedResponseHandler.swift
+ChatApp/Pods/Alamofire/Source/Combine.swift
+ChatApp/Pods/Alamofire/Source/Concurrency.swift
+ChatApp/Pods/Alamofire/Source/DispatchQueue+Alamofire.swift
+ChatApp/Pods/Alamofire/Source/EventMonitor.swift
+ChatApp/Pods/Alamofire/Source/HTTPHeaders.swift
+ChatApp/Pods/Alamofire/Source/HTTPMethod.swift
+ChatApp/Pods/Alamofire/Source/MultipartFormData.swift
+ChatApp/Pods/Alamofire/Source/MultipartUpload.swift
+ChatApp/Pods/Alamofire/Source/NetworkReachabilityManager.swift
+ChatApp/Pods/Alamofire/Source/Notifications.swift
+ChatApp/Pods/Alamofire/Source/OperationQueue+Alamofire.swift
+ChatApp/Pods/Alamofire/Source/ParameterEncoder.swift
+ChatApp/Pods/Alamofire/Source/ParameterEncoding.swift
+ChatApp/Pods/Alamofire/Source/Protected.swift
+ChatApp/Pods/Alamofire/Source/RedirectHandler.swift
+ChatApp/Pods/Alamofire/Source/Request.swift
+ChatApp/Pods/Alamofire/Source/RequestInterceptor.swift
+ChatApp/Pods/Alamofire/Source/RequestTaskMap.swift
+ChatApp/Pods/Alamofire/Source/Response.swift
+ChatApp/Pods/Alamofire/Source/ResponseSerialization.swift
+ChatApp/Pods/Alamofire/Source/Result+Alamofire.swift
+ChatApp/Pods/Alamofire/Source/RetryPolicy.swift
+ChatApp/Pods/Alamofire/Source/ServerTrustEvaluation.swift
+ChatApp/Pods/Alamofire/Source/Session.swift
+ChatApp/Pods/Alamofire/Source/SessionDelegate.swift
+ChatApp/Pods/Alamofire/Source/StringEncoding+Alamofire.swift
+ChatApp/Pods/Alamofire/Source/URLConvertible+URLRequestConvertible.swift
+ChatApp/Pods/Alamofire/Source/URLEncodedFormEncoder.swift
+ChatApp/Pods/Alamofire/Source/URLRequest+Alamofire.swift
+ChatApp/Pods/Alamofire/Source/URLSessionConfiguration+Alamofire.swift
+ChatApp/Pods/Alamofire/Source/Validation.swift
+ChatApp/Pods/Pods.xcodeproj/project.pbxproj
+ChatApp/Pods/Pods.xcodeproj/xcuserdata/patrick.xcuserdatad/xcschemes/Alamofire.xcscheme
+ChatApp/Pods/Pods.xcodeproj/xcuserdata/patrick.xcuserdatad/xcschemes/Pods-ChatApp.xcscheme
+ChatApp/Pods/Target Support Files/Alamofire/Alamofire-dummy.m
+ChatApp/Pods/Target Support Files/Alamofire/Alamofire-Info.plist
+ChatApp/Pods/Target Support Files/Alamofire/Alamofire-prefix.pch
+ChatApp/Pods/Target Support Files/Alamofire/Alamofire-umbrella.h
+ChatApp/Pods/Target Support Files/Alamofire/Alamofire.debug.xcconfig
+ChatApp/Pods/Target Support Files/Alamofire/Alamofire.modulemap
+ChatApp/Pods/Target Support Files/Alamofire/Alamofire.release.xcconfig
+ChatApp/Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp-acknowledgements.markdown
+ChatApp/Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp-acknowledgements.plist
+ChatApp/Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp-dummy.m
+ChatApp/Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp-frameworks-Debug-input-files.xcfilelist
+ChatApp/Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp-frameworks-Debug-output-files.xcfilelist
+ChatApp/Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp-frameworks-Release-input-files.xcfilelist
+ChatApp/Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp-frameworks-Release-output-files.xcfilelist
+ChatApp/Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp-frameworks.sh
+ChatApp/Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp-Info.plist
+ChatApp/Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp-umbrella.h
+ChatApp/Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp.debug.xcconfig
+ChatApp/Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp.modulemap
+ChatApp/Pods/Target Support Files/Pods-ChatApp/Pods-ChatApp.release.xcconfig
+ChatApp/Pods/Alamofire/Source/DispatchQueue+Alamofire.swift
+ChatApp/Pods/Alamofire/Source/OperationQueue+Alamofire.swift
+ChatApp/Pods/Alamofire/Source/Result+Alamofire.swift
+ChatApp/Pods/Alamofire/Source/StringEncoding+Alamofire.swift
+ChatApp/Pods/Alamofire/Source/URLConvertible+URLRequestConvertible.swift
+ChatApp/Pods/Alamofire/Source/URLRequest+Alamofire.swift
+ChatApp/Pods/Alamofire/Source/URLSessionConfiguration+Alamofire.swift
