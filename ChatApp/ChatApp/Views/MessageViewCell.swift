@@ -15,9 +15,7 @@ class MessageViewCell: UITableViewCell {
         }
     }
 
-    var senderLable = UILabel()
-    var contentLabel = UILabel()
-    var timestampLabel = UILabel()
+    var messageView = MessageView()
     let margin: CGFloat = 5
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -30,59 +28,30 @@ class MessageViewCell: UITableViewCell {
     }
 
     func setupUI() {
-        self.contentView.addSubview(senderLable)
-        self.contentView.addSubview(contentLabel)
-        self.contentView.addSubview(timestampLabel)
-
-        senderLable.translatesAutoresizingMaskIntoConstraints = false
-        contentLabel.translatesAutoresizingMaskIntoConstraints = false
-        timestampLabel.translatesAutoresizingMaskIntoConstraints = false
-
-        senderLable.numberOfLines = 1
-        contentLabel.numberOfLines = 0
-        timestampLabel.numberOfLines = 1
-        timestampLabel.textColor = .placeholderText
-        contentView.layer.borderColor = UIColor.label.cgColor
-        contentView.layer.borderWidth = 1
-        contentView.layer.cornerRadius = 15
+        self.contentView.addSubview(messageView)
+        messageView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
-            senderLable.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: margin),
-            contentLabel.topAnchor.constraint(equalTo: senderLable.bottomAnchor, constant: margin),
-            timestampLabel.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: margin),
-            senderLable.leadingAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.leadingAnchor, constant: margin),
-            contentLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: margin),
-            timestampLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: margin),
-            senderLable.trailingAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.trailingAnchor, constant: -margin),
-            contentLabel.trailingAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.trailingAnchor, constant: -margin),
-            timestampLabel.trailingAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.trailingAnchor, constant: -margin),
-            timestampLabel.bottomAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.bottomAnchor, constant: -margin)
+            messageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
+            messageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
+            messageView.widthAnchor.constraint(lessThanOrEqualToConstant: contentView.frame.width - 10.0)
         ])
     }
 
     func setupContent() {
         guard let viewModel = viewModel else {
-            senderLable.text = ""
-            contentLabel.text = ""
-            timestampLabel.text = ""
+            messageView.inputText(sender: .me, content: "", time: "")
             return
         }
 
-        contentLabel.text = viewModel.content
-        timestampLabel.text = viewModel.timestamp
+        messageView.inputText(sender: viewModel.sender, content: viewModel.content, time: viewModel.timestamp)
 
         switch viewModel.sender {
         case .me:
-            senderLable.text = "Me"
-            senderLable.textAlignment = .right
-            contentLabel.textAlignment = .right
-            timestampLabel.textAlignment = .right
+            messageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
 
-        case .other(let name):
-            senderLable.text = name
-            senderLable.textAlignment = .left
-            contentLabel.textAlignment = .left
-            timestampLabel.textAlignment = .left
+        case .other(_):
+            messageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
         }
 
     }
