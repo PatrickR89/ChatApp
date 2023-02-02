@@ -35,16 +35,25 @@ class MessageInputView: UIView {
         sendButton.translatesAutoresizingMaskIntoConstraints = false
 
         let buttonImage = UIImage(systemName: "paperplane.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .regular))
+
         sendButton.setImage(buttonImage, for: .normal)
-        sendButton.setTitleColor(.white, for: .normal)
-        sendButton.setTitleColor(.gray, for: .highlighted)
+
+        sendButton.tintColor = .white
         sendButton.backgroundColor = .systemBlue
+
         sendButton.layer.cornerRadius = 22
-        inputField.backgroundColor = .gray
+
+        inputField.backgroundColor = .lightGray
         inputField.textColor = .white
-        inputField.text = "aaaa"
+        inputField.text = ""
         inputField.isUserInteractionEnabled = true
         inputField.delegate = self
+        inputField.layer.cornerRadius = 22
+        inputField.autocorrectionType = .no
+        let placeholder = try! NSAttributedString(markdown: "Enter your message...")
+        inputField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: inputField.frame.height))
+        inputField.leftViewMode = .always
+        inputField.attributedPlaceholder = NSAttributedString(attributedString: placeholder)
 
         sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
 
@@ -64,6 +73,7 @@ class MessageInputView: UIView {
     @objc func sendMessage() {
         guard let message = inputField.text, !message.isEmpty else {return}
         delegate?.messageInputView(didSend: message)
+        inputField.text = ""
     }
 }
 

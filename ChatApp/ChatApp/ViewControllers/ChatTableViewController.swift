@@ -39,7 +39,6 @@ class ChatTableViewController: UIViewController {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         messageInputView.translatesAutoresizingMaskIntoConstraints = false
 
-        tableView.backgroundColor = .brown
         tableView.estimatedRowHeight = 50.0
         tableView.rowHeight = UITableView.automaticDimension
 

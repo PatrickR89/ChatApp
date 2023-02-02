@@ -18,7 +18,7 @@ class MessageViewCell: UITableViewCell {
     var senderLable = UILabel()
     var contentLabel = UILabel()
     var timestampLabel = UILabel()
-    let margin: CGFloat = 2
+    let margin: CGFloat = 5
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -41,18 +41,22 @@ class MessageViewCell: UITableViewCell {
         senderLable.numberOfLines = 1
         contentLabel.numberOfLines = 0
         timestampLabel.numberOfLines = 1
+        timestampLabel.textColor = .placeholderText
+        contentView.layer.borderColor = UIColor.label.cgColor
+        contentView.layer.borderWidth = 1
+        contentView.layer.cornerRadius = 15
 
         NSLayoutConstraint.activate([
             senderLable.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: margin),
             contentLabel.topAnchor.constraint(equalTo: senderLable.bottomAnchor, constant: margin),
             timestampLabel.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: margin),
-            senderLable.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            contentLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            timestampLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            senderLable.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
-            contentLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
-            timestampLabel.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor),
-            timestampLabel.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: margin)
+            senderLable.leadingAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.leadingAnchor, constant: margin),
+            contentLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: margin),
+            timestampLabel.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: margin),
+            senderLable.trailingAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.trailingAnchor, constant: -margin),
+            contentLabel.trailingAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.trailingAnchor, constant: -margin),
+            timestampLabel.trailingAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.trailingAnchor, constant: -margin),
+            timestampLabel.bottomAnchor.constraint(equalTo: self.contentView.safeAreaLayoutGuide.bottomAnchor, constant: -margin)
         ])
     }
 

@@ -98,6 +98,7 @@
 		CD565F0C2972ED8800B26FC7 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				CD565F1E2972ED8A00B26FC7 /* Info.plist */,
 				CDC92B65298BC6DE00F7E93A /* Core */,
 				CDC92B64298BC6AE00F7E93A /* Utils */,
 				CDC92B63298BC69E00F7E93A /* Services */,
@@ -176,7 +177,6 @@
 				CD565F0F2972ED8800B26FC7 /* SceneDelegate.swift */,
 				CD565F192972ED8A00B26FC7 /* Assets.xcassets */,
 				CD565F1B2972ED8A00B26FC7 /* LaunchScreen.storyboard */,
-				CD565F1E2972ED8A00B26FC7 /* Info.plist */,
 				CD565F162972ED8800B26FC7 /* ChatApp.xcdatamodeld */,
 			);
 			path = Core;
