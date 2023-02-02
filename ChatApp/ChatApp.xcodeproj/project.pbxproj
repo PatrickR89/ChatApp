@@ -98,20 +98,14 @@
 		CD565F0C2972ED8800B26FC7 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				CDC92B65298BC6DE00F7E93A /* Core */,
+				CDC92B64298BC6AE00F7E93A /* Utils */,
+				CDC92B63298BC69E00F7E93A /* Services */,
+				CDC92B62298BC67E00F7E93A /* ViewModels */,
+				CDC92B61298BC67800F7E93A /* Models */,
+				CDC92B60298BC66600F7E93A /* Controllers */,
 				CD565F252972F3AC00B26FC7 /* Views */,
 				CD565F242972F39500B26FC7 /* ViewControllers */,
-				CD565F0D2972ED8800B26FC7 /* AppDelegate.swift */,
-				CD565F0F2972ED8800B26FC7 /* SceneDelegate.swift */,
-				CD565F192972ED8A00B26FC7 /* Assets.xcassets */,
-				CD565F1B2972ED8A00B26FC7 /* LaunchScreen.storyboard */,
-				CD565F1E2972ED8A00B26FC7 /* Info.plist */,
-				CD565F162972ED8800B26FC7 /* ChatApp.xcdatamodeld */,
-				CD565F2A2972FBF400B26FC7 /* ChatController.swift */,
-				CD565F2C2972FC1300B26FC7 /* Message.swift */,
-				CD565F2E2972FD7000B26FC7 /* MessageViewModel.swift */,
-				CD565F302972FF2F00B26FC7 /* DateFormatters.swift */,
-				CD565F3429731A5500B26FC7 /* ChatService.swift */,
-				CD565F3629731AEB00B26FC7 /* LoginModels.swift */,
 			);
 			path = ChatApp;
 			sourceTree = "<group>";
@@ -132,6 +126,60 @@
 				CD565F322973018000B26FC7 /* MessageViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		CDC92B60298BC66600F7E93A /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CD565F2A2972FBF400B26FC7 /* ChatController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		CDC92B61298BC67800F7E93A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CD565F3629731AEB00B26FC7 /* LoginModels.swift */,
+				CD565F2C2972FC1300B26FC7 /* Message.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CDC92B62298BC67E00F7E93A /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				CD565F2E2972FD7000B26FC7 /* MessageViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		CDC92B63298BC69E00F7E93A /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CD565F3429731A5500B26FC7 /* ChatService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		CDC92B64298BC6AE00F7E93A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				CD565F302972FF2F00B26FC7 /* DateFormatters.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		CDC92B65298BC6DE00F7E93A /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				CD565F0D2972ED8800B26FC7 /* AppDelegate.swift */,
+				CD565F0F2972ED8800B26FC7 /* SceneDelegate.swift */,
+				CD565F192972ED8A00B26FC7 /* Assets.xcassets */,
+				CD565F1B2972ED8A00B26FC7 /* LaunchScreen.storyboard */,
+				CD565F1E2972ED8A00B26FC7 /* Info.plist */,
+				CD565F162972ED8800B26FC7 /* ChatApp.xcdatamodeld */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
