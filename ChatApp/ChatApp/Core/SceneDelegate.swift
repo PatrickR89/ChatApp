@@ -17,10 +17,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene: UIWindowScene = (scene as? UIWindowScene) else {return}
 
         let navigationController = UINavigationController()
-        let mainViewController = ViewController()
+        let loginViewController = LoginViewController()
         let chatViewController = ChatTableViewController()
 
-        navigationController.viewControllers = [chatViewController]
+        navigationController.viewControllers = [loginViewController]
 
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene

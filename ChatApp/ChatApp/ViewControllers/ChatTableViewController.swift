@@ -11,7 +11,6 @@ class ChatTableViewController: UIViewController {
 
     lazy var tableView: UITableView = {
         let tableView = UITableView()
-        tableView.delegate = self
         return tableView
     }()
 
@@ -25,7 +24,6 @@ class ChatTableViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        // Do any additional setup after loading the view.
     }
 
     func setupUI() {
@@ -53,7 +51,3 @@ class ChatTableViewController: UIViewController {
         ])
     }
 }
-
-extension ChatTableViewController: UITableViewDelegate {
-}
-

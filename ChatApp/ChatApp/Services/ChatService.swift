@@ -34,7 +34,7 @@ class ChatService: NSObject {
 
         request.httpBody = try? JSONEncoder().encode(message)
 
-        let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let data = data {
                 print("send response: \(String(data: data, encoding: .utf8) ?? "<error>")")
             }
