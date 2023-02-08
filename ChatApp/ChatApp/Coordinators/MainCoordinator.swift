@@ -6,16 +6,18 @@
 //
 
 import UIKit
+import Combine
 
 class MainCoordinator {
     
-    var token: String? = UserDefaults().string(forKey: "CHAT_ID")
+    @Published var token: String? = UserDefaults().string(forKey: "CHAT_ID")
     let navController: UINavigationController
-    let chatService = ChatService()
+    var chatService: ChatService
 
-    init(navController: UINavigationController) {
+    init(_ navController: UINavigationController, _ chatService: ChatService) {
+        self.chatService = chatService
         self.navController = navController
-        chatService.loginDelegate = self
+        self.chatService.loginDelegate = self
     }
 
     func start() {

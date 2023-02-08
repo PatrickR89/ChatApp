@@ -11,6 +11,8 @@
 		CD18DAD72990FDC6005D6544 /* LoginButtonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAD62990FDC6005D6544 /* LoginButtonController.swift */; };
 		CD18DADA2990FEAE005D6544 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAD92990FEAE005D6544 /* UITextField+Extension.swift */; };
 		CD18DADE29911EC7005D6544 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DADD29911EC7005D6544 /* MainCoordinator.swift */; };
+		CD18DAF22993C91C005D6544 /* LoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAF12993C91C005D6544 /* LoginTests.swift */; };
+		CD18DAF42993C957005D6544 /* MockChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAF32993C957005D6544 /* MockChatService.swift */; };
 		CD3C2350298BD897002A1A05 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C234F298BD897002A1A05 /* MessageView.swift */; };
 		CD3C2352298BE30C002A1A05 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C2351298BE30C002A1A05 /* LoginView.swift */; };
 		CD565F0E2972ED8800B26FC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD565F0D2972ED8800B26FC7 /* AppDelegate.swift */; };
@@ -30,12 +32,25 @@
 		CD565F3729731AEB00B26FC7 /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD565F3629731AEB00B26FC7 /* LoginModels.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		CD18DAEC2993C8EF005D6544 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CD565F022972ED8800B26FC7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CD565F092972ED8800B26FC7;
+			remoteInfo = ChatApp;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		4235E75FDAE2176D98494694 /* Pods-ChatApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.release.xcconfig"; path = "Target Support Files/Pods-ChatApp/Pods-ChatApp.release.xcconfig"; sourceTree = "<group>"; };
 		5160C5BF4AA1509CB0181E98 /* Pods-ChatApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.debug.xcconfig"; path = "Target Support Files/Pods-ChatApp/Pods-ChatApp.debug.xcconfig"; sourceTree = "<group>"; };
 		CD18DAD62990FDC6005D6544 /* LoginButtonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButtonController.swift; sourceTree = "<group>"; };
 		CD18DAD92990FEAE005D6544 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		CD18DADD29911EC7005D6544 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
+		CD18DAE82993C8EF005D6544 /* ChatAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CD18DAF12993C91C005D6544 /* LoginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTests.swift; sourceTree = "<group>"; };
+		CD18DAF32993C957005D6544 /* MockChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockChatService.swift; sourceTree = "<group>"; };
 		CD3C234F298BD897002A1A05 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		CD3C2351298BE30C002A1A05 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		CD565F0A2972ED8800B26FC7 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -59,6 +74,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		CD18DAE52993C8EF005D6544 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD565F072972ED8800B26FC7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -103,10 +125,20 @@
 			path = Coordinators;
 			sourceTree = "<group>";
 		};
+		CD18DAE92993C8EF005D6544 /* ChatAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				CD18DAF12993C91C005D6544 /* LoginTests.swift */,
+				CD18DAF32993C957005D6544 /* MockChatService.swift */,
+			);
+			path = ChatAppTests;
+			sourceTree = "<group>";
+		};
 		CD565F012972ED8800B26FC7 = {
 			isa = PBXGroup;
 			children = (
 				CD565F0C2972ED8800B26FC7 /* ChatApp */,
+				CD18DAE92993C8EF005D6544 /* ChatAppTests */,
 				CD565F0B2972ED8800B26FC7 /* Products */,
 				A1CC639D75C3C045DBF20F52 /* Pods */,
 				7945718AE35172FCCAE5CEF6 /* Frameworks */,
@@ -117,6 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				CD565F0A2972ED8800B26FC7 /* ChatApp.app */,
+				CD18DAE82993C8EF005D6544 /* ChatAppTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -216,6 +249,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		CD18DAE72993C8EF005D6544 /* ChatAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CD18DAEE2993C8EF005D6544 /* Build configuration list for PBXNativeTarget "ChatAppTests" */;
+			buildPhases = (
+				CD18DAE42993C8EF005D6544 /* Sources */,
+				CD18DAE52993C8EF005D6544 /* Frameworks */,
+				CD18DAE62993C8EF005D6544 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CD18DAED2993C8EF005D6544 /* PBXTargetDependency */,
+			);
+			name = ChatAppTests;
+			productName = ChatAppTests;
+			productReference = CD18DAE82993C8EF005D6544 /* ChatAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		CD565F092972ED8800B26FC7 /* ChatApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = CD565F212972ED8A00B26FC7 /* Build configuration list for PBXNativeTarget "ChatApp" */;
@@ -242,9 +293,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1330;
+				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1330;
 				TargetAttributes = {
+					CD18DAE72993C8EF005D6544 = {
+						CreatedOnToolsVersion = 14.2;
+						TestTargetID = CD565F092972ED8800B26FC7;
+					};
 					CD565F092972ED8800B26FC7 = {
 						CreatedOnToolsVersion = 13.3.1;
 					};
@@ -264,11 +319,19 @@
 			projectRoot = "";
 			targets = (
 				CD565F092972ED8800B26FC7 /* ChatApp */,
+				CD18DAE72993C8EF005D6544 /* ChatAppTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		CD18DAE62993C8EF005D6544 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD565F082972ED8800B26FC7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -323,6 +386,15 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		CD18DAE42993C8EF005D6544 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CD18DAF42993C957005D6544 /* MockChatService.swift in Sources */,
+				CD18DAF22993C91C005D6544 /* LoginTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		CD565F062972ED8800B26FC7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -350,6 +422,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		CD18DAED2993C8EF005D6544 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CD565F092972ED8800B26FC7 /* ChatApp */;
+			targetProxy = CD18DAEC2993C8EF005D6544 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		CD565F1B2972ED8A00B26FC7 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -362,6 +442,46 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		CD18DAEF2993C8EF005D6544 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y2ZMF37QVQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.myorganization.ChatAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChatApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ChatApp";
+			};
+			name = Debug;
+		};
+		CD18DAF02993C8EF005D6544 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = Y2ZMF37QVQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.myorganization.ChatAppTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ChatApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ChatApp";
+			};
+			name = Release;
+		};
 		CD565F1F2972ED8A00B26FC7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -535,6 +655,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		CD18DAEE2993C8EF005D6544 /* Build configuration list for PBXNativeTarget "ChatAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CD18DAEF2993C8EF005D6544 /* Debug */,
+				CD18DAF02993C8EF005D6544 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		CD565F052972ED8800B26FC7 /* Build configuration list for PBXProject "ChatApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
