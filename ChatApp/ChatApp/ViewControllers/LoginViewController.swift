@@ -10,11 +10,13 @@ import UIKit
 class LoginViewController: UIViewController {
 
     var loginView: LoginView
-    let loginController = LoginController()
+    var loginButtonController = LoginButtonController()
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        self.loginView = LoginView(loginController)
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(with service: ChatService) {
+        self.loginView = LoginView(with: loginButtonController)
+        super.init(nibName: nil, bundle: nil)
+        loginView.delegate = service
+        service.responseDelegate = loginButtonController
     }
 
     required init?(coder: NSCoder) {

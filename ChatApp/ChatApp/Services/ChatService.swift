@@ -11,19 +11,33 @@ protocol ChatServiceDelegate: AnyObject {
     func recieveMessage(_ message: RecievedMessage)
 }
 
+protocol ChatServiceLogin: AnyObject {
+    func recieveId(_ id: String)
+    func errorOccured(_ error: String)
+}
+
+protocol ChatServiceResponse: AnyObject {
+    func chatService(_ isWaitingForResponse: Bool)
+}
+
 class ChatService: NSObject {
 
-    var token: String?
-    var userId: String
-    var webSocket: URLSessionWebSocketTask?
+    private var token: String?
+    private var webSocket: URLSessionWebSocketTask?
+    private var waitingForResponse = false {
+        didSet {
+            responseDelegate?.chatService(waitingForResponse)
+        }
+    }
 
-    init(_ userId: String) {
-        self.userId = userId
+    override init() {
+        self.token = UserDefaults.standard.string(forKey: "CHAT_ID")
         super.init()
-        login()
     }
 
     weak var delegate: ChatServiceDelegate?
+    weak var loginDelegate: ChatServiceLogin?
+    weak var responseDelegate: ChatServiceResponse?
 
     func sendMessage(_ message: SentMessage) {
         let url = URL(string: "http://192.168.88.251/send")!
@@ -43,31 +57,42 @@ class ChatService: NSObject {
         task.resume()
     }
 
-    func login() {
-        let user = LoginRequest(username: userId, name: "", surname: "")
+    func login(_ model: LoginRequest) {
 
         let url = URL(string: "http://192.168.88.251/login")!
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-
-        request.httpBody = try? JSONEncoder().encode(user)
+        request.httpBody = try? JSONEncoder().encode(model)
+        request.timeoutInterval = 5
 
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+
+            if let error = error {
+                DispatchQueue.main.async { [self] in
+                    self?.waitingForResponse = false
+                    self?.loginDelegate?.errorOccured(error.localizedDescription)
+                }
+            }
+
             guard let data = data else {return}
 
-            let respData = try? JSONDecoder().decode(LoginResponse.self, from: data)
-            self?.token = respData?.token
+            guard let respData = try? JSONDecoder().decode(LoginResponse.self, from: data) else {return}
+            let userDefaults = UserDefaults.standard
+            userDefaults.set(respData.token, forKey: "CHAT_ID")
 
+            self?.waitingForResponse = false
+            self?.loginDelegate?.recieveId(respData.token)
             self?.listenForMessages()
         }
+
+        waitingForResponse = true
 
         task.resume()
     }
 
     func listenForMessages() {
         let url = URL(string: "ws://192.168.88.251/chat")!
-
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = ["mojToken": token ?? ""]
         let session = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
@@ -110,6 +135,12 @@ class ChatService: NSObject {
         DispatchQueue.main.async {
             self.delegate?.recieveMessage(message)
         }
+    }
+}
+
+extension ChatService: LoginViewDelegate {
+    func loginView(didRequestLoginFor user: LoginRequest) {
+        login(user)
     }
 }
 

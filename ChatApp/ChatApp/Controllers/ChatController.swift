@@ -16,14 +16,14 @@ class ChatController {
         }
     }
 
-    var chatId: String = "2" // UUID().uuidString
+    var chatId: String = UserDefaults().string(forKey: "CHAT_ID") ?? "0" // UUID().uuidString
 
     let chatService: ChatService
 
     var diffableDataSource: UITableViewDiffableDataSource<Int, UUID>?
 
     init() {
-        self.chatService = ChatService(chatId)
+        self.chatService = ChatService()
         chatService.delegate = self
     }
 
@@ -57,8 +57,8 @@ class ChatController {
 extension ChatController: MessageInputViewDelegate {
     func messageInputView(didSend message: String) {
 
-        let sentMessage = SentMessage(content: message, chatId: "1")
-        // let sentMessage = SentMessage(content: message, chatId: self.chatId)
+//        let sentMessage = SentMessage(content: message, chatId: "1")
+         let sentMessage = SentMessage(content: message, chatId: self.chatId)
         let messageViewModel = MessageViewModel(message: sentMessage)
         messages.append(messageViewModel)
 

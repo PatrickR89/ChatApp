@@ -10,6 +10,8 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var token = UserDefaults().string(forKey: "CHAT_ID")
+    var mainCoordinator: MainCoordinator?
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -17,10 +19,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene: UIWindowScene = (scene as? UIWindowScene) else {return}
 
         let navigationController = UINavigationController()
-        let loginViewController = LoginViewController()
-        let chatViewController = ChatTableViewController()
-
-        navigationController.viewControllers = [loginViewController]
+        mainCoordinator = MainCoordinator(navController: navigationController)
+        mainCoordinator?.start()
 
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
