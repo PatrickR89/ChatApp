@@ -8,17 +8,23 @@
 import Foundation
 import UIKit
 
+protocol ChatControllerDelegate: AnyObject {
+    func chatControllerDidAddMessage(at index: Int)
+}
+
 class ChatController {
 
     var messages: [MessageViewModel] = [] {
         didSet {
             updateSnapshot()
+            delegate?.chatControllerDidAddMessage(at: messages.count - 1)
         }
     }
 
     var chatId: String = UserDefaults().string(forKey: "CHAT_ID") ?? "0" // UUID().uuidString
 
     let chatService: ChatService
+    weak var delegate: ChatControllerDelegate?
 
     var diffableDataSource: UITableViewDiffableDataSource<Int, UUID>?
 

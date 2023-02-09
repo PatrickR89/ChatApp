@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChatTableViewController: UIViewController {
+class ChatTableViewController: UIViewControllerWithKeyboard {
 
     lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -20,16 +20,21 @@ class ChatTableViewController: UIViewController {
     } ()
 
     let chatController = ChatController()
+    let keyboardLayoutObserver = KeyboardLayoutObserver()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        chatController.delegate = self
+        self.addLayoutGuide(messageInputView, 0)
+        keyboardLayoutObserver.startKeyboardObserver(for: self)
     }
 
     func setupUI() {
         view.addSubview(tableView)
         view.addSubview(messageInputView)
         view.isUserInteractionEnabled = true
+        view.backgroundColor = .systemBackground
         messageInputView.delegate = chatController
         tableView.register(MessageViewCell.self, forCellReuseIdentifier: "cell")
         chatController.setupDataSource(for: tableView)
@@ -41,7 +46,6 @@ class ChatTableViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
 
         NSLayoutConstraint.activate([
-            messageInputView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             messageInputView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             messageInputView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             tableView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -49,5 +53,12 @@ class ChatTableViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: messageInputView.topAnchor, constant: -5)
         ])
+    }
+}
+
+extension ChatTableViewController: ChatControllerDelegate {
+    func chatControllerDidAddMessage(at index: Int) {
+        let indexPath = IndexPath(row: index, section: 0)
+        tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
     }
 }

@@ -19,9 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene: UIWindowScene = (scene as? UIWindowScene) else {return}
 
         let navigationController = UINavigationController()
-        mainCoordinator = MainCoordinator(navigationController, ChatService())
-        mainCoordinator?.start()
-
+//        mainCoordinator = MainCoordinator(navigationController, ChatService())
+//        mainCoordinator?.start()
+        navigationController.viewControllers = [ChatTableViewController()]
         window = UIWindow(frame: windowScene.coordinateSpace.bounds)
         window?.windowScene = windowScene
         window?.rootViewController = navigationController

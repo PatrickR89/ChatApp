@@ -14,7 +14,7 @@ class UIViewControllerWithKeyboard: UIViewController {
         view.addLayoutGuide(keyboardLayoutGuide)
         NSLayoutConstraint.activate([
             keyboardLayoutGuide.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            keyboardLayoutGuide.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            keyboardLayoutGuide.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             keyboardLayoutGuide.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             keyboardLayoutGuide.heightAnchor.constraint(equalToConstant: 0),
             bottomView.bottomAnchor.constraint(equalTo: keyboardLayoutGuide.topAnchor, constant: constant)
