@@ -13,6 +13,8 @@
 		CD18DADE29911EC7005D6544 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DADD29911EC7005D6544 /* MainCoordinator.swift */; };
 		CD18DAF22993C91C005D6544 /* LoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAF12993C91C005D6544 /* LoginTests.swift */; };
 		CD18DAF42993C957005D6544 /* MockChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAF32993C957005D6544 /* MockChatService.swift */; };
+		CD18DAF62994F9CB005D6544 /* KeyboardLayoutObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAF52994F9CB005D6544 /* KeyboardLayoutObserver.swift */; };
+		CD18DAF82994FA79005D6544 /* UIViewControllerWithKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAF72994FA79005D6544 /* UIViewControllerWithKeyboard.swift */; };
 		CD3C2350298BD897002A1A05 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C234F298BD897002A1A05 /* MessageView.swift */; };
 		CD3C2352298BE30C002A1A05 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C2351298BE30C002A1A05 /* LoginView.swift */; };
 		CD565F0E2972ED8800B26FC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD565F0D2972ED8800B26FC7 /* AppDelegate.swift */; };
@@ -51,6 +53,8 @@
 		CD18DAE82993C8EF005D6544 /* ChatAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CD18DAF12993C91C005D6544 /* LoginTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTests.swift; sourceTree = "<group>"; };
 		CD18DAF32993C957005D6544 /* MockChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockChatService.swift; sourceTree = "<group>"; };
+		CD18DAF52994F9CB005D6544 /* KeyboardLayoutObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutObserver.swift; sourceTree = "<group>"; };
+		CD18DAF72994FA79005D6544 /* UIViewControllerWithKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerWithKeyboard.swift; sourceTree = "<group>"; };
 		CD3C234F298BD897002A1A05 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		CD3C2351298BE30C002A1A05 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		CD565F0A2972ED8800B26FC7 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,6 +234,8 @@
 			isa = PBXGroup;
 			children = (
 				CD565F302972FF2F00B26FC7 /* DateFormatters.swift */,
+				CD18DAF52994F9CB005D6544 /* KeyboardLayoutObserver.swift */,
+				CD18DAF72994FA79005D6544 /* UIViewControllerWithKeyboard.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -403,6 +409,7 @@
 				CD565F2F2972FD7000B26FC7 /* MessageViewModel.swift in Sources */,
 				CD565F182972ED8800B26FC7 /* ChatApp.xcdatamodeld in Sources */,
 				CD3C2352298BE30C002A1A05 /* LoginView.swift in Sources */,
+				CD18DAF82994FA79005D6544 /* UIViewControllerWithKeyboard.swift in Sources */,
 				CD565F2B2972FBF400B26FC7 /* ChatController.swift in Sources */,
 				CD565F2D2972FC1300B26FC7 /* Message.swift in Sources */,
 				CD565F3529731A5500B26FC7 /* ChatService.swift in Sources */,
@@ -416,6 +423,7 @@
 				CD18DAD72990FDC6005D6544 /* LoginButtonController.swift in Sources */,
 				CD3C2350298BD897002A1A05 /* MessageView.swift in Sources */,
 				CD565F292972F49200B26FC7 /* MessageInputView.swift in Sources */,
+				CD18DAF62994F9CB005D6544 /* KeyboardLayoutObserver.swift in Sources */,
 				CD18DADA2990FEAE005D6544 /* UITextField+Extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

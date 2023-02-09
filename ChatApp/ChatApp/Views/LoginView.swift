@@ -143,6 +143,14 @@ class LoginView: UIView {
     }
 }
 
+extension LoginView {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.firstNameInput.endEditing(true)
+        self.lastNameInput.endEditing(true)
+        self.usernameInput.endEditing(true)
+    }
+}
+
 extension LoginView: UITextFieldDelegate {
 
     func textFieldDidChangeSelection(_ textField: UITextField) {

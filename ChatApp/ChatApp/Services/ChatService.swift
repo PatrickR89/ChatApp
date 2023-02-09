@@ -68,11 +68,13 @@ class ChatService: NSObject {
 
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
 
-            if let error = error {
-                DispatchQueue.main.async { [self] in
+            guard error == nil else {
+                DispatchQueue.main.async { [weak self] in
                     self?.waitingForResponse = false
-                    self?.loginDelegate?.errorOccured(error.localizedDescription)
+                    self?.loginDelegate?.errorOccured(error!.localizedDescription)
                 }
+
+                return
             }
 
             guard let data = data else {return}

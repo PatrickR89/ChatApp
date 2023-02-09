@@ -7,10 +7,11 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewControllerWithKeyboard {
 
     var loginView: LoginView
     var loginButtonController = LoginButtonController()
+    let keyboardLayoutObserver = KeyboardLayoutObserver()
 
     init(with service: ChatService) {
         self.loginView = LoginView(with: loginButtonController)
@@ -27,6 +28,8 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
 
         setupUI()
+        self.addLayoutGuide(loginView, 100.0)
+        keyboardLayoutObserver.startKeyboardObserver(for: self)
         view.backgroundColor = .white
     }
 
@@ -42,4 +45,3 @@ class LoginViewController: UIViewController {
         ])
     }
 }
-
