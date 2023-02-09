@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		30CE821E3859BAB40A9768C0 /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFB45F5B0EEEE1DA855BD1D8 /* Pods_ChatApp.framework */; };
-		CD18DAD72990FDC6005D6544 /* LoginButtonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAD62990FDC6005D6544 /* LoginButtonController.swift */; };
+		CD18DAD72990FDC6005D6544 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAD62990FDC6005D6544 /* LoginController.swift */; };
 		CD18DADA2990FEAE005D6544 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAD92990FEAE005D6544 /* UITextField+Extension.swift */; };
 		CD18DADE29911EC7005D6544 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DADD29911EC7005D6544 /* MainCoordinator.swift */; };
 		CD18DAF22993C91C005D6544 /* LoginTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAF12993C91C005D6544 /* LoginTests.swift */; };
 		CD18DAF42993C957005D6544 /* MockChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAF32993C957005D6544 /* MockChatService.swift */; };
 		CD18DAF62994F9CB005D6544 /* KeyboardLayoutObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAF52994F9CB005D6544 /* KeyboardLayoutObserver.swift */; };
 		CD18DAF82994FA79005D6544 /* UIViewControllerWithKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAF72994FA79005D6544 /* UIViewControllerWithKeyboard.swift */; };
+		CD18DAFB29950B4F005D6544 /* InputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAFA29950B4F005D6544 /* InputType.swift */; };
 		CD3C2350298BD897002A1A05 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C234F298BD897002A1A05 /* MessageView.swift */; };
 		CD3C2352298BE30C002A1A05 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C2351298BE30C002A1A05 /* LoginView.swift */; };
 		CD565F0E2972ED8800B26FC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD565F0D2972ED8800B26FC7 /* AppDelegate.swift */; };
@@ -47,7 +48,7 @@
 /* Begin PBXFileReference section */
 		4235E75FDAE2176D98494694 /* Pods-ChatApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.release.xcconfig"; path = "Target Support Files/Pods-ChatApp/Pods-ChatApp.release.xcconfig"; sourceTree = "<group>"; };
 		5160C5BF4AA1509CB0181E98 /* Pods-ChatApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.debug.xcconfig"; path = "Target Support Files/Pods-ChatApp/Pods-ChatApp.debug.xcconfig"; sourceTree = "<group>"; };
-		CD18DAD62990FDC6005D6544 /* LoginButtonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButtonController.swift; sourceTree = "<group>"; };
+		CD18DAD62990FDC6005D6544 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		CD18DAD92990FEAE005D6544 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		CD18DADD29911EC7005D6544 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
 		CD18DAE82993C8EF005D6544 /* ChatAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChatAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -55,6 +56,7 @@
 		CD18DAF32993C957005D6544 /* MockChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockChatService.swift; sourceTree = "<group>"; };
 		CD18DAF52994F9CB005D6544 /* KeyboardLayoutObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutObserver.swift; sourceTree = "<group>"; };
 		CD18DAF72994FA79005D6544 /* UIViewControllerWithKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerWithKeyboard.swift; sourceTree = "<group>"; };
+		CD18DAFA29950B4F005D6544 /* InputType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputType.swift; sourceTree = "<group>"; };
 		CD3C234F298BD897002A1A05 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		CD3C2351298BE30C002A1A05 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		CD565F0A2972ED8800B26FC7 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,6 +140,14 @@
 			path = ChatAppTests;
 			sourceTree = "<group>";
 		};
+		CD18DAF929950B3E005D6544 /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				CD18DAFA29950B4F005D6544 /* InputType.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
 		CD565F012972ED8800B26FC7 = {
 			isa = PBXGroup;
 			children = (
@@ -161,6 +171,7 @@
 		CD565F0C2972ED8800B26FC7 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				CD18DAF929950B3E005D6544 /* Enums */,
 				CD18DAE029912192005D6544 /* Coordinators */,
 				CD18DAD82990FE94005D6544 /* Extensions */,
 				CD565F1E2972ED8A00B26FC7 /* Info.plist */,
@@ -200,7 +211,7 @@
 			isa = PBXGroup;
 			children = (
 				CD565F2A2972FBF400B26FC7 /* ChatController.swift */,
-				CD18DAD62990FDC6005D6544 /* LoginButtonController.swift */,
+				CD18DAD62990FDC6005D6544 /* LoginController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -417,10 +428,11 @@
 				CD565F332973018000B26FC7 /* MessageViewCell.swift in Sources */,
 				CD565F312972FF2F00B26FC7 /* DateFormatters.swift in Sources */,
 				CD565F102972ED8800B26FC7 /* SceneDelegate.swift in Sources */,
+				CD18DAFB29950B4F005D6544 /* InputType.swift in Sources */,
 				CD565F3729731AEB00B26FC7 /* LoginModels.swift in Sources */,
 				CD565F272972F3DE00B26FC7 /* ChatTableViewController.swift in Sources */,
 				CD18DADE29911EC7005D6544 /* MainCoordinator.swift in Sources */,
-				CD18DAD72990FDC6005D6544 /* LoginButtonController.swift in Sources */,
+				CD18DAD72990FDC6005D6544 /* LoginController.swift in Sources */,
 				CD3C2350298BD897002A1A05 /* MessageView.swift in Sources */,
 				CD565F292972F49200B26FC7 /* MessageInputView.swift in Sources */,
 				CD18DAF62994F9CB005D6544 /* KeyboardLayoutObserver.swift in Sources */,

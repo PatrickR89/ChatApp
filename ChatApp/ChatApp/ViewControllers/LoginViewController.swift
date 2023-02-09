@@ -10,14 +10,14 @@ import UIKit
 class LoginViewController: UIViewControllerWithKeyboard {
 
     var loginView: LoginView
-    var loginButtonController = LoginButtonController()
+    var loginController = LoginController()
     let keyboardLayoutObserver = KeyboardLayoutObserver()
 
     init(with service: ChatService) {
-        self.loginView = LoginView(with: loginButtonController)
+        self.loginView = LoginView(with: loginController)
         super.init(nibName: nil, bundle: nil)
-        loginView.delegate = service
-        service.responseDelegate = loginButtonController
+        loginController.delegate = service
+        service.responseDelegate = loginController
     }
 
     required init?(coder: NSCoder) {
@@ -39,7 +39,6 @@ class LoginViewController: UIViewControllerWithKeyboard {
 
         NSLayoutConstraint.activate([
             loginView.topAnchor.constraint(equalTo: view.topAnchor),
-            loginView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             loginView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             loginView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])

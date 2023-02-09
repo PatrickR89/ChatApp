@@ -140,7 +140,7 @@ class ChatService: NSObject {
     }
 }
 
-extension ChatService: LoginViewDelegate {
+extension ChatService: LoginControllerDelegate {
     func loginView(didRequestLoginFor user: LoginRequest) {
         login(user)
     }

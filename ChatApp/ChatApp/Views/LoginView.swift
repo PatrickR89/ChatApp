@@ -8,10 +8,6 @@
 import UIKit
 import Combine
 
-protocol LoginViewDelegate: AnyObject {
-    func loginView(didRequestLoginFor user: LoginRequest)
-}
-
 class LoginView: UIView {
 
     let imageView: UIImageView = {
@@ -48,17 +44,16 @@ class LoginView: UIView {
         return button
     }()
 
-    var observers = [AnyCancellable]()
+    var observers: Set<AnyCancellable> = []
 
-    var loginButtonController: LoginButtonController
+    var loginController: LoginController
 
-    var delegate: LoginViewDelegate?
-
-    init(with buttonController: LoginButtonController) {
-        self.loginButtonController = buttonController
+    init(with buttonController: LoginController) {
+        self.loginController = buttonController
         super.init(frame: .zero)
-        setupInputBindings()
         setupUI()
+        setupInputBindings()
+        loginController.validateInput()
     }
 
     required init?(coder: NSCoder) {
@@ -82,7 +77,6 @@ class LoginView: UIView {
 
         textFields.forEach { textField in
             textField.delegate = self
-            loginButtonController.addInputValidation(textField)
         }
 
         confirmButton.addTarget(self, action: #selector(register), for: .touchUpInside)
@@ -107,18 +101,13 @@ class LoginView: UIView {
     }
 
     @objc func register() {
-        guard let username = usernameInput.text else {return}
-        guard let firstName = firstNameInput.text else {return}
-        guard let lastName = lastNameInput.text else {return}
-        let loginRequest = LoginRequest(username: username, name: firstName, surname: lastName)
-        delegate?.loginView(didRequestLoginFor: loginRequest)
+        loginController.sendLoginRequest()
     }
 
     private func setupInputBindings() {
-        loginButtonController.$inputsAreValid.sink(receiveValue: { [weak self] input in
-            if input.values.contains(where: { valid in
-                valid == false
-            }) {
+
+        loginController.$inputIsValid.sink(receiveValue: { [weak self] input in
+            if input == false {
                 self?.confirmButton.setTitle("Enter at least 4 characters in each field", for: .disabled)
                 self?.confirmButton.isEnabled = false
                 self?.confirmButton.backgroundColor = .lightGray
@@ -129,7 +118,7 @@ class LoginView: UIView {
         })
         .store(in: &observers)
 
-        loginButtonController.$isWaiting.sink(receiveValue: { [weak self] isWaiting in
+        loginController.$isWaiting.sink(receiveValue: { [weak self] isWaiting in
             if isWaiting {
                 self?.confirmButton.setTitle("Please wait...", for: .disabled)
                 self?.confirmButton.isEnabled = false
@@ -154,6 +143,15 @@ extension LoginView {
 extension LoginView: UITextFieldDelegate {
 
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        loginButtonController.validateInput(textField)
+        switch textField {
+        case usernameInput:
+            loginController.setLoginRequest(textField.text ?? "", .username)
+        case firstNameInput:
+            loginController.setLoginRequest(textField.text ?? "", .firstName)
+        case lastNameInput:
+            loginController.setLoginRequest(textField.text ?? "", .lastName)
+        default:
+            break
+        }
     }
 }
