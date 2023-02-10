@@ -55,7 +55,7 @@ class MessageView: UIView {
         ])
     }
 
-    func inputText(sender: Sender, content: String, time: String) {
+    func presentText(sender: Sender, content: String, time: String) {
         contentLabel.text = content
         timestampLabel.text = time
 

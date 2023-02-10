@@ -40,18 +40,18 @@ class MessageViewCell: UITableViewCell {
 
     func setupContent() {
         guard let viewModel = viewModel else {
-            messageView.inputText(sender: .me, content: "", time: "")
+            messageView.presentText(sender: .me, content: "", time: "")
             return
         }
 
-        messageView.inputText(sender: viewModel.sender, content: viewModel.content, time: viewModel.timestamp)
+        messageView.presentText(sender: viewModel.sender, content: viewModel.content, time: viewModel.timestamp)
 
         switch viewModel.sender {
         case .me:
-            messageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor).isActive = true
+            messageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin * 2).isActive = true
 
         case .other(_):
-            messageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor).isActive = true
+            messageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin * 2).isActive = true
         }
 
     }

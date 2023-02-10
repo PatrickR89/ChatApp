@@ -9,10 +9,12 @@ import UIKit
 import Combine
 
 class MainCoordinator {
-    
+
+    // token published for test purposes
     @Published var token: String? = UserDefaults().string(forKey: "CHAT_ID")
     let navController: UINavigationController
     var chatService: ChatService
+    var childCoordinator: ChatCoordinator?
 
     init(_ navController: UINavigationController, _ chatService: ChatService) {
         self.chatService = chatService
@@ -21,18 +23,18 @@ class MainCoordinator {
     }
 
     func start() {
-        if token == nil {
-            presentLoginScreen()
-        } else {
+//        if token == nil {
+//            presentLoginScreen()
+//        } else {
             presentChatView()
-        }
+//        }
     }
 
     func presentLoginScreen() {
         if !navController.viewControllers.isEmpty {
             navController.popViewController(animated: true)
         }
-        
+
         let loginViewController = LoginViewController(with: chatService)
         navController.pushViewController(loginViewController, animated: true)
     }
@@ -41,9 +43,10 @@ class MainCoordinator {
         if !navController.viewControllers.isEmpty {
             navController.popViewController(animated: true)
         }
-        navController.pushViewController(ChatTableViewController(), animated: true)
-    }
 
+        self.childCoordinator = ChatCoordinator(with: navController, and: chatService)
+        childCoordinator?.start()
+    }
 }
 
 extension MainCoordinator: ChatServiceLogin {

@@ -16,6 +16,13 @@
 		CD18DAF62994F9CB005D6544 /* KeyboardLayoutObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAF52994F9CB005D6544 /* KeyboardLayoutObserver.swift */; };
 		CD18DAF82994FA79005D6544 /* UIViewControllerWithKeyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAF72994FA79005D6544 /* UIViewControllerWithKeyboard.swift */; };
 		CD18DAFB29950B4F005D6544 /* InputType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAFA29950B4F005D6544 /* InputType.swift */; };
+		CD18DAFD29964795005D6544 /* ChatTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAFC29964794005D6544 /* ChatTabBarController.swift */; };
+		CD18DAFF299647B6005D6544 /* ActiveUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAFE299647B6005D6544 /* ActiveUsersViewController.swift */; };
+		CD18DB01299647C5005D6544 /* ConversationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DB00299647C5005D6544 /* ConversationsViewController.swift */; };
+		CD18DB0329964B3D005D6544 /* ChatCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DB0229964B3D005D6544 /* ChatCoordinator.swift */; };
+		CD18DB0529965FF0005D6544 /* ActiveUsersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DB0429965FF0005D6544 /* ActiveUsersController.swift */; };
+		CD18DB0729966043005D6544 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DB0629966043005D6544 /* User.swift */; };
+		CD18DB09299660AC005D6544 /* UserViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DB08299660AC005D6544 /* UserViewCell.swift */; };
 		CD3C2350298BD897002A1A05 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C234F298BD897002A1A05 /* MessageView.swift */; };
 		CD3C2352298BE30C002A1A05 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C2351298BE30C002A1A05 /* LoginView.swift */; };
 		CD565F0E2972ED8800B26FC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD565F0D2972ED8800B26FC7 /* AppDelegate.swift */; };
@@ -57,6 +64,13 @@
 		CD18DAF52994F9CB005D6544 /* KeyboardLayoutObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardLayoutObserver.swift; sourceTree = "<group>"; };
 		CD18DAF72994FA79005D6544 /* UIViewControllerWithKeyboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerWithKeyboard.swift; sourceTree = "<group>"; };
 		CD18DAFA29950B4F005D6544 /* InputType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputType.swift; sourceTree = "<group>"; };
+		CD18DAFC29964794005D6544 /* ChatTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatTabBarController.swift; sourceTree = "<group>"; };
+		CD18DAFE299647B6005D6544 /* ActiveUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveUsersViewController.swift; sourceTree = "<group>"; };
+		CD18DB00299647C5005D6544 /* ConversationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsViewController.swift; sourceTree = "<group>"; };
+		CD18DB0229964B3D005D6544 /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
+		CD18DB0429965FF0005D6544 /* ActiveUsersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveUsersController.swift; sourceTree = "<group>"; };
+		CD18DB0629966043005D6544 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		CD18DB08299660AC005D6544 /* UserViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewCell.swift; sourceTree = "<group>"; };
 		CD3C234F298BD897002A1A05 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		CD3C2351298BE30C002A1A05 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		CD565F0A2972ED8800B26FC7 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				CD18DADD29911EC7005D6544 /* MainCoordinator.swift */,
+				CD18DB0229964B3D005D6544 /* ChatCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -192,6 +207,9 @@
 			children = (
 				CD565F112972ED8800B26FC7 /* LoginViewController.swift */,
 				CD565F262972F3DE00B26FC7 /* ChatTableViewController.swift */,
+				CD18DAFC29964794005D6544 /* ChatTabBarController.swift */,
+				CD18DAFE299647B6005D6544 /* ActiveUsersViewController.swift */,
+				CD18DB00299647C5005D6544 /* ConversationsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -203,6 +221,7 @@
 				CD565F322973018000B26FC7 /* MessageViewCell.swift */,
 				CD3C234F298BD897002A1A05 /* MessageView.swift */,
 				CD3C2351298BE30C002A1A05 /* LoginView.swift */,
+				CD18DB08299660AC005D6544 /* UserViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -212,6 +231,7 @@
 			children = (
 				CD565F2A2972FBF400B26FC7 /* ChatController.swift */,
 				CD18DAD62990FDC6005D6544 /* LoginController.swift */,
+				CD18DB0429965FF0005D6544 /* ActiveUsersController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -221,6 +241,7 @@
 			children = (
 				CD565F3629731AEB00B26FC7 /* LoginModels.swift */,
 				CD565F2C2972FC1300B26FC7 /* Message.swift */,
+				CD18DB0629966043005D6544 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -417,9 +438,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD565F122972ED8800B26FC7 /* LoginViewController.swift in Sources */,
+				CD18DAFF299647B6005D6544 /* ActiveUsersViewController.swift in Sources */,
 				CD565F2F2972FD7000B26FC7 /* MessageViewModel.swift in Sources */,
+				CD18DB01299647C5005D6544 /* ConversationsViewController.swift in Sources */,
 				CD565F182972ED8800B26FC7 /* ChatApp.xcdatamodeld in Sources */,
+				CD18DB0729966043005D6544 /* User.swift in Sources */,
 				CD3C2352298BE30C002A1A05 /* LoginView.swift in Sources */,
+				CD18DB0329964B3D005D6544 /* ChatCoordinator.swift in Sources */,
 				CD18DAF82994FA79005D6544 /* UIViewControllerWithKeyboard.swift in Sources */,
 				CD565F2B2972FBF400B26FC7 /* ChatController.swift in Sources */,
 				CD565F2D2972FC1300B26FC7 /* Message.swift in Sources */,
@@ -427,12 +452,15 @@
 				CD565F0E2972ED8800B26FC7 /* AppDelegate.swift in Sources */,
 				CD565F332973018000B26FC7 /* MessageViewCell.swift in Sources */,
 				CD565F312972FF2F00B26FC7 /* DateFormatters.swift in Sources */,
+				CD18DB09299660AC005D6544 /* UserViewCell.swift in Sources */,
+				CD18DB0529965FF0005D6544 /* ActiveUsersController.swift in Sources */,
 				CD565F102972ED8800B26FC7 /* SceneDelegate.swift in Sources */,
 				CD18DAFB29950B4F005D6544 /* InputType.swift in Sources */,
 				CD565F3729731AEB00B26FC7 /* LoginModels.swift in Sources */,
 				CD565F272972F3DE00B26FC7 /* ChatTableViewController.swift in Sources */,
 				CD18DADE29911EC7005D6544 /* MainCoordinator.swift in Sources */,
 				CD18DAD72990FDC6005D6544 /* LoginController.swift in Sources */,
+				CD18DAFD29964795005D6544 /* ChatTabBarController.swift in Sources */,
 				CD3C2350298BD897002A1A05 /* MessageView.swift in Sources */,
 				CD565F292972F49200B26FC7 /* MessageInputView.swift in Sources */,
 				CD18DAF62994F9CB005D6544 /* KeyboardLayoutObserver.swift in Sources */,

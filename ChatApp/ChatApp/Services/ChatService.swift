@@ -11,6 +11,10 @@ protocol ChatServiceDelegate: AnyObject {
     func recieveMessage(_ message: RecievedMessage)
 }
 
+protocol ChatServiceUsersDelegate: AnyObject {
+    func service(didRecieve users: [User])
+}
+
 protocol ChatServiceLogin: AnyObject {
     func recieveId(_ id: String)
     func errorOccured(_ error: String)
@@ -38,6 +42,7 @@ class ChatService: NSObject {
     weak var delegate: ChatServiceDelegate?
     weak var loginDelegate: ChatServiceLogin?
     weak var responseDelegate: ChatServiceResponse?
+    weak var usersDelegate: ChatServiceUsersDelegate?
 
     func sendMessage(_ message: SentMessage) {
         let url = URL(string: "http://192.168.88.251/send")!
@@ -137,6 +142,26 @@ class ChatService: NSObject {
         DispatchQueue.main.async {
             self.delegate?.recieveMessage(message)
         }
+    }
+
+    func fetchActiveUsers() {
+        let url = URL(string: "http://192.168.88.251/users?status=active")!
+
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.allHTTPHeaderFields = ["mojToken": token ?? ""]
+
+        let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+            guard let data = data else {return}
+
+            guard let users = try? JSONDecoder().decode([User].self, from: data) else {return}
+
+            DispatchQueue.main.async {
+                self?.usersDelegate?.service(didRecieve: users)
+            }
+        }
+
+        task.resume()
     }
 }
 

@@ -54,8 +54,16 @@ class ChatController {
 
         var snapshot = NSDiffableDataSourceSnapshot<Int, UUID>()
         snapshot.appendSections([0])
-        let msgIds = messages.map { $0.id }
-        snapshot.appendItems(msgIds, toSection: 0)
+
+        for message in messages {
+            switch message.sender {
+            case .me:
+                diffableDataSource.defaultRowAnimation = .right
+            case .other:
+                diffableDataSource.defaultRowAnimation = .left
+            }
+            snapshot.appendItems([message.id], toSection: 0)
+        }
         diffableDataSource.apply(snapshot)
     }
 }

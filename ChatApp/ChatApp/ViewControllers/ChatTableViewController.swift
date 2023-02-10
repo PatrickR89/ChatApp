@@ -44,6 +44,7 @@ class ChatTableViewController: UIViewControllerWithKeyboard {
 
         tableView.estimatedRowHeight = 50.0
         tableView.rowHeight = UITableView.automaticDimension
+        tableView.separatorStyle = .none
 
         NSLayoutConstraint.activate([
             messageInputView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
