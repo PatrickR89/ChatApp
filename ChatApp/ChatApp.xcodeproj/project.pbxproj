@@ -23,6 +23,7 @@
 		CD18DB0529965FF0005D6544 /* ActiveUsersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DB0429965FF0005D6544 /* ActiveUsersController.swift */; };
 		CD18DB0729966043005D6544 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DB0629966043005D6544 /* User.swift */; };
 		CD18DB09299660AC005D6544 /* UserViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DB08299660AC005D6544 /* UserViewCell.swift */; };
+		CD18DB0D2997941F005D6544 /* ActiveUsersTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DB0C2997941F005D6544 /* ActiveUsersTest.swift */; };
 		CD3C2350298BD897002A1A05 /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C234F298BD897002A1A05 /* MessageView.swift */; };
 		CD3C2352298BE30C002A1A05 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD3C2351298BE30C002A1A05 /* LoginView.swift */; };
 		CD565F0E2972ED8800B26FC7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD565F0D2972ED8800B26FC7 /* AppDelegate.swift */; };
@@ -71,6 +72,7 @@
 		CD18DB0429965FF0005D6544 /* ActiveUsersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveUsersController.swift; sourceTree = "<group>"; };
 		CD18DB0629966043005D6544 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CD18DB08299660AC005D6544 /* UserViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewCell.swift; sourceTree = "<group>"; };
+		CD18DB0C2997941F005D6544 /* ActiveUsersTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveUsersTest.swift; sourceTree = "<group>"; };
 		CD3C234F298BD897002A1A05 /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 		CD3C2351298BE30C002A1A05 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		CD565F0A2972ED8800B26FC7 /* ChatApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChatApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -151,6 +153,7 @@
 			children = (
 				CD18DAF12993C91C005D6544 /* LoginTests.swift */,
 				CD18DAF32993C957005D6544 /* MockChatService.swift */,
+				CD18DB0C2997941F005D6544 /* ActiveUsersTest.swift */,
 			);
 			path = ChatAppTests;
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD18DAF42993C957005D6544 /* MockChatService.swift in Sources */,
+				CD18DB0D2997941F005D6544 /* ActiveUsersTest.swift in Sources */,
 				CD18DAF22993C91C005D6544 /* LoginTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

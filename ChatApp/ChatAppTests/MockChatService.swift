@@ -11,7 +11,6 @@ import Foundation
 
 class MockChatService: ChatService {
     private var token: String?
-    private var webSocket: URLSessionWebSocketTask?
     private var waitingForResponse = false {
         didSet {
             responseDelegate?.chatService(waitingForResponse)
@@ -103,5 +102,26 @@ class MockChatService: ChatService {
 //        DispatchQueue.main.async {
 //            self.delegate?.recieveMessage(message)
 //        }
+    }
+
+    override func fetchActiveUsers() {
+        let activeUsers = [User(username: "asddas"), User(username: "asjdhjkas"), User(username: "user")]
+        usersDelegate?.service(didRecieve: activeUsers)
+//        let url = URL(string: "http://192.168.88.251/users?status=active")!
+//        var request = URLRequest(url: url)
+//        request.httpMethod = "POST"
+//        request.allHTTPHeaderFields = ["mojToken": token ?? ""]
+//
+//        let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+//            guard let data = data else {return}
+//
+//            guard let users = try? JSONDecoder().decode([User].self, from: data) else {return}
+//
+//            DispatchQueue.main.async {
+//                self?.usersDelegate?.service(didRecieve: users)
+//            }
+//        }
+//
+//        task.resume()
     }
 }

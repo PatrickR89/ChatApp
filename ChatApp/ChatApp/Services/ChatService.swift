@@ -146,7 +146,6 @@ class ChatService: NSObject {
 
     func fetchActiveUsers() {
         let url = URL(string: "http://192.168.88.251/users?status=active")!
-
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = ["mojToken": token ?? ""]
@@ -168,6 +167,12 @@ class ChatService: NSObject {
 extension ChatService: LoginControllerDelegate {
     func loginView(didRequestLoginFor user: LoginRequest) {
         login(user)
+    }
+}
+
+extension ChatService: ActiveUsersControllerDelegate {
+    func activeUsersControllerDidRequestUsers() {
+        fetchActiveUsers()
     }
 }
 

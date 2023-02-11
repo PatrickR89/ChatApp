@@ -9,17 +9,24 @@ import UIKit
 
 class UserViewCell: UITableViewCell {
 
-    
+    lazy var label: UILabel = {
+        let label = UILabel()
+        return label
+    }()
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    func setupUI(_ model: User) {
+        contentView.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = model.username
 
-        // Configure the view for the selected state
+        NSLayoutConstraint.activate([
+            label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10)
+        ])
     }
-
 }

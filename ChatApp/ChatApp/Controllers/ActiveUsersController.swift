@@ -6,17 +6,36 @@
 //
 
 import UIKit
+import Combine
+
+protocol ActiveUsersControllerDelegate: AnyObject {
+    func activeUsersControllerDidRequestUsers()
+}
 
 class ActiveUsersController {
-    var users = [User]()
+    @Published var users = [User]()
+
+    var usersObserver: AnyCancellable?
+
+    weak var delegate: ActiveUsersControllerDelegate?
     var diffableDataSource: UITableViewDiffableDataSource<Int, String>?
+
+    init() {
+        usersObserver = self.$users.sink(receiveValue: { [weak self] _ in
+            self?.updateSnapshot()
+        })
+    }
+
+    deinit {
+        usersObserver = nil
+    }
 
     func setupDataSource(for tableView: UITableView) {
         let diffableDataSource = UITableViewDiffableDataSource<Int, String>(tableView: tableView) { [weak self] tableView,indexPath,itemIdentifier in
 
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? UserViewCell else { fatalError("cell not found")}
 
-//            cell.viewModel = self?.users[indexPath.row]
+            cell.setupUI((self?.users[indexPath.row]) ?? User(username: ""))
 
             return cell
         }
@@ -37,6 +56,10 @@ class ActiveUsersController {
         snapshot.appendItems(userIds, toSection: 0)
 
         diffableDataSource.apply(snapshot)
+    }
+
+    func requestUsers() {
+        delegate?.activeUsersControllerDidRequestUsers()
     }
 }
 

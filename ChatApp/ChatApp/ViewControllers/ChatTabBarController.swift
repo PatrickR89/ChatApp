@@ -7,9 +7,15 @@
 
 import UIKit
 
+protocol ChatTabBarControllerDelegate: AnyObject {
+    func chatTabBarDidRequestUsers()
+    func chatTabBarDidRequestLogout()
+}
+
 class ChatTabBarController: UITabBarController {
 
     let navController: UINavigationController
+    weak var chatDelegate: ChatTabBarControllerDelegate?
 
     init(navController: UINavigationController) {
         self.navController = navController
@@ -27,7 +33,11 @@ class ChatTabBarController: UITabBarController {
         view.backgroundColor = .systemBackground
 
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "power"), style: .plain, target: nil, action: nil)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.triangle.2.circlepath"), style: .plain, target: nil, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.triangle.2.circlepath"), style: .plain, target: self, action: #selector(requestUsers))
+    }
+
+    @objc private func requestUsers() {
+        chatDelegate?.chatTabBarDidRequestUsers()
     }
 }
 
