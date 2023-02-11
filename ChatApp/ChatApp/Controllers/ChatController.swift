@@ -10,25 +10,33 @@ import UIKit
 
 protocol ChatControllerDelegate: AnyObject {
     func chatControllerDidAddMessage(at index: Int)
+    func chatControllerDidSendMessage(_ message: SentMessage)
+}
+
+extension ChatControllerDelegate {
+    func chatControllerDidAddMessage(at index: Int){}
+    func chatControllerDidSendMessage(_ message: SentMessage){}
 }
 
 class ChatController {
 
-    var messages: [MessageViewModel] = [] {
+    var messages: [MessageViewModel] {
         didSet {
             updateSnapshot()
             delegate?.chatControllerDidAddMessage(at: messages.count - 1)
         }
     }
 
-    var chatId: String = UserDefaults().string(forKey: "CHAT_ID") ?? "0" // UUID().uuidString
+    var chatId: String
 
     let chatService: ChatService
     weak var delegate: ChatControllerDelegate?
 
     var diffableDataSource: UITableViewDiffableDataSource<Int, UUID>?
 
-    init() {
+    init(_ chatId: String, _ messages: [MessageViewModel]) {
+        self.chatId = chatId
+        self.messages = messages
         self.chatService = ChatService()
         chatService.delegate = self
     }
@@ -71,8 +79,8 @@ class ChatController {
 extension ChatController: MessageInputViewDelegate {
     func messageInputView(didSend message: String) {
 
-//        let sentMessage = SentMessage(content: message, chatId: "1")
-         let sentMessage = SentMessage(content: message, chatId: self.chatId)
+        let sentMessage = SentMessage(content: message, chatId: self.chatId)
+        delegate?.chatControllerDidSendMessage(sentMessage)
         let messageViewModel = MessageViewModel(message: sentMessage)
         messages.append(messageViewModel)
 

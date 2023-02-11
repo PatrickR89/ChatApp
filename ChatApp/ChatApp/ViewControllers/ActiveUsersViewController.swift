@@ -33,8 +33,25 @@ class ActiveUsersViewController: UIViewController {
         view.backgroundColor = .systemBackground
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.triangle.2.circlepath"), style: .plain, target: nil, action: nil)
-        title = "Active Users"
-        navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationItem.largeTitleDisplayMode = .always
+    }
+
+    func setupUI() {
+        view.addSubview(tableView)
+        tableView.register(UserViewCell.self, forCellReuseIdentifier: "active user cell")
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.estimatedRowHeight = 100
+
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+        ])
+    }
+}
+
+extension ActiveUsersViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //
     }
 }

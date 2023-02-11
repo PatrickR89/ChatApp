@@ -19,8 +19,17 @@ class ChatTableViewController: UIViewControllerWithKeyboard {
         return messageInputView
     } ()
 
-    let chatController = ChatController()
+    let chatController: ChatController
     let keyboardLayoutObserver = KeyboardLayoutObserver()
+
+    init(_ chatController: ChatController) {
+        self.chatController = chatController
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +67,7 @@ class ChatTableViewController: UIViewControllerWithKeyboard {
 }
 
 extension ChatTableViewController: ChatControllerDelegate {
+
     func chatControllerDidAddMessage(at index: Int) {
         let indexPath = IndexPath(row: index, section: 0)
         tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
