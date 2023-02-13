@@ -31,6 +31,12 @@ class ChatTableViewController: UIViewControllerWithKeyboard {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        title = chatController.chatId
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationItem.largeTitleDisplayMode = .always
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()

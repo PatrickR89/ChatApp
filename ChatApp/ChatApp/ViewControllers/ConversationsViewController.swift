@@ -14,15 +14,21 @@ class ConversationsViewController: UIViewController {
         return tableView
     }()
 
-    let controller = ConversationsController()
+    let controller: ConversationsController
+    weak var titleDelegate: ChatTabBarChildDelegate?
 
-    init() {
+    init(_ controller: ConversationsController) {
+        self.controller = controller
         super.init(nibName: nil, bundle: nil)
         controller.setupDataSource(for: tableView)
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        titleDelegate?.tabBarChild(didSet: "Conversations")
     }
 
     override func viewDidLoad() {
@@ -35,6 +41,9 @@ class ConversationsViewController: UIViewController {
         view.addSubview(tableView)
         tableView.register(ConversationViewCell.self, forCellReuseIdentifier: "conversation cell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.estimatedRowHeight = 20
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.delegate = self
 
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -42,5 +51,11 @@ class ConversationsViewController: UIViewController {
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
+    }
+}
+
+extension ConversationsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //
     }
 }

@@ -149,6 +149,7 @@ class ChatService: NSObject {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = ["mojToken": token ?? ""]
+        request.timeoutInterval = 5
 
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             guard let data = data else {return}

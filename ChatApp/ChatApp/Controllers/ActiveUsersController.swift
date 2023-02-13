@@ -12,6 +12,10 @@ protocol ActiveUsersControllerDelegate: AnyObject {
     func activeUsersControllerDidRequestUsers()
 }
 
+protocol ActiveUsersControllerActions: AnyObject {
+    func activeUsersControllerDidSelect(user: User)
+}
+
 class ActiveUsersController {
 
     // users published mainly for test purposes
@@ -20,6 +24,8 @@ class ActiveUsersController {
     var usersObserver: AnyCancellable?
 
     weak var delegate: ActiveUsersControllerDelegate?
+    weak var actions: ActiveUsersControllerActions?
+
     var diffableDataSource: UITableViewDiffableDataSource<Int, String>?
 
     init() {
@@ -56,12 +62,16 @@ class ActiveUsersController {
         let userIds = users.map { $0.username }
 
         snapshot.appendItems(userIds, toSection: 0)
-
         diffableDataSource.apply(snapshot)
     }
 
     func requestUsers() {
         delegate?.activeUsersControllerDidRequestUsers()
+    }
+
+    func startConversation(_ userRow: Int) {
+        let user = users[userRow]
+        actions?.activeUsersControllerDidSelect(user: user)
     }
 }
 

@@ -11,7 +11,8 @@ class ChatCoordinator {
     let navController: UINavigationController
     let chatService: ChatService
     var activeUsersController: ActiveUsersController?
-    var activeUsersViewController: ActiveUsersViewController?
+    var tabBarController: ChatTabBarController?
+    var conversationsController: ConversationsController?
 
     init(with navController: UINavigationController, and service: ChatService) {
         self.navController = navController
@@ -20,24 +21,40 @@ class ChatCoordinator {
 
     deinit {
         activeUsersController = nil
-        activeUsersViewController = nil
+        tabBarController = nil
+        conversationsController = nil
     }
 
     func start() {
-        activeUsersController = ActiveUsersController()
-        activeUsersController?.delegate = chatService
-        chatService.usersDelegate = activeUsersController
-        activeUsersViewController = ActiveUsersViewController(activeUsersController ?? ActiveUsersController())
-        let convViewController = ConversationsViewController()
+        let activeUsersViewController = startActiveUsersViewController()
+        let convViewController = startConversationsViewController()
 
-        activeUsersViewController?.tabBarItem = UITabBarItem(title: "Active Users", image: UIImage(systemName: "person.circle"), tag: 0)
-        convViewController.tabBarItem = UITabBarItem(title: "Conversations", image: UIImage(systemName: "bubble.left"), tag: 1)
+        tabBarController = ChatTabBarController(navController: navController)
 
-        let tabBarController = ChatTabBarController(navController: navController)
-        tabBarController.setViewControllers([activeUsersViewController ?? ActiveUsersViewController(activeUsersController ?? ActiveUsersController()), convViewController], animated: true)
+        guard let tabBarController = tabBarController else {return}
+        tabBarController.setViewControllers([activeUsersViewController, convViewController], animated: true)
         tabBarController.chatDelegate = self
 
         navController.pushViewController(tabBarController, animated: true)
+    }
+
+    private func startActiveUsersViewController() -> ActiveUsersViewController {
+        activeUsersController = ActiveUsersController()
+        activeUsersController?.delegate = chatService
+        activeUsersController?.actions = self
+        chatService.usersDelegate = activeUsersController
+        let activeUsersViewController = ActiveUsersViewController(activeUsersController ?? ActiveUsersController())
+        activeUsersViewController.titleDelegate = self
+        activeUsersViewController.tabBarItem = UITabBarItem(title: "Active Users", image: UIImage(systemName: "person.circle"), tag: 0)
+        return activeUsersViewController
+    }
+
+    private func startConversationsViewController() -> ConversationsViewController {
+        conversationsController = ConversationsController()
+        let convViewController = ConversationsViewController(conversationsController ?? ConversationsController())
+        convViewController.titleDelegate = self
+        convViewController.tabBarItem = UITabBarItem(title: "Conversations", image: UIImage(systemName: "bubble.left"), tag: 1)
+        return convViewController
     }
 }
 
@@ -48,5 +65,18 @@ extension ChatCoordinator: ChatTabBarControllerDelegate {
 
     func chatTabBarDidRequestLogout() {
         //
+    }
+}
+
+extension ChatCoordinator: ChatTabBarChildDelegate {
+    func tabBarChild(didSet title: String) {
+        tabBarController?.setTitle(title)
+    }
+}
+
+extension ChatCoordinator: ActiveUsersControllerActions {
+    func activeUsersControllerDidSelect(user: User) {
+        let chatViewController = ChatTableViewController(ChatController(user.username, []))
+        navController.pushViewController(chatViewController, animated: true)
     }
 }
