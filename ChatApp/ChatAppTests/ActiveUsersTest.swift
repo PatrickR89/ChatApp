@@ -41,4 +41,18 @@ final class ActiveUsersTest: XCTestCase {
         let numOfRows = chatCoordinator?.activeUsersViewController?.tableView.numberOfRows(inSection: 0) ?? 0
         XCTAssertTrue(numOfRows > 0)
     }
+
+    func testSuccessOpenningChat() {
+        chatCoordinator?.activeUsersController?.startConversation(0)
+        let expectation = XCTestExpectation(description: "open chat")
+
+        DispatchQueue.main.async {
+            var VC: ChatTableViewController? = nil
+
+            VC = self.chatCoordinator?.navController.viewControllers.last as? ChatTableViewController
+            XCTAssertNotNil(VC)
+            expectation.fulfill()
+        }
+        wait(for: [expectation], timeout: 10)
+    }
 }

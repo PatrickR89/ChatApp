@@ -13,6 +13,8 @@ class ChatCoordinator {
     var activeUsersController: ActiveUsersController?
     var tabBarController: ChatTabBarController?
     var conversationsController: ConversationsController?
+    // for test purposes
+    var activeUsersViewController: ActiveUsersViewController?
 
     init(with navController: UINavigationController, and service: ChatService) {
         self.navController = navController
@@ -26,10 +28,12 @@ class ChatCoordinator {
     }
 
     func start() {
-        let activeUsersViewController = startActiveUsersViewController()
+        startActiveUsersViewController()
         let convViewController = startConversationsViewController()
 
         tabBarController = ChatTabBarController(navController: navController)
+
+        let activeUsersViewController = activeUsersViewController ?? ActiveUsersViewController(activeUsersController ?? ActiveUsersController())
 
         guard let tabBarController = tabBarController else {return}
         tabBarController.setViewControllers([activeUsersViewController, convViewController], animated: true)
@@ -38,15 +42,14 @@ class ChatCoordinator {
         navController.pushViewController(tabBarController, animated: true)
     }
 
-    private func startActiveUsersViewController() -> ActiveUsersViewController {
+    private func startActiveUsersViewController() {
         activeUsersController = ActiveUsersController()
         activeUsersController?.delegate = chatService
         activeUsersController?.actions = self
         chatService.usersDelegate = activeUsersController
-        let activeUsersViewController = ActiveUsersViewController(activeUsersController ?? ActiveUsersController())
-        activeUsersViewController.titleDelegate = self
-        activeUsersViewController.tabBarItem = UITabBarItem(title: "Active Users", image: UIImage(systemName: "person.circle"), tag: 0)
-        return activeUsersViewController
+        activeUsersViewController = ActiveUsersViewController(activeUsersController ?? ActiveUsersController())
+        activeUsersViewController?.titleDelegate = self
+        activeUsersViewController?.tabBarItem = UITabBarItem(title: "Active Users", image: UIImage(systemName: "person.circle"), tag: 0)
     }
 
     private func startConversationsViewController() -> ConversationsViewController {
