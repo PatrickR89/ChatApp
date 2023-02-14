@@ -98,10 +98,9 @@ class MockChatService: ChatService {
     }
 
     override func recieveMessageData(_ data: Data) {
-//        guard let message = try? JSONDecoder().decode(RecievedMessage.self, from: data) else {return}
-//        DispatchQueue.main.async {
-//            self.delegate?.recieveMessage(message)
-//        }
+        
+        let message = RecievedMessage(sourceUsername: "someuser", timestamp: Date.now.timeIntervalSince1970, content: "test message")
+        delegate?.recieveMessage(message)
     }
 
     override func fetchActiveUsers() {

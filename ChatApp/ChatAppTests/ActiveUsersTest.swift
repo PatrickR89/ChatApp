@@ -13,7 +13,6 @@ final class ActiveUsersTest: XCTestCase {
 
     var chatCoordinator: ChatCoordinator?
     var cancellable: AnyCancellable?
-    var tableViewExpectation: XCTestExpectation?
 
     override func setUp() {
         self.chatCoordinator = ChatCoordinator(with: UINavigationController(), and: MockChatService())
@@ -23,7 +22,6 @@ final class ActiveUsersTest: XCTestCase {
     override func tearDown() {
         chatCoordinator = nil
         cancellable = nil
-        tableViewExpectation = nil
     }
 
     func testFetchActiveUsers() throws {
@@ -43,7 +41,7 @@ final class ActiveUsersTest: XCTestCase {
     }
 
     func testSuccessOpenningChat() {
-        chatCoordinator?.activeUsersController?.startConversation(0)
+        chatCoordinator?.activeUsersController?.startConversation(IndexPath(row: 0, section: 0))
         let expectation = XCTestExpectation(description: "open chat")
 
         DispatchQueue.main.async {

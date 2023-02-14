@@ -13,7 +13,7 @@ protocol ConversationControllerActions: AnyObject {
 
 class ConversationsController {
     private(set) var conversations: [String: [MessageViewModel]] = [:]
-    private var conversationsList: [String] = [] {
+    private(set) var conversationsList: [String] = [] {
         didSet {
             updateSnapshot()
         }
@@ -42,18 +42,18 @@ class ConversationsController {
         if let index = conversationsList.firstIndex(of: username) {
             conversationsList.remove(at: index)
         }
-
         conversationsList.insert(username, at: 0)
     }
 
     private func updateSnapshot() {
+        guard let diffableDataSource = diffableDataSource else { return }
         var snapshot = NSDiffableDataSourceSnapshot<Int, String>()
 
         snapshot.appendSections([0])
         snapshot.appendItems(conversationsList, toSection: 0)
 
-        diffableDataSource?.defaultRowAnimation = .fade
-        diffableDataSource?.apply(snapshot)
+        diffableDataSource.defaultRowAnimation = .fade
+        diffableDataSource.apply(snapshot)
     }
 
     func openConversation(_ indexPath: IndexPath) {

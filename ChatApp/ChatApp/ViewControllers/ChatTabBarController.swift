@@ -32,12 +32,16 @@ class ChatTabBarController: UITabBarController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
 
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "power"), style: .plain, target: nil, action: nil)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "power"), style: .plain, target: self, action: #selector(requestLogout))
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.triangle.2.circlepath"), style: .plain, target: self, action: #selector(requestUsers))
     }
 
     @objc private func requestUsers() {
         chatDelegate?.chatTabBarDidRequestUsers()
+    }
+
+    @objc private func requestLogout() {
+        chatDelegate?.chatTabBarDidRequestLogout()
     }
 
     func setTitle(_ titleText: String) {
@@ -50,7 +54,7 @@ class ChatTabBarController: UITabBarController {
 extension ChatTabBarController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if viewController is ActiveUsersViewController {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.triangle.2.circlepath"), style: .plain, target: nil, action: nil)
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.triangle.2.circlepath"), style: .plain, target: nil, action: #selector(requestUsers))
         } else {
             navigationItem.rightBarButtonItem = nil
         }
