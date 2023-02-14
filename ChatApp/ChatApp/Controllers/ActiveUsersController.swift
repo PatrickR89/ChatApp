@@ -69,8 +69,9 @@ class ActiveUsersController {
         delegate?.activeUsersControllerDidRequestUsers()
     }
 
-    func startConversation(_ userRow: Int) {
-        let user = users[userRow]
+    func startConversation(_ indexPath: IndexPath) {
+        guard let username = diffableDataSource?.itemIdentifier(for: indexPath) else { return }
+        guard let user = users.first(where: { $0.username == username}) else { return }
         actions?.activeUsersControllerDidSelect(user: user)
     }
 }

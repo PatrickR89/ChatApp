@@ -20,7 +20,6 @@ class ConversationsViewController: UIViewController {
     init(_ controller: ConversationsController) {
         self.controller = controller
         super.init(nibName: nil, bundle: nil)
-        controller.setupDataSource(for: tableView)
     }
 
     required init?(coder: NSCoder) {
@@ -39,6 +38,7 @@ class ConversationsViewController: UIViewController {
 
     func setupUI() {
         view.addSubview(tableView)
+        controller.setupDataSource(for: tableView)
         tableView.register(ConversationViewCell.self, forCellReuseIdentifier: "conversation cell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.estimatedRowHeight = 20
@@ -56,6 +56,7 @@ class ConversationsViewController: UIViewController {
 
 extension ConversationsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //
+        controller.openConversation(indexPath)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

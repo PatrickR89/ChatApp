@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol ConversationControllerActions: AnyObject {
+    func conversationControllerDidSelect(_ user: String, _ conversation: [MessageViewModel])
+}
+
 class ConversationsController {
     private(set) var conversations: [String: [MessageViewModel]] = [:]
     private var conversationsList: [String] = [] {
@@ -15,6 +19,7 @@ class ConversationsController {
         }
     }
 
+    weak var actions: ConversationControllerActions?
     var diffableDataSource: UITableViewDiffableDataSource<Int, String>?
 
     func setupDataSource(for tableView: UITableView) {
@@ -49,6 +54,12 @@ class ConversationsController {
 
         diffableDataSource?.defaultRowAnimation = .fade
         diffableDataSource?.apply(snapshot)
+    }
+
+    func openConversation(_ indexPath: IndexPath) {
+        guard let conversationIdentifier = diffableDataSource?.itemIdentifier(for: indexPath) else { return }
+        guard let conversation = conversations[conversationIdentifier] else {return}
+        actions?.conversationControllerDidSelect(conversationIdentifier, conversation)
     }
 }
 

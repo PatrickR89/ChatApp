@@ -54,6 +54,7 @@ class ChatCoordinator {
 
     private func startConversationsViewController() -> ConversationsViewController {
         conversationsController = ConversationsController()
+        conversationsController?.actions = self
         let convViewController = ConversationsViewController(conversationsController ?? ConversationsController())
         convViewController.titleDelegate = self
         convViewController.tabBarItem = UITabBarItem(title: "Conversations", image: UIImage(systemName: "bubble.left"), tag: 1)
@@ -80,6 +81,13 @@ extension ChatCoordinator: ChatTabBarChildDelegate {
 extension ChatCoordinator: ActiveUsersControllerActions {
     func activeUsersControllerDidSelect(user: User) {
         let chatViewController = ChatTableViewController(ChatController(user.username, []))
+        navController.pushViewController(chatViewController, animated: true)
+    }
+}
+
+extension ChatCoordinator: ConversationControllerActions {
+    func conversationControllerDidSelect(_ user: String, _ conversation: [MessageViewModel]) {
+        let chatViewController = ChatTableViewController(ChatController(user, conversation))
         navController.pushViewController(chatViewController, animated: true)
     }
 }

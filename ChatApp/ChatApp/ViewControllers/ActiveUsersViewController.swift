@@ -62,7 +62,7 @@ class ActiveUsersViewController: UIViewController {
 
 extension ActiveUsersViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        controller.startConversation(indexPath.row)
+        controller.startConversation(indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
