@@ -7,12 +7,16 @@
 
 import XCTest
 @testable import ChatApp
+import Combine
 
 final class ConversationsTest: XCTestCase {
 
     var chatCoordinator: ChatCoordinator?
+    var cancellables: Set<AnyCancellable> = []
 
     override func setUp() {
+        UserDefaults.standard.set("asdassdbkasdsajbasdjb", forKey: "CHAT_ID")
+
         self.chatCoordinator = ChatCoordinator(with: UINavigationController(), and: MockChatService())
         chatCoordinator?.start()
         chatCoordinator?.tabBarController?.selectedIndex = 1
@@ -21,6 +25,8 @@ final class ConversationsTest: XCTestCase {
 
     override func tearDown() {
         chatCoordinator = nil
+        UserDefaults.standard.set(nil, forKey: "CHAT_ID")
+        cancellables = []
     }
 
     func testConversationsPopulateSuccess() {
@@ -57,5 +63,28 @@ final class ConversationsTest: XCTestCase {
         }
 
         wait(for: [expectation], timeout: 10)
+    }
+
+    func testPopulateConversationViaChat() {
+        chatCoordinator?.conversationsController?.openConversation(IndexPath(row: 0, section: 0))
+        let expectation = XCTestExpectation(description: "populate conversations")
+
+        DispatchQueue.main.async {
+            var viewController: ChatTableViewController? = nil
+            viewController = self.chatCoordinator?.navController.viewControllers.last as? ChatTableViewController
+            viewController?.viewDidLoad()
+            viewController?.messageInputView.inputField.text = "sdasdasdsad"
+            viewController?.messageInputView.sendMessage()
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.chatCoordinator?.conversationsController?.$conversations.sink(receiveValue: { conversation in
+                let chatCount = conversation.values.first?.count ?? 0
+                XCTAssertTrue(chatCount > 1)
+                expectation.fulfill()
+            }).store(in: &self.cancellables)
+        }
+
+        wait(for: [expectation], timeout: 15)
     }
 }

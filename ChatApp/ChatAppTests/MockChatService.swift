@@ -42,6 +42,7 @@ class MockChatService: ChatService {
 //        }
 //
 //        task.resume()
+        print(message)
     }
 
     override func login(_ model: LoginRequest) {

@@ -33,8 +33,8 @@ class ChatController {
 
     var diffableDataSource: UITableViewDiffableDataSource<Int, UUID>?
 
-    init() {
-        self.chatService = ChatService()
+    init(with service: ChatService) {
+        self.chatService = service
         chatService.delegate = self
     }
 

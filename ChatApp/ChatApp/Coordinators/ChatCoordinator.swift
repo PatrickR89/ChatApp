@@ -67,7 +67,7 @@ class ChatCoordinator {
     }
 
     private func startChatTableViewController(_ user: String, _ messages: [MessageViewModel]) {
-        let chatController = ChatController()
+        let chatController = ChatController(with: chatService)
         chatController.openChat(user, messages)
         chatController.actions = conversationsController
         let chatViewController = ChatTableViewController(chatController)

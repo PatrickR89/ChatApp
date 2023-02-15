@@ -6,13 +6,14 @@
 //
 
 import UIKit
+import Combine
 
 protocol ConversationControllerActions: AnyObject {
     func conversationControllerDidSelect(_ user: String, _ conversation: [MessageViewModel])
 }
 
 class ConversationsController {
-    private(set) var conversations: [String: [MessageViewModel]] = [:]
+    @Published private(set) var conversations: [String: [MessageViewModel]] = [:]
     private(set) var conversationsList: [String] = [] {
         didSet {
             updateSnapshot()
