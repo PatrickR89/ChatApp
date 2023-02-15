@@ -71,10 +71,10 @@ extension ConversationsController: ChatServiceDelegate {
     }
 }
 
-extension ConversationsController: ChatControllerDelegate {
-    func chatControllerDidSendMessage(_ message: SentMessage) {
-        let messageViewModel = MessageViewModel(message: message)
-        conversations[message.chatId, default: []].append(messageViewModel)
-        listConversations(message.chatId)
+extension ConversationsController: ChatControllerActions {
+
+    func chatControllerDidSendMessage(_ username: String, _ message: MessageViewModel) {
+        conversations[username, default: []].append(message)
+        listConversations(username)
     }
 }

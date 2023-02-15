@@ -26,14 +26,16 @@ class ChatCoordinator {
         activeUsersController = nil
         tabBarController = nil
         conversationsController = nil
+        activeUsersViewController = nil
+        convViewController = nil
     }
 
     func start() {
+
         startActiveUsersViewController()
         startConversationsViewController()
 
         tabBarController = ChatTabBarController(navController: navController)
-
         let activeUsersViewController = activeUsersViewController ?? ActiveUsersViewController(activeUsersController ?? ActiveUsersController())
         let convViewController = convViewController ?? ConversationsViewController(conversationsController ?? ConversationsController())
 
@@ -58,9 +60,18 @@ class ChatCoordinator {
         conversationsController = ConversationsController()
         conversationsController?.actions = self
         chatService.delegate = conversationsController
+
         convViewController = ConversationsViewController(conversationsController ?? ConversationsController())
         convViewController?.titleDelegate = self
         convViewController?.tabBarItem = UITabBarItem(title: "Conversations", image: UIImage(systemName: "bubble.left"), tag: 1)
+    }
+
+    private func startChatTableViewController(_ user: String, _ messages: [MessageViewModel]) {
+        let chatController = ChatController()
+        chatController.openChat(user, messages)
+        chatController.actions = conversationsController
+        let chatViewController = ChatTableViewController(chatController)
+        navController.pushViewController(chatViewController, animated: true)
     }
 }
 
@@ -82,14 +93,12 @@ extension ChatCoordinator: ChatTabBarChildDelegate {
 
 extension ChatCoordinator: ActiveUsersControllerActions {
     func activeUsersControllerDidSelect(user: User) {
-        let chatViewController = ChatTableViewController(ChatController(user.username, []))
-        navController.pushViewController(chatViewController, animated: true)
+        startChatTableViewController(user.username, [])
     }
 }
 
 extension ChatCoordinator: ConversationControllerActions {
     func conversationControllerDidSelect(_ user: String, _ conversation: [MessageViewModel]) {
-        let chatViewController = ChatTableViewController(ChatController(user, conversation))
-        navController.pushViewController(chatViewController, animated: true)
+        startChatTableViewController(user, conversation)
     }
 }

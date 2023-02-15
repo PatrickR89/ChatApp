@@ -10,33 +10,30 @@ import UIKit
 
 protocol ChatControllerDelegate: AnyObject {
     func chatControllerDidAddMessage(at index: Int)
-    func chatControllerDidSendMessage(_ message: SentMessage)
 }
 
-extension ChatControllerDelegate {
-    func chatControllerDidAddMessage(at index: Int){}
-    func chatControllerDidSendMessage(_ message: SentMessage){}
+protocol ChatControllerActions: AnyObject {
+    func chatControllerDidSendMessage(_ username: String, _ message: MessageViewModel)
 }
 
 class ChatController {
 
-    var messages: [MessageViewModel] {
+    var messages: [MessageViewModel] = [] {
         didSet {
             updateSnapshot()
             delegate?.chatControllerDidAddMessage(at: messages.count - 1)
         }
     }
 
-    var chatId: String
+    var chatId: String = ""
 
     let chatService: ChatService
     weak var delegate: ChatControllerDelegate?
+    weak var actions: ChatControllerActions?
 
     var diffableDataSource: UITableViewDiffableDataSource<Int, UUID>?
 
-    init(_ chatId: String, _ messages: [MessageViewModel]) {
-        self.chatId = chatId
-        self.messages = messages
+    init() {
         self.chatService = ChatService()
         chatService.delegate = self
     }
@@ -74,16 +71,20 @@ class ChatController {
         }
         diffableDataSource.apply(snapshot)
     }
+
+    func openChat(_ userId: String, _ messages: [MessageViewModel]) {
+        self.chatId = userId
+        self.messages = messages
+    }
 }
 
 extension ChatController: MessageInputViewDelegate {
     func messageInputView(didSend message: String) {
 
         let sentMessage = SentMessage(content: message, chatId: self.chatId)
-        delegate?.chatControllerDidSendMessage(sentMessage)
         let messageViewModel = MessageViewModel(message: sentMessage)
+        actions?.chatControllerDidSendMessage(chatId, messageViewModel)
         messages.append(messageViewModel)
-
         chatService.sendMessage(sentMessage)
     }
 }
