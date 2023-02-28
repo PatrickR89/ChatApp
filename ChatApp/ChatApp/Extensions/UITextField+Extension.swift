@@ -11,13 +11,15 @@ import UIKit
 extension UITextField {
     func createInputField(_ placeholderText: String) -> UITextField {
 
-        self.layer.borderWidth = 1
-        self.layer.borderColor = UIColor.lightGray.cgColor
+        self.layer.borderWidth = 3
+        self.layer.borderColor = UIConstants.lightMain.cgColor
         self.layer.cornerRadius = 22
-        self.textColor = .black
+        textColor = UIConstants.accentColor
 
-        let placeholder = try! NSAttributedString(markdown: placeholderText)
-        self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: self.frame.height))
+        let placeholder = try! NSMutableAttributedString(markdown: placeholderText)
+        let range = (placeholderText as NSString).range(of: placeholderText)
+        placeholder.addAttribute(NSAttributedString.Key.foregroundColor, value: UIConstants.lightColor, range: range)
+        self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: self.frame.height))
         self.leftViewMode = .always
         self.attributedPlaceholder = NSAttributedString(attributedString: placeholder)
 

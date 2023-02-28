@@ -34,6 +34,7 @@ class LoginViewController: UIViewControllerWithKeyboard {
     }
 
     func setupUI() {
+        loginView.setFrame(frame: view.frame)
         view.addSubview(loginView)
         loginView.translatesAutoresizingMaskIntoConstraints = false
 

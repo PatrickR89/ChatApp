@@ -16,7 +16,7 @@ class LoginController {
 
     @Published private(set) var inputIsValid: Bool
     @Published private(set) var isWaiting: Bool = false
-    private(set) var loginRequest = LoginRequest(username: "", name: "", surname: "") {
+    @Published private(set) var loginRequest = LoginRequest(username: "", name: "", surname: "") {
         didSet {
             validateInput()
         }

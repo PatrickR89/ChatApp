@@ -45,6 +45,8 @@
 		CD565F332973018000B26FC7 /* MessageViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD565F322973018000B26FC7 /* MessageViewCell.swift */; };
 		CD565F3529731A5500B26FC7 /* ChatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD565F3429731A5500B26FC7 /* ChatService.swift */; };
 		CD565F3729731AEB00B26FC7 /* LoginModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD565F3629731AEB00B26FC7 /* LoginModels.swift */; };
+		CDA963FA29AE54EE0020320E /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA963F929AE54EE0020320E /* UIConstants.swift */; };
+		CDA963FD29AE63540020320E /* LoginView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA963FC29AE63540020320E /* LoginView+Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +102,8 @@
 		CD565F322973018000B26FC7 /* MessageViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageViewCell.swift; sourceTree = "<group>"; };
 		CD565F3429731A5500B26FC7 /* ChatService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatService.swift; sourceTree = "<group>"; };
 		CD565F3629731AEB00B26FC7 /* LoginModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginModels.swift; sourceTree = "<group>"; };
+		CDA963F929AE54EE0020320E /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
+		CDA963FC29AE63540020320E /* LoginView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginView+Extensions.swift"; sourceTree = "<group>"; };
 		EFB45F5B0EEEE1DA855BD1D8 /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -198,6 +202,7 @@
 		CD565F0C2972ED8800B26FC7 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				CDA963F829AE54D80020320E /* Constants */,
 				CD18DAF929950B3E005D6544 /* Enums */,
 				CD18DAE029912192005D6544 /* Coordinators */,
 				CD18DAD82990FE94005D6544 /* Extensions */,
@@ -229,6 +234,7 @@
 		CD565F252972F3AC00B26FC7 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CDA963FB29AE633E0020320E /* Extensions */,
 				CD565F282972F49200B26FC7 /* MessageInputView.swift */,
 				CD565F322973018000B26FC7 /* MessageViewCell.swift */,
 				CD3C234F298BD897002A1A05 /* MessageView.swift */,
@@ -237,6 +243,22 @@
 				CD18DB102997D47D005D6544 /* ConversationViewCell.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		CDA963F829AE54D80020320E /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				CDA963F929AE54EE0020320E /* UIConstants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		CDA963FB29AE633E0020320E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				CDA963FC29AE63540020320E /* LoginView+Extensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		CDC92B60298BC66600F7E93A /* Controllers */ = {
@@ -456,11 +478,13 @@
 			files = (
 				CD565F122972ED8800B26FC7 /* LoginViewController.swift in Sources */,
 				CD18DAFF299647B6005D6544 /* ActiveUsersViewController.swift in Sources */,
+				CDA963FD29AE63540020320E /* LoginView+Extensions.swift in Sources */,
 				CD565F2F2972FD7000B26FC7 /* MessageViewModel.swift in Sources */,
 				CD18DB112997D47D005D6544 /* ConversationViewCell.swift in Sources */,
 				CD18DB01299647C5005D6544 /* ConversationsViewController.swift in Sources */,
 				CD565F182972ED8800B26FC7 /* ChatApp.xcdatamodeld in Sources */,
 				CD18DB0729966043005D6544 /* User.swift in Sources */,
+				CDA963FA29AE54EE0020320E /* UIConstants.swift in Sources */,
 				CD3C2352298BE30C002A1A05 /* LoginView.swift in Sources */,
 				CD18DB0329964B3D005D6544 /* ChatCoordinator.swift in Sources */,
 				CD18DAF82994FA79005D6544 /* UIViewControllerWithKeyboard.swift in Sources */,

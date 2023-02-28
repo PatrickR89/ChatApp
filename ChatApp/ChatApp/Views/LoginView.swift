@@ -20,29 +20,59 @@ class LoginView: UIView {
 
     let firstNameInput: UITextField = {
         let inputField = UITextField().createInputField("Enter your first name")
+        inputField.textColor = UIConstants.accentColor
         return inputField
     }()
 
     let lastNameInput: UITextField = {
         let inputField = UITextField().createInputField("Enter your last name")
+        inputField.textColor = UIConstants.accentColor
         return inputField
     }()
 
     let usernameInput: UITextField = {
         let inputField = UITextField().createInputField("Enter your chat name")
+        
         return inputField
+    }()
+
+    let firstNameWarning: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = UIConstants.accentColor
+        label.text = "Enter at least 4 characters"
+        return label
+    }()
+
+    let lastNameWarning: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = UIConstants.accentColor
+        label.text = "Enter at least 4 characters"
+        return label
+    }()
+
+    let usernameWarning: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = UIConstants.accentColor
+        label.text = "Enter at least 4 characters"
+        return label
     }()
 
     let confirmButton: UIButton = {
         let button = UIButton()
 
         button.layer.cornerRadius = 22
-        button.backgroundColor = .systemBlue
         button.setTitle("Register", for: .normal)
+        button.setTitleColor(UIConstants.accentColor, for: .normal)
+        button.setTitleColor(UIConstants.darkMain, for: .disabled)
         button.tintColor = .white
 
         return button
     }()
+
+    let gradient = CAGradientLayer()
 
     var observers: Set<AnyCancellable> = []
 
@@ -51,7 +81,7 @@ class LoginView: UIView {
     init(with buttonController: LoginController) {
         self.loginController = buttonController
         super.init(frame: .zero)
-        setupUI()
+//        setupUI()
         setupInputBindings()
         loginController.validateInput()
     }
@@ -65,7 +95,6 @@ class LoginView: UIView {
     }
     
     private func setupUI() {
-        self.backgroundColor = .white
         let textFields = [usernameInput, firstNameInput, lastNameInput]
         let views: [UIView] = [imageView, confirmButton] + textFields
 
@@ -80,6 +109,10 @@ class LoginView: UIView {
         }
 
         confirmButton.addTarget(self, action: #selector(register), for: .touchUpInside)
+
+        addNameWarning()
+        addLastNameWarning()
+        addUsernameWarning()
 
         NSLayoutConstraint.activate([
 
@@ -96,8 +129,24 @@ class LoginView: UIView {
             firstNameInput.heightAnchor.constraint(equalToConstant: 40),
             lastNameInput.heightAnchor.constraint(equalToConstant: 40),
             confirmButton.heightAnchor.constraint(equalTo: usernameInput.heightAnchor)
-
         ])
+
+        setupBackground()
+    }
+
+    func setFrame(frame: CGRect) {
+        self.frame = frame
+        setupUI()
+        setupBackground()
+    }
+
+    private func setupBackground() {
+        gradient.colors = [UIConstants.backgroundColorDark.cgColor, UIConstants.backgroundColorLight.cgColor]
+        gradient.frame = self.bounds
+        gradient.startPoint = .init(x: 0.5, y: 0.5)
+        gradient.endPoint = .init(x: 1, y: 1)
+        layer.insertSublayer(gradient, at: 0)
+
     }
 
     @objc func register() {
@@ -108,26 +157,51 @@ class LoginView: UIView {
 
         loginController.$inputIsValid.sink(receiveValue: { [weak self] input in
             if input == false {
-                self?.confirmButton.setTitle("Enter at least 4 characters in each field", for: .disabled)
                 self?.confirmButton.isEnabled = false
-                self?.confirmButton.backgroundColor = .lightGray
+                self?.confirmButton.backgroundColor = UIConstants.lightMain
             } else {
                 self?.confirmButton.isEnabled = true
-                self?.confirmButton.backgroundColor = .systemBlue
+                self?.confirmButton.backgroundColor = UIConstants.darkMain
             }
         })
         .store(in: &observers)
 
         loginController.$isWaiting.sink(receiveValue: { [weak self] isWaiting in
             if isWaiting {
-                self?.confirmButton.setTitle("Please wait...", for: .disabled)
                 self?.confirmButton.isEnabled = false
-                self?.confirmButton.backgroundColor = .lightGray
+                self?.confirmButton.backgroundColor = UIConstants.lightMain
             } else {
                 self?.confirmButton.isEnabled = true
-                self?.confirmButton.backgroundColor = .systemBlue
+                self?.confirmButton.backgroundColor = UIConstants.darkMain
             }
         })
+        .store(in: &observers)
+
+        loginController.$loginRequest.sink { [weak self] loginRequest in
+            if loginRequest.name.count < 4 {
+                self?.firstNameWarning.isHidden = false
+                self?.firstNameInput.layer.borderColor = UIConstants.accentColor.cgColor
+            } else {
+                self?.firstNameWarning.isHidden = true
+                self?.firstNameInput.layer.borderColor = UIConstants.lightMain.cgColor
+            }
+
+            if loginRequest.surname.count < 4 {
+                self?.lastNameWarning.isHidden = false
+                self?.lastNameInput.layer.borderColor = UIConstants.accentColor.cgColor
+            } else {
+                self?.lastNameWarning.isHidden = true
+                self?.lastNameInput.layer.borderColor = UIConstants.lightMain.cgColor
+            }
+
+            if loginRequest.username.count < 4 {
+                self?.usernameWarning.isHidden = false
+                self?.usernameInput.layer.borderColor = UIConstants.accentColor.cgColor
+            } else {
+                self?.usernameWarning.isHidden = true
+                self?.usernameInput.layer.borderColor = UIConstants.lightMain.cgColor
+            }
+        }
         .store(in: &observers)
     }
 }
