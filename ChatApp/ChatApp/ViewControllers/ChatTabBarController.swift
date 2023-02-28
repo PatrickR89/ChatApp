@@ -30,10 +30,26 @@ class ChatTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBackground
+        setupBackground()
+        addTabBarItems()
 
+    }
+
+    private func setupBackground() {
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIConstants.backgroundColorDark.cgColor, UIConstants.backgroundColorLight.cgColor]
+        gradient.frame = view.bounds
+        gradient.startPoint = .init(x: 0.5, y: 0.5)
+        gradient.endPoint = .init(x: 0, y: 1)
+        view.layer.insertSublayer(gradient, at: 0)
+    }
+
+    private func addTabBarItems() {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "power"), style: .plain, target: self, action: #selector(requestLogout))
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.triangle.2.circlepath"), style: .plain, target: self, action: #selector(requestUsers))
+
+        tabBar.tintColor = UIConstants.accentColor
+        tabBar.unselectedItemTintColor = UIConstants.inactiveAccentColor
     }
 
     @objc private func requestUsers() {
@@ -46,8 +62,11 @@ class ChatTabBarController: UITabBarController {
 
     func setTitle(_ titleText: String) {
         navigationController?.navigationBar.prefersLargeTitles = true
+        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIConstants.backgroundColorLight]
         navigationController?.navigationItem.largeTitleDisplayMode = .always
+        navigationController?.navigationBar.tintColor = UIConstants.accentColor
         title = titleText
+
     }
 }
 

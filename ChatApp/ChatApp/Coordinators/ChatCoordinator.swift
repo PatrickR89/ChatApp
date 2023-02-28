@@ -38,7 +38,6 @@ class ChatCoordinator {
         tabBarController = ChatTabBarController(navController: navController)
         let activeUsersViewController = activeUsersViewController ?? ActiveUsersViewController(activeUsersController ?? ActiveUsersController())
         let convViewController = convViewController ?? ConversationsViewController(conversationsController ?? ConversationsController())
-
         guard let tabBarController = tabBarController else {return}
         tabBarController.setViewControllers([activeUsersViewController, convViewController], animated: true)
         tabBarController.chatDelegate = self
@@ -53,7 +52,8 @@ class ChatCoordinator {
         chatService.usersDelegate = activeUsersController
         activeUsersViewController = ActiveUsersViewController(activeUsersController ?? ActiveUsersController())
         activeUsersViewController?.titleDelegate = self
-        activeUsersViewController?.tabBarItem = UITabBarItem(title: "Active Users", image: UIImage(systemName: "person.circle"), tag: 0)
+        let tabItemImage = UIImage(systemName: "person.circle")
+        activeUsersViewController?.tabBarItem = UITabBarItem(title: "Active Users", image: tabItemImage, tag: 0)
     }
 
     private func startConversationsViewController() {

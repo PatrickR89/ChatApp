@@ -81,7 +81,6 @@ class LoginView: UIView {
     init(with buttonController: LoginController) {
         self.loginController = buttonController
         super.init(frame: .zero)
-//        setupUI()
         setupInputBindings()
         loginController.validateInput()
     }
@@ -130,8 +129,6 @@ class LoginView: UIView {
             lastNameInput.heightAnchor.constraint(equalToConstant: 40),
             confirmButton.heightAnchor.constraint(equalTo: usernameInput.heightAnchor)
         ])
-
-        setupBackground()
     }
 
     func setFrame(frame: CGRect) {

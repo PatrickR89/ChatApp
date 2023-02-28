@@ -23,11 +23,11 @@ class MainCoordinator {
     }
 
     func start() {
-        if token == nil {
-            presentLoginScreen()
-        } else {
+//        if token == nil {
+//            presentLoginScreen()
+//        } else {
             presentChatView()
-        }
+//        }
     }
 
     func presentLoginScreen() {

@@ -37,8 +37,6 @@ class ActiveUsersViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-
-        view.backgroundColor = .systemBackground
     }
 
     func setupUI() {
@@ -50,6 +48,7 @@ class ActiveUsersViewController: UIViewController {
         tableView.estimatedRowHeight = 20
         tableView.rowHeight = UITableView.automaticDimension
         tableView.delegate = self
+        tableView.backgroundColor = .clear
 
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
