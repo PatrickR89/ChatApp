@@ -55,6 +55,7 @@ class ChatTableViewController: UIViewControllerWithKeyboard {
 
         tableView.translatesAutoresizingMaskIntoConstraints = false
         messageInputView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.delegate = self
 
         tableView.estimatedRowHeight = 50.0
         tableView.rowHeight = UITableView.automaticDimension
@@ -88,5 +89,15 @@ extension ChatTableViewController: ChatControllerDelegate {
     func chatControllerDidAddMessage(at index: Int) {
         let indexPath = IndexPath(row: index, section: 0)
         tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+    }
+}
+
+extension ChatTableViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        guard let cell = tableView.cellForRow(at: indexPath) as? MessageViewCell else { return }
+        tableView.beginUpdates()
+        cell.toggleIsExpanded()
+        tableView.endUpdates()
     }
 }

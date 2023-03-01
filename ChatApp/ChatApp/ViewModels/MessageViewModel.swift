@@ -17,6 +17,7 @@ struct MessageViewModel {
     let sender: Sender
     let timestamp: String
     let content: String
+    var isExpanded: Bool
 
     init(message: SentMessage) {
         self.id = UUID()
@@ -24,6 +25,7 @@ struct MessageViewModel {
         self.content = message.content
         let currentDate = Date().timeIntervalSince1970
         self.timestamp = DateFormatters.formatMessageTimestamp(currentDate)
+        self.isExpanded = false
     }
 
     init(message: RecievedMessage) {
@@ -31,5 +33,6 @@ struct MessageViewModel {
         self.sender = Sender.other(message.sourceUsername)
         self.timestamp = DateFormatters.formatMessageTimestamp(message.timestamp)
         self.content = message.content
+        self.isExpanded = false
     }
 }

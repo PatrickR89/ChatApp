@@ -32,8 +32,8 @@ class MessageView: UIView {
 
         contentLabel.numberOfLines = 0
         timestampLabel.numberOfLines = 1
-        self.layer.borderWidth = 1
-        self.layer.cornerRadius = 15
+        layer.borderWidth = 1
+        layer.cornerRadius = 5
         backgroundColor = .clear
 
         contentLabel.textColor = UIConstants.lightColor
@@ -42,12 +42,11 @@ class MessageView: UIView {
 
         NSLayoutConstraint.activate([
             contentLabel.topAnchor.constraint(equalTo: topAnchor, constant: margin),
-            timestampLabel.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: margin),
             contentLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin),
             timestampLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin),
-            contentLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -margin),
-            timestampLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -margin),
-            timestampLabel.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -margin)
+            contentLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin),
+            timestampLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -margin),
+            contentLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -margin)
         ])
     }
 
@@ -65,5 +64,31 @@ class MessageView: UIView {
             timestampLabel.textAlignment = .left
             layer.borderColor = UIConstants.inactiveAccentColor.cgColor
         }
+    }
+
+    func showTimestamp(_ isExpanded: Bool) {
+
+        UIView.transition(with: self, duration: 0.4, options: .transitionFlipFromTop, animations: {
+            self.timestampLabel.isHidden = !isExpanded
+            let bottomConstraints = self.constraints.filter { constraint in
+                constraint.secondAttribute == NSLayoutConstraint.Attribute.bottom
+                && (constraint.firstItem as? UILabel == self.contentLabel
+                    || constraint.firstItem as? UILabel == self.timestampLabel)
+            }
+            self.removeConstraints(bottomConstraints)
+            switch isExpanded {
+            case false:
+                NSLayoutConstraint.activate([
+                    self.contentLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -self.margin)
+                ])
+            case true:
+                NSLayoutConstraint.activate([
+                    self.timestampLabel.topAnchor.constraint(equalTo: self.contentLabel.bottomAnchor, constant: self.margin),
+                    self.timestampLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -self.margin)
+                ])
+            }
+        }, completion: nil)
+
+        layoutIfNeeded()
     }
 }

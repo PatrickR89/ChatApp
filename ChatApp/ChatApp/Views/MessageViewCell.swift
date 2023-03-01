@@ -11,6 +11,8 @@ class MessageViewCell: UITableViewCell {
 
     var viewModel: MessageViewModel? {
         didSet {
+            guard let viewModel else { return }
+            messageView.showTimestamp(viewModel.isExpanded)
             setupContent()
         }
     }
@@ -32,15 +34,11 @@ class MessageViewCell: UITableViewCell {
         contentView.backgroundColor = .clear
         self.contentView.addSubview(messageView)
         messageView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.translatesAutoresizingMaskIntoConstraints = false
+        selectionStyle = .none
 
         contentView.frame = frame
 
         NSLayoutConstraint.activate([
-            contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
-            contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
-            contentView.topAnchor.constraint(equalTo: topAnchor),
-            contentView.bottomAnchor.constraint(equalTo: bottomAnchor),
             messageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
             messageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
             messageView.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, constant: -10)
@@ -79,5 +77,12 @@ class MessageViewCell: UITableViewCell {
         case .other(_):
             leadingConstraint.isActive = true
         }
+    }
+
+    func toggleIsExpanded() {
+        guard let viewModel else { return }
+        self.viewModel?.isExpanded = !viewModel.isExpanded
+
+        layoutIfNeeded()
     }
 }

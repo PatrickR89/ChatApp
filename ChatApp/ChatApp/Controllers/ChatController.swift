@@ -59,7 +59,7 @@ class ChatController {
 
         var snapshot = NSDiffableDataSourceSnapshot<Int, UUID>()
         snapshot.appendSections([0])
-
+        diffableDataSource.defaultRowAnimation = .fade
         for message in messages {
             switch message.sender {
             case .me:
