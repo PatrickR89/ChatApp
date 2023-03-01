@@ -62,6 +62,13 @@ class ConversationsController {
         guard let conversation = conversations[conversationIdentifier] else {return}
         actions?.conversationControllerDidSelect(conversationIdentifier, conversation)
     }
+
+    func test() {
+        let temp = RecievedMessage(sourceUsername: "someone", timestamp: Date().timeIntervalSince1970, content: "Hello world!")
+        let tempMessage = MessageViewModel(message: temp)
+        conversations[temp.sourceUsername, default: []].append(tempMessage)
+        listConversations(temp.sourceUsername)
+    }
 }
 
 extension ConversationsController: ChatServiceDelegate {

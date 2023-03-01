@@ -45,6 +45,8 @@ class ConversationsViewController: UIViewController {
         tableView.delegate = self
         tableView.backgroundColor = .clear
 
+        controller.test()
+
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),

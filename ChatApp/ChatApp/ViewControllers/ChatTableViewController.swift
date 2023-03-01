@@ -49,7 +49,6 @@ class ChatTableViewController: UIViewControllerWithKeyboard {
         view.addSubview(tableView)
         view.addSubview(messageInputView)
         view.isUserInteractionEnabled = true
-        view.backgroundColor = .systemBackground
         messageInputView.delegate = chatController
         tableView.register(MessageViewCell.self, forCellReuseIdentifier: "cell")
         chatController.setupDataSource(for: tableView)
@@ -60,6 +59,7 @@ class ChatTableViewController: UIViewControllerWithKeyboard {
         tableView.estimatedRowHeight = 50.0
         tableView.rowHeight = UITableView.automaticDimension
         tableView.separatorStyle = .none
+        tableView.backgroundColor = .clear
 
         NSLayoutConstraint.activate([
             messageInputView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -69,6 +69,17 @@ class ChatTableViewController: UIViewControllerWithKeyboard {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: messageInputView.topAnchor, constant: -5)
         ])
+
+        setupBackground()
+    }
+
+    private func setupBackground() {
+        let gradient = CAGradientLayer()
+        gradient.colors = [UIConstants.backgroundColorDark.cgColor, UIConstants.backgroundColorLight.cgColor]
+        gradient.frame = view.bounds
+        gradient.startPoint = .init(x: 0, y: 0.3)
+        gradient.endPoint = .init(x: 0, y: 0.7)
+        view.layer.insertSublayer(gradient, at: 0)
     }
 }
 

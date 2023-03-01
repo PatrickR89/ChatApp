@@ -9,7 +9,6 @@ import UIKit
 
 class MessageView: UIView {
 
-    var senderLable = UILabel()
     var contentLabel = UILabel()
     var timestampLabel = UILabel()
     let margin: CGFloat = 5
@@ -25,30 +24,27 @@ class MessageView: UIView {
     }
 
     func setupUI() {
-        self.addSubview(senderLable)
         self.addSubview(contentLabel)
         self.addSubview(timestampLabel)
 
-        senderLable.translatesAutoresizingMaskIntoConstraints = false
         contentLabel.translatesAutoresizingMaskIntoConstraints = false
         timestampLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        senderLable.numberOfLines = 1
         contentLabel.numberOfLines = 0
         timestampLabel.numberOfLines = 1
-        timestampLabel.textColor = .placeholderText
-        self.layer.borderColor = UIColor.label.cgColor
         self.layer.borderWidth = 1
         self.layer.cornerRadius = 15
+        backgroundColor = .clear
+
+        contentLabel.textColor = UIConstants.lightColor
+        timestampLabel.textColor = UIConstants.lightMain
+        timestampLabel.font = UIFont.systemFont(ofSize: 12)
 
         NSLayoutConstraint.activate([
-            senderLable.topAnchor.constraint(equalTo: self.topAnchor, constant: margin),
-            contentLabel.topAnchor.constraint(equalTo: senderLable.bottomAnchor, constant: margin),
+            contentLabel.topAnchor.constraint(equalTo: topAnchor, constant: margin),
             timestampLabel.topAnchor.constraint(equalTo: contentLabel.bottomAnchor, constant: margin),
-            senderLable.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: margin),
             contentLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin),
             timestampLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: margin),
-            senderLable.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -margin),
             contentLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -margin),
             timestampLabel.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: -margin),
             timestampLabel.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -margin)
@@ -61,17 +57,13 @@ class MessageView: UIView {
 
         switch sender {
         case .me:
-            senderLable.text = "Me"
-            senderLable.textAlignment = .right
             contentLabel.textAlignment = .right
             timestampLabel.textAlignment = .right
-
-        case .other(let name):
-            senderLable.text = name
-            senderLable.textAlignment = .left
+            layer.borderColor = UIConstants.lightMain.cgColor
+        case .other(_):
             contentLabel.textAlignment = .left
             timestampLabel.textAlignment = .left
+            layer.borderColor = UIConstants.inactiveAccentColor.cgColor
         }
-
     }
 }

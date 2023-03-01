@@ -20,7 +20,7 @@ class MessageViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.setupUI()
+        setupUI()
     }
 
     required init?(coder: NSCoder) {
@@ -28,13 +28,22 @@ class MessageViewCell: UITableViewCell {
     }
 
     func setupUI() {
+        backgroundColor = .clear
+        contentView.backgroundColor = .clear
         self.contentView.addSubview(messageView)
         messageView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.translatesAutoresizingMaskIntoConstraints = false
+
+        contentView.frame = frame
 
         NSLayoutConstraint.activate([
+            contentView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            contentView.topAnchor.constraint(equalTo: topAnchor),
+            contentView.bottomAnchor.constraint(equalTo: bottomAnchor),
             messageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
             messageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
-            messageView.widthAnchor.constraint(lessThanOrEqualToConstant: contentView.frame.width - 10.0)
+            messageView.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, constant: -10)
         ])
     }
 
@@ -45,14 +54,30 @@ class MessageViewCell: UITableViewCell {
         }
 
         messageView.presentText(sender: viewModel.sender, content: viewModel.content, time: viewModel.timestamp)
+        setupUIBySender(viewModel.sender)
+    }
 
-        switch viewModel.sender {
-        case .me:
-            messageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin * 2).isActive = true
+    func setupUIBySender(_ sender: Sender) {
+        let leadingConstraint = messageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin * 2)
+        let trailingConstraint = messageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin * 2)
+        leadingConstraint.isActive = false
+        trailingConstraint.isActive = false
 
-        case .other(_):
-            messageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin * 2).isActive = true
+        if let constraint = contentView.constraints.first(where: {$0.firstAttribute == NSLayoutConstraint.Attribute.leading}) {
+            contentView.removeConstraint(constraint)
         }
 
+        if let constraint = contentView.constraints.first(where: {$0.firstAttribute == NSLayoutConstraint.Attribute.trailing}) {
+            contentView.removeConstraint(constraint)
+        }
+
+
+        switch sender {
+        case .me:
+            trailingConstraint.isActive = true
+
+        case .other(_):
+            leadingConstraint.isActive = true
+        }
     }
 }
