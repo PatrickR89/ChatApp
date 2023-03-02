@@ -8,7 +8,7 @@
 import Foundation
 
 enum Sender {
-    case me
+    case myself
     case other(_ name: String)
 }
 
@@ -21,7 +21,7 @@ struct MessageViewModel {
 
     init(message: SentMessage) {
         self.id = UUID()
-        self.sender = Sender.me
+        self.sender = Sender.myself
         self.content = message.content
         let currentDate = Date().timeIntervalSince1970
         self.timestamp = DateFormatters.formatMessageTimestamp(currentDate)

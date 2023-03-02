@@ -45,8 +45,16 @@ class ChatTabBarController: UITabBarController {
     }
 
     private func addTabBarItems() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "power"), style: .plain, target: self, action: #selector(requestLogout))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.triangle.2.circlepath"), style: .plain, target: self, action: #selector(requestUsers))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "power"),
+            style: .plain,
+            target: self,
+            action: #selector(requestLogout))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(
+            image: UIImage(systemName: "arrow.triangle.2.circlepath"),
+            style: .plain,
+            target: self,
+            action: #selector(requestUsers))
 
         tabBar.tintColor = UIConstants.accentColor
         tabBar.unselectedItemTintColor = UIConstants.inactiveAccentColor
@@ -62,7 +70,9 @@ class ChatTabBarController: UITabBarController {
 
     func setTitle(_ titleText: String) {
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIConstants.backgroundColorLight]
+        navigationController?.navigationBar.largeTitleTextAttributes =
+        [NSAttributedString.Key.foregroundColor: UIConstants.backgroundColorLight]
+
         navigationController?.navigationItem.largeTitleDisplayMode = .always
         navigationController?.navigationBar.tintColor = UIConstants.accentColor
         title = titleText
@@ -73,7 +83,10 @@ class ChatTabBarController: UITabBarController {
 extension ChatTabBarController: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         if viewController is ActiveUsersViewController {
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.triangle.2.circlepath"), style: .plain, target: nil, action: #selector(requestUsers))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(
+                image: UIImage(systemName: "arrow.triangle.2.circlepath"),
+                style: .plain,
+                target: nil, action: #selector(requestUsers))
         } else {
             navigationItem.rightBarButtonItem = nil
         }

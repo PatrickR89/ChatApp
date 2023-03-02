@@ -52,7 +52,12 @@ class ConversationViewCell: UITableViewCell {
 
     func convertLabelToPassive() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            UIView.transition(with: self.userLabel, duration: 0.5, options: .transitionCrossDissolve, animations: {self.userLabel.textColor = UIConstants.lightColor}, completion: nil)
+            UIView.transition(
+                with: self.userLabel,
+                duration: 0.5,
+                options: .transitionCrossDissolve,
+                animations: {self.userLabel.textColor = UIConstants.lightColor},
+                completion: nil)
         }
     }
 }

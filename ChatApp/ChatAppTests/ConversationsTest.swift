@@ -35,7 +35,9 @@ final class ConversationsTest: XCTestCase {
 
         DispatchQueue.main.async {
             guard let conversations = self.chatCoordinator?.conversationsController?.conversations else {fatalError()}
-            guard let conversationsList = self.chatCoordinator?.conversationsController?.conversationsList else {fatalError()}
+            guard let conversationsList = self.chatCoordinator?.conversationsController?.conversationsList else {
+                fatalError()
+            }
             XCTAssertFalse(conversations.isEmpty)
             XCTAssertFalse(conversationsList.isEmpty)
 
@@ -55,7 +57,7 @@ final class ConversationsTest: XCTestCase {
         let expectation = XCTestExpectation(description: "open chat from conversations")
 
         DispatchQueue.main.async {
-            var viewController: ChatTableViewController? = nil
+            var viewController: ChatTableViewController?
 
             viewController = self.chatCoordinator?.navController.viewControllers.last as? ChatTableViewController
             XCTAssertNotNil(viewController)
@@ -70,7 +72,7 @@ final class ConversationsTest: XCTestCase {
         let expectation = XCTestExpectation(description: "populate conversations")
 
         DispatchQueue.main.async {
-            var viewController: ChatTableViewController? = nil
+            var viewController: ChatTableViewController?
             viewController = self.chatCoordinator?.navController.viewControllers.last as? ChatTableViewController
             viewController?.viewDidLoad()
             viewController?.messageInputView.inputField.text = "sdasdasdsad"

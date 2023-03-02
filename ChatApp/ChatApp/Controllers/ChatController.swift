@@ -39,9 +39,14 @@ class ChatController {
     }
 
     func setupDataSource(for tableView: UITableView) {
-        let diffableDataSource = UITableViewDiffableDataSource<Int, UUID>(tableView: tableView) { [weak self] tableView,indexPath,itemIdentifier in
+        let diffableDataSource = UITableViewDiffableDataSource<
+            Int, UUID>(tableView: tableView) { [weak self] tableView, indexPath, _ in
 
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as? MessageViewCell else { fatalError("cell not found")}
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: "cell",
+                for: indexPath) as? MessageViewCell else {
+                fatalError("cell not found")
+            }
 
             cell.viewModel = self?.messages[indexPath.row]
 
@@ -62,7 +67,7 @@ class ChatController {
         diffableDataSource.defaultRowAnimation = .fade
         for message in messages {
             switch message.sender {
-            case .me:
+            case .myself:
                 diffableDataSource.defaultRowAnimation = .right
             case .other:
                 diffableDataSource.defaultRowAnimation = .left

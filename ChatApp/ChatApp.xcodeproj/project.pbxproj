@@ -351,6 +351,7 @@
 				CD565F072972ED8800B26FC7 /* Frameworks */,
 				CD565F082972ED8800B26FC7 /* Resources */,
 				53C333B90B099B26DABF1937 /* [CP] Embed Pods Frameworks */,
+				CDEA313729B081FA005D6FFB /* Lint Source */,
 			);
 			buildRules = (
 			);
@@ -457,6 +458,25 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ChatApp/Pods-ChatApp-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		CDEA313729B081FA005D6FFB /* Lint Source */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Lint Source";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n    swiftlint lint\nelse\n   echo \"warning: SwiftLint not installed\"\nfi \n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

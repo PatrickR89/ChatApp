@@ -17,7 +17,7 @@ class ChatTableViewController: UIViewControllerWithKeyboard {
     lazy var messageInputView: MessageInputView = {
         let messageInputView = MessageInputView()
         return messageInputView
-    } ()
+    }()
 
     let chatController: ChatController
     let keyboardLayoutObserver = KeyboardLayoutObserver()

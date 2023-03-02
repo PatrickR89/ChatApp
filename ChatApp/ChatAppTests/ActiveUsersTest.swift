@@ -45,10 +45,10 @@ final class ActiveUsersTest: XCTestCase {
         let expectation = XCTestExpectation(description: "open chat")
 
         DispatchQueue.main.async {
-            var VC: ChatTableViewController? = nil
+            var viewController: ChatTableViewController?
 
-            VC = self.chatCoordinator?.navController.viewControllers.last as? ChatTableViewController
-            XCTAssertNotNil(VC)
+            viewController = self.chatCoordinator?.navController.viewControllers.last as? ChatTableViewController
+            XCTAssertNotNil(viewController)
             expectation.fulfill()
         }
         wait(for: [expectation], timeout: 10)

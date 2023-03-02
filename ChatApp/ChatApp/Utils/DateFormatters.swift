@@ -13,8 +13,7 @@ class DateFormatters {
         formatter.timeStyle = .medium
         formatter.dateStyle = .short
         return formatter
-    } ()
-
+    }()
 
     static func formatMessageTimestamp(_ time: TimeInterval) -> String {
         let date = Date(timeIntervalSince1970: time)

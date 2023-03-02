@@ -24,12 +24,15 @@ class ConversationsController {
     var diffableDataSource: UITableViewDiffableDataSource<Int, String>?
 
     func setupDataSource(for tableView: UITableView) {
-        let diffableDataSource = UITableViewDiffableDataSource<Int, String>(tableView: tableView) { [weak self] tableView, indexPath, itemIdentifier in
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "conversation cell", for: indexPath) as? ConversationViewCell else {
+        let diffableDataSource = UITableViewDiffableDataSource<
+            Int, String>(tableView: tableView) { [weak self] tableView, indexPath, _ in
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: "conversation cell",
+                for: indexPath) as? ConversationViewCell else {
                 fatalError("cell not found")
             }
             let conversationTitle = self?.conversationsList[indexPath.row] ?? ""
-            let conversationTime = self?.conversations[conversationTitle , default: []].last?.timestamp ?? ""
+            let conversationTime = self?.conversations[conversationTitle, default: []].last?.timestamp ?? ""
             let conversation = Conversation(withUser: conversationTitle, lastActivity: conversationTime)
             cell.setupCell(conversation)
             return cell
@@ -64,7 +67,10 @@ class ConversationsController {
     }
 
     func test() {
-        let temp = RecievedMessage(sourceUsername: "someone", timestamp: Date().timeIntervalSince1970, content: "Hello world!")
+        let temp = RecievedMessage(
+            sourceUsername: "someone",
+            timestamp: Date().timeIntervalSince1970,
+            content: "Hello world!")
         let tempMessage = MessageViewModel(message: temp)
         conversations[temp.sourceUsername, default: []].append(tempMessage)
         listConversations(temp.sourceUsername)

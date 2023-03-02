@@ -55,8 +55,6 @@ class MockChatService: ChatService {
         let userDefaults = UserDefaults.standard
         userDefaults.set(response.token, forKey: "CHAT_ID")
         self.loginDelegate?.recieveId(response.token)
-
-
     }
 
     override func listenForMessages() {
@@ -99,8 +97,10 @@ class MockChatService: ChatService {
     }
 
     override func recieveMessageData(_ data: Data) {
-        
-        let message = RecievedMessage(sourceUsername: "someuser", timestamp: Date.now.timeIntervalSince1970, content: "test message")
+        let message = RecievedMessage(
+            sourceUsername: "someuser",
+            timestamp: Date.now.timeIntervalSince1970,
+            content: "test message")
         delegate?.recieveMessage(message)
     }
 

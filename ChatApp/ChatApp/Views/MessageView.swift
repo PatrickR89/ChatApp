@@ -55,11 +55,11 @@ class MessageView: UIView {
         timestampLabel.text = time
 
         switch sender {
-        case .me:
+        case .myself:
             contentLabel.textAlignment = .right
             timestampLabel.textAlignment = .right
             layer.borderColor = UIConstants.lightMain.cgColor
-        case .other(_):
+        case .other:
             contentLabel.textAlignment = .left
             timestampLabel.textAlignment = .left
             layer.borderColor = UIConstants.inactiveAccentColor.cgColor
@@ -83,7 +83,9 @@ class MessageView: UIView {
                 ])
             case true:
                 NSLayoutConstraint.activate([
-                    self.timestampLabel.topAnchor.constraint(equalTo: self.contentLabel.bottomAnchor, constant: self.margin),
+                    self.timestampLabel.topAnchor.constraint(
+                        equalTo: self.contentLabel.bottomAnchor,
+                        constant: self.margin),
                     self.timestampLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -self.margin)
                 ])
             }

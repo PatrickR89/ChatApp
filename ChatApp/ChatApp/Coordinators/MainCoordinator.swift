@@ -10,7 +10,6 @@ import Combine
 
 class MainCoordinator {
 
-    // token published for test purposes
     @Published var token: String? = UserDefaults().string(forKey: "CHAT_ID")
     let navController: UINavigationController
     var chatService: ChatService

@@ -20,7 +20,7 @@ class ActiveUsersViewController: UIViewController {
 
     let controller: ActiveUsersController
     weak var titleDelegate: ChatTabBarChildDelegate?
-    
+
     init(_ controller: ActiveUsersController) {
         self.controller = controller
         super.init(nibName: nil, bundle: nil)

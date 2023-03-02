@@ -16,7 +16,6 @@ class UserViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     func setupUI(_ model: User) {
@@ -37,7 +36,12 @@ class UserViewCell: UITableViewCell {
 
     func convertLabelToPassive() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            UIView.transition(with: self.label, duration: 0.5, options: .transitionCrossDissolve, animations: {self.label.textColor = UIConstants.lightColor}, completion: nil)
+            UIView.transition(
+                with: self.label,
+                duration: 0.5,
+                options: .transitionCrossDissolve,
+                animations: {self.label.textColor = UIConstants.lightColor},
+                completion: nil)
         }
     }
 }

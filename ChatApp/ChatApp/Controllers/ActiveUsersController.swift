@@ -18,7 +18,6 @@ protocol ActiveUsersControllerActions: AnyObject {
 
 class ActiveUsersController {
 
-    // users published mainly for test purposes
     @Published var users = [User]()
 
     var usersObserver: AnyCancellable?
@@ -39,9 +38,15 @@ class ActiveUsersController {
     }
 
     func setupDataSource(for tableView: UITableView) {
-        let diffableDataSource = UITableViewDiffableDataSource<Int, String>(tableView: tableView) { [weak self] tableView,indexPath,itemIdentifier in
+        let diffableDataSource =
+        UITableViewDiffableDataSource<
+            Int, String>(tableView: tableView) { [weak self] tableView, indexPath, _ in
 
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "active user cell", for: indexPath) as? UserViewCell else { fatalError("cell not found")}
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: "active user cell",
+                for: indexPath) as? UserViewCell else {
+                fatalError("cell not found")
+            }
 
             cell.setupUI((self?.users[indexPath.row]) ?? User(username: ""))
 

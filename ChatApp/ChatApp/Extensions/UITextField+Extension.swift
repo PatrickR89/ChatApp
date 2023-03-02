@@ -16,12 +16,17 @@ extension UITextField {
         self.layer.cornerRadius = 22
         textColor = UIConstants.accentColor
 
-        let placeholder = try! NSMutableAttributedString(markdown: placeholderText)
-        let range = (placeholderText as NSString).range(of: placeholderText)
-        placeholder.addAttribute(NSAttributedString.Key.foregroundColor, value: UIConstants.lightColor, range: range)
         self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: self.frame.height))
         self.leftViewMode = .always
-        self.attributedPlaceholder = NSAttributedString(attributedString: placeholder)
+
+        if let placeholder = try? NSMutableAttributedString(markdown: placeholderText) {
+            let range = (placeholderText as NSString).range(of: placeholderText)
+            placeholder.addAttribute(
+                NSAttributedString.Key.foregroundColor,
+                value: UIConstants.lightColor,
+                range: range)
+            self.attributedPlaceholder = NSAttributedString(attributedString: placeholder)
+        }
 
         return self
     }

@@ -13,7 +13,6 @@ class ChatCoordinator {
     private(set) var activeUsersController: ActiveUsersController?
     private(set) var tabBarController: ChatTabBarController?
     private(set) var conversationsController: ConversationsController?
-    // for test purposes
     private(set) var activeUsersViewController: ActiveUsersViewController?
     private(set) var convViewController: ConversationsViewController?
 
@@ -36,8 +35,10 @@ class ChatCoordinator {
         startConversationsViewController()
 
         tabBarController = ChatTabBarController(navController: navController)
-        let activeUsersViewController = activeUsersViewController ?? ActiveUsersViewController(activeUsersController ?? ActiveUsersController())
-        let convViewController = convViewController ?? ConversationsViewController(conversationsController ?? ConversationsController())
+        let activeUsersViewController = activeUsersViewController ?? ActiveUsersViewController(
+            activeUsersController ?? ActiveUsersController())
+        let convViewController = convViewController ?? ConversationsViewController(
+            conversationsController ?? ConversationsController())
         guard let tabBarController = tabBarController else {return}
         tabBarController.setViewControllers([activeUsersViewController, convViewController], animated: true)
         tabBarController.chatDelegate = self
@@ -63,7 +64,10 @@ class ChatCoordinator {
 
         convViewController = ConversationsViewController(conversationsController ?? ConversationsController())
         convViewController?.titleDelegate = self
-        convViewController?.tabBarItem = UITabBarItem(title: "Conversations", image: UIImage(systemName: "bubble.left"), tag: 1)
+        convViewController?.tabBarItem = UITabBarItem(
+            title: "Conversations",
+            image: UIImage(systemName: "bubble.left"),
+            tag: 1)
     }
 
     private func startChatTableViewController(_ user: String, _ messages: [MessageViewModel]) {

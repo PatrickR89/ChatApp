@@ -12,7 +12,12 @@ class LoginView: UIView {
 
     let imageView: UIImageView = {
         let imageView = UIImageView()
-        let image = UIImage(systemName: "envelope.open.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 120, weight: UIImage.SymbolWeight.thin, scale: UIImage.SymbolScale.large))
+        let image = UIImage(
+            systemName: "envelope.open.fill",
+            withConfiguration: UIImage.SymbolConfiguration(
+                pointSize: 120,
+                weight: UIImage.SymbolWeight.thin,
+                scale: UIImage.SymbolScale.large))
         imageView.image = image
         imageView.tintColor = .black
         return imageView
@@ -32,7 +37,7 @@ class LoginView: UIView {
 
     let usernameInput: UITextField = {
         let inputField = UITextField().createInputField("Enter your chat name")
-        
+
         return inputField
     }()
 
@@ -92,7 +97,7 @@ class LoginView: UIView {
     deinit {
         self.observers = []
     }
-    
+
     private func setupUI() {
         let textFields = [usernameInput, firstNameInput, lastNameInput]
         let views: [UIView] = [imageView, confirmButton] + textFields

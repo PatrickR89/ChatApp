@@ -47,7 +47,7 @@ class MessageViewCell: UITableViewCell {
 
     func setupContent() {
         guard let viewModel = viewModel else {
-            messageView.presentText(sender: .me, content: "", time: "")
+            messageView.presentText(sender: .myself, content: "", time: "")
             return
         }
 
@@ -56,25 +56,30 @@ class MessageViewCell: UITableViewCell {
     }
 
     func setupUIBySender(_ sender: Sender) {
-        let leadingConstraint = messageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: margin * 2)
-        let trailingConstraint = messageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -margin * 2)
+        let leadingConstraint = messageView.leadingAnchor.constraint(
+            equalTo: contentView.leadingAnchor,
+            constant: margin * 2)
+        let trailingConstraint = messageView.trailingAnchor.constraint(
+            equalTo: contentView.trailingAnchor,
+            constant: -margin * 2)
         leadingConstraint.isActive = false
         trailingConstraint.isActive = false
 
-        if let constraint = contentView.constraints.first(where: {$0.firstAttribute == NSLayoutConstraint.Attribute.leading}) {
+        if let constraint = contentView.constraints.first(
+            where: {$0.firstAttribute == NSLayoutConstraint.Attribute.leading}) {
             contentView.removeConstraint(constraint)
         }
 
-        if let constraint = contentView.constraints.first(where: {$0.firstAttribute == NSLayoutConstraint.Attribute.trailing}) {
+        if let constraint = contentView.constraints.first(
+            where: {$0.firstAttribute == NSLayoutConstraint.Attribute.trailing}) {
             contentView.removeConstraint(constraint)
         }
-
 
         switch sender {
-        case .me:
+        case .myself:
             trailingConstraint.isActive = true
 
-        case .other(_):
+        case .other:
             leadingConstraint.isActive = true
         }
     }
