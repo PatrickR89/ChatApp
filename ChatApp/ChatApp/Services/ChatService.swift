@@ -15,7 +15,7 @@ protocol ChatServiceUsersDelegate: AnyObject {
     func service(didRecieve users: [User])
 }
 
-protocol ChatServiceLogin: AnyObject {
+protocol ChatServiceActions: AnyObject {
     func recieveId(_ id: String)
     func errorOccured(_ error: String)
 }
@@ -30,7 +30,9 @@ class ChatService: NSObject {
     private var webSocket: URLSessionWebSocketTask?
     private var waitingForResponse = false {
         didSet {
-            responseDelegate?.chatService(waitingForResponse)
+            DispatchQueue.main.async {
+                self.responseDelegate?.chatService(self.waitingForResponse)
+            }
         }
     }
 
@@ -40,7 +42,7 @@ class ChatService: NSObject {
     }
 
     weak var delegate: ChatServiceDelegate?
-    weak var loginDelegate: ChatServiceLogin?
+    weak var actions: ChatServiceActions?
     weak var responseDelegate: ChatServiceResponse?
     weak var usersDelegate: ChatServiceUsersDelegate?
 
@@ -53,7 +55,23 @@ class ChatService: NSObject {
 
         request.httpBody = try? JSONEncoder().encode(message)
 
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+            if let error = error {
+                self?.actions?.errorOccured(error.localizedDescription)
+                return
+            }
+
+            guard let response = response as? HTTPURLResponse else { return }
+            guard response.statusCode == 200 else {
+                if response.statusCode >= 400 && response.statusCode < 500 {
+                    self?.actions?.errorOccured("Error in request")
+                } else if response.statusCode >= 500 {
+                    self?.actions?.errorOccured("Error occured on server")
+                }
+
+                return
+            }
+
             if let data = data {
                 print("send response: \(String(data: data, encoding: .utf8) ?? "<error>")")
             }
@@ -73,23 +91,40 @@ class ChatService: NSObject {
 
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
 
-            guard error == nil else {
-                DispatchQueue.main.async { [weak self] in
-                    self?.waitingForResponse = false
-                    self?.loginDelegate?.errorOccured(error!.localizedDescription)
+            if let error = error {
+                self?.waitingForResponse = false
+                self?.actions?.errorOccured(error.localizedDescription)
+                return
+            }
+
+            guard let response = response as? HTTPURLResponse else { return }
+            guard response.statusCode == 200 else {
+                self?.waitingForResponse = false
+                if response.statusCode == 403 || response.statusCode == 401 {
+                    self?.actions?.errorOccured("Authentication failed")
+                } else if response.statusCode >= 400 && response.statusCode < 500 {
+                    self?.actions?.errorOccured("Error in request")
+                } else if response.statusCode >= 500 {
+                    self?.actions?.errorOccured("Error occured on server")
                 }
 
                 return
             }
 
-            guard let data = data else {return}
+            guard let data = data else {
+                self?.actions?.errorOccured("Error occured while fetching data")
+                return
+            }
 
-            guard let respData = try? JSONDecoder().decode(LoginResponse.self, from: data) else {return}
+            guard let respData = try? JSONDecoder().decode(LoginResponse.self, from: data) else {
+                self?.actions?.errorOccured("Error in retrieved data")
+                return
+            }
             let userDefaults = UserDefaults.standard
             userDefaults.set(respData.token, forKey: "CHAT_ID")
 
             self?.waitingForResponse = false
-            self?.loginDelegate?.recieveId(respData.token)
+            self?.actions?.recieveId(respData.token)
             self?.listenForMessages()
         }
 
@@ -152,9 +187,34 @@ class ChatService: NSObject {
         request.timeoutInterval = 5
 
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
-            guard let data = data else {return}
 
-            guard let users = try? JSONDecoder().decode([User].self, from: data) else {return}
+            if let error = error {
+                self?.waitingForResponse = false
+                self?.actions?.errorOccured(error.localizedDescription)
+                return
+            }
+
+            guard let response = response as? HTTPURLResponse else { return }
+            guard response.statusCode == 200 else {
+                self?.waitingForResponse = false
+                if response.statusCode >= 400 && response.statusCode < 500 {
+                    self?.actions?.errorOccured("Error in request")
+                } else if response.statusCode >= 500 {
+                    self?.actions?.errorOccured("Error occured on server")
+                }
+
+                return
+            }
+
+            guard let data = data else {
+                self?.actions?.errorOccured("Error occured while fetching data")
+                return
+            }
+
+            guard let users = try? JSONDecoder().decode([User].self, from: data) else {
+                self?.actions?.errorOccured("Error in retrieved data")
+                return
+            }
 
             DispatchQueue.main.async {
                 self?.usersDelegate?.service(didRecieve: users)
@@ -182,14 +242,14 @@ extension ChatService: URLSessionWebSocketDelegate {
         _ session: URLSession,
         webSocketTask: URLSessionWebSocketTask,
         didOpenWithProtocol protocol: String?) {
-        print("open")
-    }
+            print("open")
+        }
 
     func urlSession(
         _ session: URLSession,
         webSocketTask: URLSessionWebSocketTask,
         didCloseWith closeCode: URLSessionWebSocketTask.CloseCode,
         reason: Data?) {
-        print("closed")
-    }
+            print("closed")
+        }
 }

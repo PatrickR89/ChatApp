@@ -18,7 +18,7 @@ class MainCoordinator {
     init(_ navController: UINavigationController, _ chatService: ChatService) {
         self.chatService = chatService
         self.navController = navController
-        self.chatService.loginDelegate = self
+        self.chatService.actions = self
     }
 
     func start() {
@@ -46,14 +46,32 @@ class MainCoordinator {
         self.childCoordinator = ChatCoordinator(with: navController, and: chatService)
         childCoordinator?.start()
     }
+
+    func presentServiceNotification(_ message: String) {
+
+        var yPosition = navController.view.frame.height / 2
+
+        if let height = navController.viewControllers.last?.view.frame.height {
+            yPosition -= height / 2
+        }
+
+        let frame = CGRect(
+            x: 0,
+            y: yPosition,
+            width: UIScreen.main.bounds.width,
+            height: UIScreen.main.bounds.height / 2)
+
+        let serviceNotification = ServiceNotificationView(frame: frame, message: message)
+
+        navController.viewControllers.last?.view.addSubview(serviceNotification)
+    }
 }
 
-extension MainCoordinator: ChatServiceLogin {
+extension MainCoordinator: ChatServiceActions {
     func errorOccured(_ error: String) {
-
-        let alertController = UIAlertController(title: "Error", message: error, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default))
-        navController.visibleViewController?.present(alertController, animated: true)
+        DispatchQueue.main.async {
+            self.presentServiceNotification(error)
+        }
     }
 
     func recieveId(_ id: String) {

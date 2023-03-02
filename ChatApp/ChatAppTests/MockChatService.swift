@@ -23,7 +23,7 @@ class MockChatService: ChatService {
     }
 
 //    weak var delegate: ChatServiceDelegate?
-//    weak var loginDelegate: ChatServiceLogin?
+//    weak var actions: ChatServiceLogin?
 //    weak var responseDelegate: ChatServiceResponse?
 
     override func sendMessage(_ message: SentMessage) {
