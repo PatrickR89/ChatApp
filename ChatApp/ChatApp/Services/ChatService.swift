@@ -47,7 +47,7 @@ class ChatService: NSObject {
     weak var usersDelegate: ChatServiceUsersDelegate?
 
     func sendMessage(_ message: SentMessage) {
-        let url = URL(string: "http://192.168.88.251/send")!
+        let url = URL(string: "\(APIConstants.baseURL)\(APIConstants.sendMessageAPI)")!
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -82,7 +82,7 @@ class ChatService: NSObject {
 
     func login(_ model: LoginRequest) {
 
-        let url = URL(string: "http://192.168.88.251/login")!
+        let url = URL(string: "\(APIConstants.baseURL)\(APIConstants.loginAPI)")!
 
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
@@ -134,7 +134,7 @@ class ChatService: NSObject {
     }
 
     func listenForMessages() {
-        let url = URL(string: "ws://192.168.88.251/chat")!
+        let url = URL(string: "\(APIConstants.webSocketURL)\(APIConstants.chatAPI)")!
         var request = URLRequest(url: url)
         request.allHTTPHeaderFields = ["mojToken": token ?? ""]
         let session = URLSession(configuration: .default, delegate: self, delegateQueue: nil)
@@ -180,7 +180,7 @@ class ChatService: NSObject {
     }
 
     func fetchActiveUsers() {
-        let url = URL(string: "http://192.168.88.251/users?status=active")!
+        let url = URL(string: "\(APIConstants.baseURL)\(APIConstants.fetchUsersAPI)")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.allHTTPHeaderFields = ["mojToken": token ?? ""]

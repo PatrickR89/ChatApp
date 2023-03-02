@@ -30,8 +30,10 @@ class ChatTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupBackground()
+
+        setupTabBarAppearance()
         addTabBarItems()
+        setupBackground()
 
     }
 
@@ -55,9 +57,23 @@ class ChatTabBarController: UITabBarController {
             style: .plain,
             target: self,
             action: #selector(requestUsers))
+    }
 
-        tabBar.tintColor = UIConstants.accentColor
-        tabBar.unselectedItemTintColor = UIConstants.inactiveAccentColor
+    func setupTabBarAppearance() {
+        let appearance = UITabBarAppearance()
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes =
+        [NSAttributedString.Key.font: UIFont(name: SupremeFont.extraBold, size: 10)!,
+         NSAttributedString.Key.foregroundColor: UIConstants.accentColor]
+        appearance.stackedLayoutAppearance.normal.titleTextAttributes =
+        [NSAttributedString.Key.font: UIFont(name: SupremeFont.boldItalic, size: 10)!,
+         NSAttributedString.Key.foregroundColor: UIConstants.inactiveAccentColor]
+        appearance.backgroundColor = .clear
+        appearance.stackedLayoutAppearance.selected.iconColor = UIConstants.accentColor
+        appearance.stackedLayoutAppearance.normal.iconColor = UIConstants.inactiveAccentColor
+        appearance.configureWithTransparentBackground()
+
+        tabBar.standardAppearance = appearance
+        tabBar.scrollEdgeAppearance = appearance
     }
 
     @objc private func requestUsers() {
@@ -70,13 +86,20 @@ class ChatTabBarController: UITabBarController {
 
     func setTitle(_ titleText: String) {
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationController?.navigationBar.largeTitleTextAttributes =
-        [NSAttributedString.Key.foregroundColor: UIConstants.backgroundColorLight]
 
-        navigationController?.navigationItem.largeTitleDisplayMode = .always
+        let appearance = UINavigationBarAppearance()
+        appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIConstants.backgroundColorLight,
+                                               NSAttributedString.Key.font: UIFont(name: SupremeFont.italic, size: 40)!]
+        appearance.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont(name: SupremeFont.italic, size: 20)!,
+            NSAttributedString.Key.foregroundColor: UIConstants.backgroundColorLight
+        ]
+        appearance.configureWithTransparentBackground()
+
+        navigationController?.navigationBar.standardAppearance = appearance
+        navigationController?.navigationBar.scrollEdgeAppearance = appearance
         navigationController?.navigationBar.tintColor = UIConstants.accentColor
         title = titleText
-
     }
 }
 
@@ -86,7 +109,7 @@ extension ChatTabBarController: UITabBarControllerDelegate {
             navigationItem.rightBarButtonItem = UIBarButtonItem(
                 image: UIImage(systemName: "arrow.triangle.2.circlepath"),
                 style: .plain,
-                target: nil, action: #selector(requestUsers))
+                target: self, action: #selector(requestUsers))
         } else {
             navigationItem.rightBarButtonItem = nil
         }

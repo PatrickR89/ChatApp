@@ -15,6 +15,7 @@ extension UITextField {
         self.layer.borderColor = UIConstants.lightMain.cgColor
         self.layer.cornerRadius = 22
         textColor = UIConstants.accentColor
+        font = UIFont(name: SupremeFont.regular, size: 17)
 
         self.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: self.frame.height))
         self.leftViewMode = .always

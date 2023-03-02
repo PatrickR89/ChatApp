@@ -48,6 +48,23 @@
 		CDA963FA29AE54EE0020320E /* UIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA963F929AE54EE0020320E /* UIConstants.swift */; };
 		CDA963FD29AE63540020320E /* LoginView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDA963FC29AE63540020320E /* LoginView+Extensions.swift */; };
 		CDEA313929B08C3E005D6FFB /* ServiceNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEA313829B08C3E005D6FFB /* ServiceNotificationView.swift */; };
+		CDEA313B29B0B33E005D6FFB /* APIConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEA313A29B0B33E005D6FFB /* APIConstants.swift */; };
+		CDEA314029B0B743005D6FFB /* FFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = CDEA313F29B0B743005D6FFB /* FFL.txt */; };
+		CDEA315029B0B75D005D6FFB /* Supreme-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CDEA314229B0B75D005D6FFB /* Supreme-MediumItalic.otf */; };
+		CDEA315129B0B75D005D6FFB /* Supreme-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CDEA314329B0B75D005D6FFB /* Supreme-LightItalic.otf */; };
+		CDEA315229B0B75D005D6FFB /* Supreme-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = CDEA314429B0B75D005D6FFB /* Supreme-Medium.otf */; };
+		CDEA315329B0B75D005D6FFB /* Supreme-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CDEA314529B0B75D005D6FFB /* Supreme-Bold.otf */; };
+		CDEA315429B0B75D005D6FFB /* Supreme-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = CDEA314629B0B75D005D6FFB /* Supreme-Thin.otf */; };
+		CDEA315529B0B75D005D6FFB /* Supreme-Extralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = CDEA314729B0B75D005D6FFB /* Supreme-Extralight.otf */; };
+		CDEA315629B0B75D005D6FFB /* Supreme-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CDEA314829B0B75D005D6FFB /* Supreme-ThinItalic.otf */; };
+		CDEA315729B0B75D005D6FFB /* Supreme-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CDEA314929B0B75D005D6FFB /* Supreme-BoldItalic.otf */; };
+		CDEA315829B0B75D005D6FFB /* Supreme-ExtraboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CDEA314A29B0B75D005D6FFB /* Supreme-ExtraboldItalic.otf */; };
+		CDEA315929B0B75D005D6FFB /* Supreme-ExtralightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CDEA314B29B0B75D005D6FFB /* Supreme-ExtralightItalic.otf */; };
+		CDEA315A29B0B75D005D6FFB /* Supreme-Italic.otf in Resources */ = {isa = PBXBuildFile; fileRef = CDEA314C29B0B75D005D6FFB /* Supreme-Italic.otf */; };
+		CDEA315B29B0B75D005D6FFB /* Supreme-Extrabold.otf in Resources */ = {isa = PBXBuildFile; fileRef = CDEA314D29B0B75D005D6FFB /* Supreme-Extrabold.otf */; };
+		CDEA315C29B0B75D005D6FFB /* Supreme-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = CDEA314E29B0B75D005D6FFB /* Supreme-Light.otf */; };
+		CDEA315D29B0B75D005D6FFB /* Supreme-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = CDEA314F29B0B75D005D6FFB /* Supreme-Regular.otf */; };
+		CDEA315F29B0B8CA005D6FFB /* SupremeFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEA315E29B0B8CA005D6FFB /* SupremeFont.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -106,6 +123,23 @@
 		CDA963F929AE54EE0020320E /* UIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIConstants.swift; sourceTree = "<group>"; };
 		CDA963FC29AE63540020320E /* LoginView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginView+Extensions.swift"; sourceTree = "<group>"; };
 		CDEA313829B08C3E005D6FFB /* ServiceNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceNotificationView.swift; sourceTree = "<group>"; };
+		CDEA313A29B0B33E005D6FFB /* APIConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConstants.swift; sourceTree = "<group>"; };
+		CDEA313F29B0B743005D6FFB /* FFL.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = FFL.txt; sourceTree = "<group>"; };
+		CDEA314229B0B75D005D6FFB /* Supreme-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Supreme-MediumItalic.otf"; sourceTree = "<group>"; };
+		CDEA314329B0B75D005D6FFB /* Supreme-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Supreme-LightItalic.otf"; sourceTree = "<group>"; };
+		CDEA314429B0B75D005D6FFB /* Supreme-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Supreme-Medium.otf"; sourceTree = "<group>"; };
+		CDEA314529B0B75D005D6FFB /* Supreme-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Supreme-Bold.otf"; sourceTree = "<group>"; };
+		CDEA314629B0B75D005D6FFB /* Supreme-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Supreme-Thin.otf"; sourceTree = "<group>"; };
+		CDEA314729B0B75D005D6FFB /* Supreme-Extralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Supreme-Extralight.otf"; sourceTree = "<group>"; };
+		CDEA314829B0B75D005D6FFB /* Supreme-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Supreme-ThinItalic.otf"; sourceTree = "<group>"; };
+		CDEA314929B0B75D005D6FFB /* Supreme-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Supreme-BoldItalic.otf"; sourceTree = "<group>"; };
+		CDEA314A29B0B75D005D6FFB /* Supreme-ExtraboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Supreme-ExtraboldItalic.otf"; sourceTree = "<group>"; };
+		CDEA314B29B0B75D005D6FFB /* Supreme-ExtralightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Supreme-ExtralightItalic.otf"; sourceTree = "<group>"; };
+		CDEA314C29B0B75D005D6FFB /* Supreme-Italic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Supreme-Italic.otf"; sourceTree = "<group>"; };
+		CDEA314D29B0B75D005D6FFB /* Supreme-Extrabold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Supreme-Extrabold.otf"; sourceTree = "<group>"; };
+		CDEA314E29B0B75D005D6FFB /* Supreme-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Supreme-Light.otf"; sourceTree = "<group>"; };
+		CDEA314F29B0B75D005D6FFB /* Supreme-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Supreme-Regular.otf"; sourceTree = "<group>"; };
+		CDEA315E29B0B8CA005D6FFB /* SupremeFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupremeFont.swift; sourceTree = "<group>"; };
 		EFB45F5B0EEEE1DA855BD1D8 /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -184,6 +218,7 @@
 		CD565F012972ED8800B26FC7 = {
 			isa = PBXGroup;
 			children = (
+				CDEA313C29B0B706005D6FFB /* Fonts */,
 				CD565F0C2972ED8800B26FC7 /* ChatApp */,
 				CD18DAE92993C8EF005D6544 /* ChatAppTests */,
 				CD565F0B2972ED8800B26FC7 /* Products */,
@@ -252,6 +287,8 @@
 			isa = PBXGroup;
 			children = (
 				CDA963F929AE54EE0020320E /* UIConstants.swift */,
+				CDEA313A29B0B33E005D6FFB /* APIConstants.swift */,
+				CDEA315E29B0B8CA005D6FFB /* SupremeFont.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -322,6 +359,52 @@
 				CD565F162972ED8800B26FC7 /* ChatApp.xcdatamodeld */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		CDEA313C29B0B706005D6FFB /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				CDEA313D29B0B72B005D6FFB /* Supreme */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		CDEA313D29B0B72B005D6FFB /* Supreme */ = {
+			isa = PBXGroup;
+			children = (
+				CDEA314129B0B75D005D6FFB /* OTF */,
+				CDEA313E29B0B743005D6FFB /* License */,
+			);
+			path = Supreme;
+			sourceTree = "<group>";
+		};
+		CDEA313E29B0B743005D6FFB /* License */ = {
+			isa = PBXGroup;
+			children = (
+				CDEA313F29B0B743005D6FFB /* FFL.txt */,
+			);
+			path = License;
+			sourceTree = "<group>";
+		};
+		CDEA314129B0B75D005D6FFB /* OTF */ = {
+			isa = PBXGroup;
+			children = (
+				CDEA314229B0B75D005D6FFB /* Supreme-MediumItalic.otf */,
+				CDEA314329B0B75D005D6FFB /* Supreme-LightItalic.otf */,
+				CDEA314429B0B75D005D6FFB /* Supreme-Medium.otf */,
+				CDEA314529B0B75D005D6FFB /* Supreme-Bold.otf */,
+				CDEA314629B0B75D005D6FFB /* Supreme-Thin.otf */,
+				CDEA314729B0B75D005D6FFB /* Supreme-Extralight.otf */,
+				CDEA314829B0B75D005D6FFB /* Supreme-ThinItalic.otf */,
+				CDEA314929B0B75D005D6FFB /* Supreme-BoldItalic.otf */,
+				CDEA314A29B0B75D005D6FFB /* Supreme-ExtraboldItalic.otf */,
+				CDEA314B29B0B75D005D6FFB /* Supreme-ExtralightItalic.otf */,
+				CDEA314C29B0B75D005D6FFB /* Supreme-Italic.otf */,
+				CDEA314D29B0B75D005D6FFB /* Supreme-Extrabold.otf */,
+				CDEA314E29B0B75D005D6FFB /* Supreme-Light.otf */,
+				CDEA314F29B0B75D005D6FFB /* Supreme-Regular.otf */,
+			);
+			path = OTF;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -415,8 +498,23 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CDEA315429B0B75D005D6FFB /* Supreme-Thin.otf in Resources */,
+				CDEA315129B0B75D005D6FFB /* Supreme-LightItalic.otf in Resources */,
+				CDEA315329B0B75D005D6FFB /* Supreme-Bold.otf in Resources */,
+				CDEA315029B0B75D005D6FFB /* Supreme-MediumItalic.otf in Resources */,
+				CDEA315229B0B75D005D6FFB /* Supreme-Medium.otf in Resources */,
+				CDEA315729B0B75D005D6FFB /* Supreme-BoldItalic.otf in Resources */,
+				CDEA315929B0B75D005D6FFB /* Supreme-ExtralightItalic.otf in Resources */,
+				CDEA314029B0B743005D6FFB /* FFL.txt in Resources */,
 				CD565F1D2972ED8A00B26FC7 /* LaunchScreen.storyboard in Resources */,
+				CDEA315D29B0B75D005D6FFB /* Supreme-Regular.otf in Resources */,
+				CDEA315A29B0B75D005D6FFB /* Supreme-Italic.otf in Resources */,
+				CDEA315529B0B75D005D6FFB /* Supreme-Extralight.otf in Resources */,
+				CDEA315629B0B75D005D6FFB /* Supreme-ThinItalic.otf in Resources */,
+				CDEA315B29B0B75D005D6FFB /* Supreme-Extrabold.otf in Resources */,
 				CD565F1A2972ED8A00B26FC7 /* Assets.xcassets in Resources */,
+				CDEA315C29B0B75D005D6FFB /* Supreme-Light.otf in Resources */,
+				CDEA315829B0B75D005D6FFB /* Supreme-ExtraboldItalic.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +598,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CD565F122972ED8800B26FC7 /* LoginViewController.swift in Sources */,
+				CDEA313B29B0B33E005D6FFB /* APIConstants.swift in Sources */,
 				CD18DAFF299647B6005D6544 /* ActiveUsersViewController.swift in Sources */,
 				CDA963FD29AE63540020320E /* LoginView+Extensions.swift in Sources */,
 				CD565F2F2972FD7000B26FC7 /* MessageViewModel.swift in Sources */,
@@ -514,6 +613,7 @@
 				CD565F2B2972FBF400B26FC7 /* ChatController.swift in Sources */,
 				CD565F2D2972FC1300B26FC7 /* Message.swift in Sources */,
 				CD565F3529731A5500B26FC7 /* ChatService.swift in Sources */,
+				CDEA315F29B0B8CA005D6FFB /* SupremeFont.swift in Sources */,
 				CD565F0E2972ED8800B26FC7 /* AppDelegate.swift in Sources */,
 				CD18DB132997D4BC005D6544 /* Conversation.swift in Sources */,
 				CD565F332973018000B26FC7 /* MessageViewCell.swift in Sources */,

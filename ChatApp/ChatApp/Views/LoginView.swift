@@ -25,25 +25,22 @@ class LoginView: UIView {
 
     let firstNameInput: UITextField = {
         let inputField = UITextField().createInputField("Enter your first name")
-        inputField.textColor = UIConstants.accentColor
         return inputField
     }()
 
     let lastNameInput: UITextField = {
         let inputField = UITextField().createInputField("Enter your last name")
-        inputField.textColor = UIConstants.accentColor
         return inputField
     }()
 
     let usernameInput: UITextField = {
         let inputField = UITextField().createInputField("Enter your chat name")
-
         return inputField
     }()
 
     let firstNameWarning: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont(name: SupremeFont.boldItalic, size: 12)
         label.textColor = UIConstants.accentColor
         label.text = "Enter at least 4 characters"
         return label
@@ -51,7 +48,7 @@ class LoginView: UIView {
 
     let lastNameWarning: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont(name: SupremeFont.boldItalic, size: 12)
         label.textColor = UIConstants.accentColor
         label.text = "Enter at least 4 characters"
         return label
@@ -59,7 +56,7 @@ class LoginView: UIView {
 
     let usernameWarning: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.font = UIFont(name: SupremeFont.boldItalic, size: 12)
         label.textColor = UIConstants.accentColor
         label.text = "Enter at least 4 characters"
         return label
@@ -70,6 +67,7 @@ class LoginView: UIView {
 
         button.layer.cornerRadius = 22
         button.setTitle("Register", for: .normal)
+        button.titleLabel?.font = UIFont(name: SupremeFont.bold, size: 20)
         button.setTitleColor(UIConstants.accentColor, for: .normal)
         button.setTitleColor(UIConstants.darkMain, for: .disabled)
         button.tintColor = .white

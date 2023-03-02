@@ -16,6 +16,7 @@ class ServiceNotificationView: UIView {
         label.layer.cornerRadius = 10
         label.layer.borderColor = UIConstants.inactiveAccentColor.cgColor
         label.layer.borderWidth = 2
+        label.font = UIFont(name: SupremeFont.boldItalic, size: 20)
         label.clipsToBounds = true
         label.textAlignment = .center
         label.textColor = UIConstants.accentColor
