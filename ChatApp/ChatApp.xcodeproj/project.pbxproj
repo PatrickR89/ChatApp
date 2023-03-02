@@ -22,7 +22,7 @@
 		CD18DB0329964B3D005D6544 /* ChatCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DB0229964B3D005D6544 /* ChatCoordinator.swift */; };
 		CD18DB0529965FF0005D6544 /* ActiveUsersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DB0429965FF0005D6544 /* ActiveUsersController.swift */; };
 		CD18DB0729966043005D6544 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DB0629966043005D6544 /* User.swift */; };
-		CD18DB09299660AC005D6544 /* UserViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DB08299660AC005D6544 /* UserViewCell.swift */; };
+		CD18DB09299660AC005D6544 /* ActiveUserViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DB08299660AC005D6544 /* ActiveUserViewCell.swift */; };
 		CD18DB0D2997941F005D6544 /* ActiveUsersTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DB0C2997941F005D6544 /* ActiveUsersTest.swift */; };
 		CD18DB0F2997B7EE005D6544 /* ConversationsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DB0E2997B7EE005D6544 /* ConversationsController.swift */; };
 		CD18DB112997D47D005D6544 /* ConversationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DB102997D47D005D6544 /* ConversationViewCell.swift */; };
@@ -95,7 +95,7 @@
 		CD18DB0229964B3D005D6544 /* ChatCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatCoordinator.swift; sourceTree = "<group>"; };
 		CD18DB0429965FF0005D6544 /* ActiveUsersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveUsersController.swift; sourceTree = "<group>"; };
 		CD18DB0629966043005D6544 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		CD18DB08299660AC005D6544 /* UserViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewCell.swift; sourceTree = "<group>"; };
+		CD18DB08299660AC005D6544 /* ActiveUserViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveUserViewCell.swift; sourceTree = "<group>"; };
 		CD18DB0C2997941F005D6544 /* ActiveUsersTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveUsersTest.swift; sourceTree = "<group>"; };
 		CD18DB0E2997B7EE005D6544 /* ConversationsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationsController.swift; sourceTree = "<group>"; };
 		CD18DB102997D47D005D6544 /* ConversationViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewCell.swift; sourceTree = "<group>"; };
@@ -276,7 +276,7 @@
 				CD565F322973018000B26FC7 /* MessageViewCell.swift */,
 				CD3C234F298BD897002A1A05 /* MessageView.swift */,
 				CD3C2351298BE30C002A1A05 /* LoginView.swift */,
-				CD18DB08299660AC005D6544 /* UserViewCell.swift */,
+				CD18DB08299660AC005D6544 /* ActiveUserViewCell.swift */,
 				CD18DB102997D47D005D6544 /* ConversationViewCell.swift */,
 				CDEA313829B08C3E005D6FFB /* ServiceNotificationView.swift */,
 			);
@@ -618,7 +618,7 @@
 				CD18DB132997D4BC005D6544 /* Conversation.swift in Sources */,
 				CD565F332973018000B26FC7 /* MessageViewCell.swift in Sources */,
 				CD565F312972FF2F00B26FC7 /* DateFormatters.swift in Sources */,
-				CD18DB09299660AC005D6544 /* UserViewCell.swift in Sources */,
+				CD18DB09299660AC005D6544 /* ActiveUserViewCell.swift in Sources */,
 				CD18DB0529965FF0005D6544 /* ActiveUsersController.swift in Sources */,
 				CD565F102972ED8800B26FC7 /* SceneDelegate.swift in Sources */,
 				CD18DAFB29950B4F005D6544 /* InputType.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  UserViewCell.swift
+//  ActiveUserViewCell.swift
 //  ChatApp
 //
 //  Created by Patrick on 10.02.2023..
@@ -7,10 +7,11 @@
 
 import UIKit
 
-class UserViewCell: UITableViewCell {
+class ActiveUserViewCell: UITableViewCell {
 
     lazy var label: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: SupremeFont.medium, size: 20)
         return label
     }()
 

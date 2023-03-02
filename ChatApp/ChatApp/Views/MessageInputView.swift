@@ -53,6 +53,7 @@ class MessageInputView: UIView {
         inputField.layer.cornerRadius = 22
         inputField.autocorrectionType = .no
         inputField.autocapitalizationType = .none
+        inputField.font = UIFont(name: SupremeFont.medium, size: 17)
         inputField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: inputField.frame.height))
         inputField.leftViewMode = .always
         if let placeholder = try? NSAttributedString(markdown: "Enter your message...") {

@@ -41,7 +41,7 @@ class MessageViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             messageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 2),
             messageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -2),
-            messageView.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, constant: -10)
+            messageView.widthAnchor.constraint(lessThanOrEqualTo: contentView.widthAnchor, constant: -50)
         ])
     }
 

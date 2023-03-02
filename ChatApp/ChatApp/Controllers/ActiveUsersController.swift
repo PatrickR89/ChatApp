@@ -31,6 +31,7 @@ class ActiveUsersController {
         usersObserver = self.$users.sink(receiveValue: { [weak self] _ in
             self?.updateSnapshot()
         })
+        users.append(User(username: "someone"))
     }
 
     deinit {
@@ -44,7 +45,7 @@ class ActiveUsersController {
 
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: "active user cell",
-                for: indexPath) as? UserViewCell else {
+                for: indexPath) as? ActiveUserViewCell else {
                 fatalError("cell not found")
             }
 

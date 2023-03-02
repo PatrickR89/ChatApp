@@ -11,14 +11,14 @@ class ConversationViewCell: UITableViewCell {
 
     lazy var userLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 20, weight: .bold)
+        label.font = UIFont(name: SupremeFont.bold, size: 20)
         label.textColor = UIConstants.accentColor
         return label
     }()
 
     lazy var timeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        label.font = UIFont(name: SupremeFont.lightItalic, size: 15)
         label.textColor = UIConstants.lightMain
         label.textAlignment = .right
         return label

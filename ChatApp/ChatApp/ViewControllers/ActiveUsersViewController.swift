@@ -43,7 +43,7 @@ class ActiveUsersViewController: UIViewController {
         view.addSubview(tableView)
         controller.requestUsers()
         controller.setupDataSource(for: tableView)
-        tableView.register(UserViewCell.self, forCellReuseIdentifier: "active user cell")
+        tableView.register(ActiveUserViewCell.self, forCellReuseIdentifier: "active user cell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.estimatedRowHeight = 20
         tableView.rowHeight = UITableView.automaticDimension
