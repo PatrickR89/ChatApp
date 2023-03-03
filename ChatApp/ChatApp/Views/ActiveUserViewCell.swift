@@ -23,7 +23,7 @@ class ActiveUserViewCell: UITableViewCell {
         contentView.addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = model.username
-        label.textColor = UIConstants.accentColor
+        label.textColor = ColorConstants.accentColor
         contentView.backgroundColor = .clear
         backgroundColor = .clear
 
@@ -41,7 +41,7 @@ class ActiveUserViewCell: UITableViewCell {
                 with: self.label,
                 duration: 0.5,
                 options: .transitionCrossDissolve,
-                animations: {self.label.textColor = UIConstants.lightColor},
+                animations: {self.label.textColor = ColorConstants.lightColor},
                 completion: nil)
         }
     }

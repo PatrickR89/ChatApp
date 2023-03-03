@@ -9,8 +9,14 @@ import UIKit
 
 class MessageView: UIView {
 
-    var contentLabel = UILabel()
-    var timestampLabel = UILabel()
+    var contentLabel: UILabel = {
+        let label = UILabel().createMsgContentLabel()
+        return label
+    }()
+    var timestampLabel: UILabel = {
+        let label = UILabel().createMsgTimestampLabel()
+        return label
+    }()
     let margin: CGFloat = 5
 
     override init(frame: CGRect) {
@@ -30,16 +36,9 @@ class MessageView: UIView {
         contentLabel.translatesAutoresizingMaskIntoConstraints = false
         timestampLabel.translatesAutoresizingMaskIntoConstraints = false
 
-        contentLabel.numberOfLines = 0
-        timestampLabel.numberOfLines = 1
-        contentLabel.font = UIFont(name: SupremeFont.regular, size: 17)
-        timestampLabel.font = UIFont(name: SupremeFont.lightItalic, size: 12)
         layer.borderWidth = 1
         layer.cornerRadius = 5
         backgroundColor = .clear
-
-        contentLabel.textColor = UIConstants.lightColor
-        timestampLabel.textColor = UIConstants.lightMain
 
         NSLayoutConstraint.activate([
             contentLabel.topAnchor.constraint(equalTo: topAnchor, constant: margin),
@@ -59,15 +58,15 @@ class MessageView: UIView {
         case .myself:
             contentLabel.textAlignment = .right
             timestampLabel.textAlignment = .right
-            layer.borderColor = UIConstants.lightMain.cgColor
+            layer.borderColor = ColorConstants.lightMain.cgColor
         case .other:
             contentLabel.textAlignment = .left
             timestampLabel.textAlignment = .left
-            layer.borderColor = UIConstants.inactiveAccentColor.cgColor
+            layer.borderColor = ColorConstants.inactiveAccentColor.cgColor
         }
     }
 
-    func showTimestamp(_ isExpanded: Bool) {
+    func toggleTimestamp(_ isExpanded: Bool) {
 
         UIView.transition(with: self, duration: 0.4, options: .transitionFlipFromTop, animations: {
             self.timestampLabel.isHidden = !isExpanded

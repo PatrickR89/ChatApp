@@ -13,8 +13,16 @@ protocol MessageInputViewDelegate: AnyObject {
 
 class MessageInputView: UIView {
 
-    var inputField = UITextField()
-    let sendButton = UIButton()
+    var inputField: UITextField = {
+        let textField = UITextField().createMessageInputField()
+        return textField
+    }()
+
+    let sendButton: UIButton = {
+        let button = UIButton().createPaperPlaneButton()
+        return button
+    }()
+
     let margin: CGFloat = 5.0
     weak var delegate: MessageInputViewDelegate?
 
@@ -34,31 +42,7 @@ class MessageInputView: UIView {
         inputField.translatesAutoresizingMaskIntoConstraints = false
         sendButton.translatesAutoresizingMaskIntoConstraints = false
 
-        let buttonImage = UIImage(
-            systemName: "paperplane.fill",
-            withConfiguration: UIImage.SymbolConfiguration(pointSize: 16, weight: .regular))
-
-        sendButton.setImage(buttonImage, for: .normal)
-
-        sendButton.tintColor = UIConstants.lightMain
-        sendButton.backgroundColor = UIConstants.accentColor
-
-        sendButton.layer.cornerRadius = 22
-
-        inputField.backgroundColor = UIConstants.lightColor
-        inputField.textColor = UIConstants.accentColor
-        inputField.text = ""
-        inputField.isUserInteractionEnabled = true
         inputField.delegate = self
-        inputField.layer.cornerRadius = 22
-        inputField.autocorrectionType = .no
-        inputField.autocapitalizationType = .none
-        inputField.font = UIFont(name: SupremeFont.medium, size: 17)
-        inputField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: inputField.frame.height))
-        inputField.leftViewMode = .always
-        if let placeholder = try? NSAttributedString(markdown: "Enter your message...") {
-            inputField.attributedPlaceholder = NSAttributedString(attributedString: placeholder)
-        }
 
         sendButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
 

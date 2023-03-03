@@ -12,7 +12,7 @@ class MessageViewCell: UITableViewCell {
     var viewModel: MessageViewModel? {
         didSet {
             guard let viewModel else { return }
-            messageView.showTimestamp(viewModel.isExpanded)
+            messageView.toggleTimestamp(viewModel.isExpanded)
             setupContent()
         }
     }

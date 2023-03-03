@@ -39,7 +39,7 @@ class ChatTabBarController: UITabBarController {
 
     private func setupBackground() {
         let gradient = CAGradientLayer()
-        gradient.colors = [UIConstants.backgroundColorDark.cgColor, UIConstants.backgroundColorLight.cgColor]
+        gradient.colors = [ColorConstants.backgroundColorDark.cgColor, ColorConstants.backgroundColorLight.cgColor]
         gradient.frame = view.bounds
         gradient.startPoint = .init(x: 0.5, y: 0.5)
         gradient.endPoint = .init(x: 0, y: 1)
@@ -63,13 +63,13 @@ class ChatTabBarController: UITabBarController {
         let appearance = UITabBarAppearance()
         appearance.stackedLayoutAppearance.selected.titleTextAttributes =
         [NSAttributedString.Key.font: UIFont(name: SupremeFont.extraBold, size: 10)!,
-         NSAttributedString.Key.foregroundColor: UIConstants.accentColor]
+         NSAttributedString.Key.foregroundColor: ColorConstants.accentColor]
         appearance.stackedLayoutAppearance.normal.titleTextAttributes =
         [NSAttributedString.Key.font: UIFont(name: SupremeFont.boldItalic, size: 10)!,
-         NSAttributedString.Key.foregroundColor: UIConstants.inactiveAccentColor]
+         NSAttributedString.Key.foregroundColor: ColorConstants.inactiveAccentColor]
         appearance.backgroundColor = .clear
-        appearance.stackedLayoutAppearance.selected.iconColor = UIConstants.accentColor
-        appearance.stackedLayoutAppearance.normal.iconColor = UIConstants.inactiveAccentColor
+        appearance.stackedLayoutAppearance.selected.iconColor = ColorConstants.accentColor
+        appearance.stackedLayoutAppearance.normal.iconColor = ColorConstants.inactiveAccentColor
         appearance.configureWithTransparentBackground()
 
         tabBar.standardAppearance = appearance
@@ -88,17 +88,18 @@ class ChatTabBarController: UITabBarController {
         navigationController?.navigationBar.prefersLargeTitles = true
 
         let appearance = UINavigationBarAppearance()
-        appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIConstants.backgroundColorLight,
-                                               NSAttributedString.Key.font: UIFont(name: SupremeFont.italic, size: 40)!]
+        appearance.largeTitleTextAttributes = [
+            NSAttributedString.Key.foregroundColor: ColorConstants.backgroundColorLight,
+            NSAttributedString.Key.font: UIFont(name: SupremeFont.italic, size: 40)!]
         appearance.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont(name: SupremeFont.italic, size: 20)!,
-            NSAttributedString.Key.foregroundColor: UIConstants.backgroundColorLight
+            NSAttributedString.Key.foregroundColor: ColorConstants.backgroundColorLight
         ]
         appearance.configureWithTransparentBackground()
 
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
-        navigationController?.navigationBar.tintColor = UIConstants.accentColor
+        navigationController?.navigationBar.tintColor = ColorConstants.accentColor
         title = titleText
     }
 }

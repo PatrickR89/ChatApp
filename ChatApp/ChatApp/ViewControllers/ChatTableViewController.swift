@@ -76,7 +76,7 @@ class ChatTableViewController: UIViewControllerWithKeyboard {
 
     private func setupBackground() {
         let gradient = CAGradientLayer()
-        gradient.colors = [UIConstants.backgroundColorDark.cgColor, UIConstants.backgroundColorLight.cgColor]
+        gradient.colors = [ColorConstants.backgroundColorDark.cgColor, ColorConstants.backgroundColorLight.cgColor]
         gradient.frame = view.bounds
         gradient.startPoint = .init(x: 0, y: 0.3)
         gradient.endPoint = .init(x: 0, y: 0.7)

@@ -39,43 +39,25 @@ class LoginView: UIView {
     }()
 
     let firstNameWarning: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: SupremeFont.boldItalic, size: 12)
-        label.textColor = UIConstants.accentColor
-        label.text = "Enter at least 4 characters"
+        let label = UILabel().createWarningLabel("Enter at least 4 characters")
         return label
     }()
 
     let lastNameWarning: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: SupremeFont.boldItalic, size: 12)
-        label.textColor = UIConstants.accentColor
-        label.text = "Enter at least 4 characters"
+        let label = UILabel().createWarningLabel("Enter at least 4 characters")
         return label
     }()
 
     let usernameWarning: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: SupremeFont.boldItalic, size: 12)
-        label.textColor = UIConstants.accentColor
-        label.text = "Enter at least 4 characters"
+        let label = UILabel().createWarningLabel("Enter at least 4 characters")
         return label
     }()
 
     let confirmButton: UIButton = {
-        let button = UIButton()
-
-        button.layer.cornerRadius = 22
-        button.setTitle("Register", for: .normal)
-        button.titleLabel?.font = UIFont(name: SupremeFont.bold, size: 20)
-        button.setTitleColor(UIConstants.accentColor, for: .normal)
-        button.setTitleColor(UIConstants.darkMain, for: .disabled)
-        button.tintColor = .white
+        let button = UIButton().createLoginButton()
 
         return button
     }()
-
-    let gradient = CAGradientLayer()
 
     var observers: Set<AnyCancellable> = []
 
@@ -141,12 +123,12 @@ class LoginView: UIView {
     }
 
     private func setupBackground() {
-        gradient.colors = [UIConstants.backgroundColorDark.cgColor, UIConstants.backgroundColorLight.cgColor]
+        let gradient = CAGradientLayer()
+        gradient.colors = [ColorConstants.backgroundColorDark.cgColor, ColorConstants.backgroundColorLight.cgColor]
         gradient.frame = self.bounds
         gradient.startPoint = .init(x: 0.5, y: 0.5)
         gradient.endPoint = .init(x: 1, y: 1)
         layer.insertSublayer(gradient, at: 0)
-
     }
 
     @objc func register() {
@@ -158,10 +140,10 @@ class LoginView: UIView {
         loginController.$inputIsValid.sink(receiveValue: { [weak self] input in
             if input == false {
                 self?.confirmButton.isEnabled = false
-                self?.confirmButton.backgroundColor = UIConstants.lightMain
+                self?.confirmButton.backgroundColor = ColorConstants.lightMain
             } else {
                 self?.confirmButton.isEnabled = true
-                self?.confirmButton.backgroundColor = UIConstants.darkMain
+                self?.confirmButton.backgroundColor = ColorConstants.darkMain
             }
         })
         .store(in: &observers)
@@ -169,10 +151,10 @@ class LoginView: UIView {
         loginController.$isWaiting.sink(receiveValue: { [weak self] isWaiting in
             if isWaiting {
                 self?.confirmButton.isEnabled = false
-                self?.confirmButton.backgroundColor = UIConstants.lightMain
+                self?.confirmButton.backgroundColor = ColorConstants.lightMain
             } else {
                 self?.confirmButton.isEnabled = true
-                self?.confirmButton.backgroundColor = UIConstants.darkMain
+                self?.confirmButton.backgroundColor = ColorConstants.darkMain
             }
         })
         .store(in: &observers)
@@ -180,26 +162,26 @@ class LoginView: UIView {
         loginController.$loginRequest.sink { [weak self] loginRequest in
             if loginRequest.name.count < 4 {
                 self?.firstNameWarning.isHidden = false
-                self?.firstNameInput.layer.borderColor = UIConstants.accentColor.cgColor
+                self?.firstNameInput.layer.borderColor = ColorConstants.accentColor.cgColor
             } else {
                 self?.firstNameWarning.isHidden = true
-                self?.firstNameInput.layer.borderColor = UIConstants.lightMain.cgColor
+                self?.firstNameInput.layer.borderColor = ColorConstants.lightMain.cgColor
             }
 
             if loginRequest.surname.count < 4 {
                 self?.lastNameWarning.isHidden = false
-                self?.lastNameInput.layer.borderColor = UIConstants.accentColor.cgColor
+                self?.lastNameInput.layer.borderColor = ColorConstants.accentColor.cgColor
             } else {
                 self?.lastNameWarning.isHidden = true
-                self?.lastNameInput.layer.borderColor = UIConstants.lightMain.cgColor
+                self?.lastNameInput.layer.borderColor = ColorConstants.lightMain.cgColor
             }
 
             if loginRequest.username.count < 4 {
                 self?.usernameWarning.isHidden = false
-                self?.usernameInput.layer.borderColor = UIConstants.accentColor.cgColor
+                self?.usernameInput.layer.borderColor = ColorConstants.accentColor.cgColor
             } else {
                 self?.usernameWarning.isHidden = true
-                self?.usernameInput.layer.borderColor = UIConstants.lightMain.cgColor
+                self?.usernameInput.layer.borderColor = ColorConstants.lightMain.cgColor
             }
         }
         .store(in: &observers)

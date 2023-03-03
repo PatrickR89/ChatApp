@@ -1,5 +1,5 @@
 //
-//  UIConstants.swift
+//  ColorConstants.swift
 //  ChatApp
 //
 //  Created by Patrick on 28.02.2023..
@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct UIConstants {
+struct ColorConstants {
     static let backgroundColorDark = UIColor(red: 34/255, green: 40/255, blue: 49/255, alpha: 1)
     static let backgroundColorLight = UIColor(red: 63/255, green: 74/255, blue: 90/255, alpha: 1)
     static let darkMain = UIColor(red: 45/255, green: 64/255, blue: 89/255, alpha: 1)

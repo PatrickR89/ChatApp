@@ -12,14 +12,14 @@ class ServiceNotificationView: UIView {
     let notificationLabel: UILabel = {
         let label = UILabel()
 
-        label.backgroundColor = UIConstants.darkMainBackground
+        label.backgroundColor = ColorConstants.darkMainBackground
         label.layer.cornerRadius = 10
-        label.layer.borderColor = UIConstants.inactiveAccentColor.cgColor
+        label.layer.borderColor = ColorConstants.inactiveAccentColor.cgColor
         label.layer.borderWidth = 2
         label.font = UIFont(name: SupremeFont.boldItalic, size: 20)
         label.clipsToBounds = true
         label.textAlignment = .center
-        label.textColor = UIConstants.accentColor
+        label.textColor = ColorConstants.accentColor
         label.numberOfLines = 0
 
         return label

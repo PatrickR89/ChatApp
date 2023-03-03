@@ -12,14 +12,14 @@ class ConversationViewCell: UITableViewCell {
     lazy var userLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: SupremeFont.bold, size: 20)
-        label.textColor = UIConstants.accentColor
+        label.textColor = ColorConstants.accentColor
         return label
     }()
 
     lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: SupremeFont.lightItalic, size: 15)
-        label.textColor = UIConstants.lightMain
+        label.textColor = ColorConstants.lightMain
         label.textAlignment = .right
         return label
     }()
@@ -56,7 +56,7 @@ class ConversationViewCell: UITableViewCell {
                 with: self.userLabel,
                 duration: 0.5,
                 options: .transitionCrossDissolve,
-                animations: {self.userLabel.textColor = UIConstants.lightColor},
+                animations: {self.userLabel.textColor = ColorConstants.lightColor},
                 completion: nil)
         }
     }
