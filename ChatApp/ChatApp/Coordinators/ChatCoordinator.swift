@@ -12,7 +12,7 @@ class ChatCoordinator {
     let chatService: ChatService
     private(set) var activeUsersController: ActiveUsersController?
     private(set) var tabBarController: ChatTabBarController?
-    private(set) var conversationsController: ConversationsController?
+    private(set) var conversationsController = ConversationsController()
     private(set) var activeUsersViewController: ActiveUsersViewController?
     private(set) var convViewController: ConversationsViewController?
     let appearance = UITabBarAppearance()
@@ -25,7 +25,6 @@ class ChatCoordinator {
     deinit {
         activeUsersController = nil
         tabBarController = nil
-        conversationsController = nil
         activeUsersViewController = nil
         convViewController = nil
     }
@@ -38,8 +37,7 @@ class ChatCoordinator {
         tabBarController = ChatTabBarController(navController: navController)
         let activeUsersViewController = activeUsersViewController ?? ActiveUsersViewController(
             activeUsersController ?? ActiveUsersController())
-        let convViewController = convViewController ?? ConversationsViewController(
-            conversationsController ?? ConversationsController())
+        let convViewController = convViewController ?? ConversationsViewController(conversationsController)
         guard let tabBarController = tabBarController else {return}
         tabBarController.setViewControllers([activeUsersViewController, convViewController], animated: true)
         tabBarController.chatDelegate = self
@@ -61,11 +59,10 @@ class ChatCoordinator {
     }
 
     private func startConversationsViewController() {
-        conversationsController = ConversationsController()
-        conversationsController?.actions = self
+        conversationsController.actions = self
         chatService.delegate = conversationsController
 
-        convViewController = ConversationsViewController(conversationsController ?? ConversationsController())
+        convViewController = ConversationsViewController(conversationsController)
         convViewController?.titleDelegate = self
         convViewController?.tabBarItem = UITabBarItem(
             title: "Conversations",
@@ -100,7 +97,8 @@ extension ChatCoordinator: ChatTabBarChildDelegate {
 
 extension ChatCoordinator: ActiveUsersControllerActions {
     func activeUsersControllerDidSelect(user: User) {
-        startChatTableViewController(user.username, [])
+        conversationsController.startConversation(with: user.username)
+
     }
 }
 

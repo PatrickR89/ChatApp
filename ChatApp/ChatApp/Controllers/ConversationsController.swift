@@ -66,6 +66,11 @@ class ConversationsController {
         actions?.conversationControllerDidSelect(conversationIdentifier, conversation)
     }
 
+    func startConversation(with user: String) {
+        let conversation = conversations[user, default: []]
+        actions?.conversationControllerDidSelect(user, conversation)
+    }
+
     func test() {
         let temp = RecievedMessage(
             sourceUsername: "someone",
