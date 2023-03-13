@@ -32,22 +32,26 @@ class ActiveUsersViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         titleDelegate?.tabBarChild(didSet: "Active Users")
+        setupUI()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        configureTableView()
+    }
+
+    func configureTableView() {
+        controller.setupDataSource(for: tableView)
+        tableView.register(ActiveUserViewCell.self, forCellReuseIdentifier: "active user cell")
+        tableView.delegate = self
     }
 
     func setupUI() {
         view.addSubview(tableView)
         controller.requestUsers()
-        controller.setupDataSource(for: tableView)
-        tableView.register(ActiveUserViewCell.self, forCellReuseIdentifier: "active user cell")
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.estimatedRowHeight = 20
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.delegate = self
+        tableView.estimatedRowHeight = 50
+        tableView.rowHeight = 50
         tableView.backgroundColor = .clear
 
         NSLayoutConstraint.activate([

@@ -28,24 +28,28 @@ class ConversationsViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         titleDelegate?.tabBarChild(didSet: "Conversations")
+        setupUI()
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
+        controller.test()
+        configureTableView()
+    }
+
+    func configureTableView() {
+        controller.setupDataSource(for: tableView)
+        tableView.register(ConversationViewCell.self, forCellReuseIdentifier: "conversation cell")
+        tableView.delegate = self
     }
 
     func setupUI() {
         view.addSubview(tableView)
-        controller.setupDataSource(for: tableView)
-        tableView.register(ConversationViewCell.self, forCellReuseIdentifier: "conversation cell")
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.estimatedRowHeight = 20
-        tableView.rowHeight = UITableView.automaticDimension
-        tableView.delegate = self
-        tableView.backgroundColor = .clear
 
-        controller.test()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.estimatedRowHeight = 50
+        tableView.rowHeight = 50
+        tableView.backgroundColor = .clear
 
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

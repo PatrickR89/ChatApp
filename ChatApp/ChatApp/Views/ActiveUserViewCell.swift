@@ -28,8 +28,9 @@ class ActiveUserViewCell: UITableViewCell {
         backgroundColor = .clear
 
         NSLayoutConstraint.activate([
-            label.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10)
+            label.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            label.topAnchor.constraint(equalTo: contentView.topAnchor),
+            label.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
 
         convertLabelToPassive()
