@@ -67,6 +67,11 @@
 		CDEA315F29B0B8CA005D6FFB /* SupremeFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEA315E29B0B8CA005D6FFB /* SupremeFont.swift */; };
 		CDEA316129B1D859005D6FFB /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEA316029B1D859005D6FFB /* UIButton+Extension.swift */; };
 		CDEA316329B1D9C4005D6FFB /* UILabel+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEA316229B1D9C4005D6FFB /* UILabel+Extensions.swift */; };
+		CDEA328629C079AA005D6FFB /* DatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEA328529C079AA005D6FFB /* DatabaseService.swift */; };
+		CDEA328829C079FE005D6FFB /* DatabaseProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEA328729C079FE005D6FFB /* DatabaseProvider.swift */; };
+		CDEA328B29C07A8C005D6FFB /* FileManager+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEA328A29C07A8C005D6FFB /* FileManager+Extension.swift */; };
+		CDEA328E29C1AB94005D6FFB /* ConversationRealmModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEA328D29C1AB94005D6FFB /* ConversationRealmModel.swift */; };
+		CDEA329029C1B32E005D6FFB /* CurrentUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDEA328F29C1B32E005D6FFB /* CurrentUserModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +149,11 @@
 		CDEA315E29B0B8CA005D6FFB /* SupremeFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupremeFont.swift; sourceTree = "<group>"; };
 		CDEA316029B1D859005D6FFB /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		CDEA316229B1D9C4005D6FFB /* UILabel+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Extensions.swift"; sourceTree = "<group>"; };
+		CDEA328529C079AA005D6FFB /* DatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseService.swift; sourceTree = "<group>"; };
+		CDEA328729C079FE005D6FFB /* DatabaseProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProvider.swift; sourceTree = "<group>"; };
+		CDEA328A29C07A8C005D6FFB /* FileManager+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Extension.swift"; sourceTree = "<group>"; };
+		CDEA328D29C1AB94005D6FFB /* ConversationRealmModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationRealmModel.swift; sourceTree = "<group>"; };
+		CDEA328F29C1B32E005D6FFB /* CurrentUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserModel.swift; sourceTree = "<group>"; };
 		EFB45F5B0EEEE1DA855BD1D8 /* Pods_ChatApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChatApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -245,6 +255,7 @@
 		CD565F0C2972ED8800B26FC7 /* ChatApp */ = {
 			isa = PBXGroup;
 			children = (
+				CDEA328929C07A7E005D6FFB /* Middleware */,
 				CDA963F829AE54D80020320E /* Constants */,
 				CD18DAF929950B3E005D6544 /* Enums */,
 				CD18DAE029912192005D6544 /* Coordinators */,
@@ -321,6 +332,7 @@
 		CDC92B61298BC67800F7E93A /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				CDEA328C29C1AB85005D6FFB /* Realm */,
 				CD565F3629731AEB00B26FC7 /* LoginModels.swift */,
 				CD565F2C2972FC1300B26FC7 /* Message.swift */,
 				CD18DB0629966043005D6544 /* User.swift */,
@@ -341,6 +353,8 @@
 			isa = PBXGroup;
 			children = (
 				CD565F3429731A5500B26FC7 /* ChatService.swift */,
+				CDEA328529C079AA005D6FFB /* DatabaseService.swift */,
+				CDEA328729C079FE005D6FFB /* DatabaseProvider.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -411,6 +425,23 @@
 				CDEA314F29B0B75D005D6FFB /* Supreme-Regular.otf */,
 			);
 			path = OTF;
+			sourceTree = "<group>";
+		};
+		CDEA328929C07A7E005D6FFB /* Middleware */ = {
+			isa = PBXGroup;
+			children = (
+				CDEA328A29C07A8C005D6FFB /* FileManager+Extension.swift */,
+			);
+			path = Middleware;
+			sourceTree = "<group>";
+		};
+		CDEA328C29C1AB85005D6FFB /* Realm */ = {
+			isa = PBXGroup;
+			children = (
+				CDEA328D29C1AB94005D6FFB /* ConversationRealmModel.swift */,
+				CDEA328F29C1B32E005D6FFB /* CurrentUserModel.swift */,
+			);
+			path = Realm;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -612,6 +643,7 @@
 				CD18DB01299647C5005D6544 /* ConversationsViewController.swift in Sources */,
 				CD565F182972ED8800B26FC7 /* ChatApp.xcdatamodeld in Sources */,
 				CDEA316329B1D9C4005D6FFB /* UILabel+Extensions.swift in Sources */,
+				CDEA328629C079AA005D6FFB /* DatabaseService.swift in Sources */,
 				CD18DB0729966043005D6544 /* User.swift in Sources */,
 				CDA963FA29AE54EE0020320E /* ColorConstants.swift in Sources */,
 				CD3C2352298BE30C002A1A05 /* LoginView.swift in Sources */,
@@ -634,13 +666,17 @@
 				CD565F3729731AEB00B26FC7 /* LoginModels.swift in Sources */,
 				CD18DB0F2997B7EE005D6544 /* ConversationsController.swift in Sources */,
 				CD565F272972F3DE00B26FC7 /* ChatTableViewController.swift in Sources */,
+				CDEA329029C1B32E005D6FFB /* CurrentUserModel.swift in Sources */,
 				CD18DADE29911EC7005D6544 /* MainCoordinator.swift in Sources */,
+				CDEA328829C079FE005D6FFB /* DatabaseProvider.swift in Sources */,
 				CD18DAD72990FDC6005D6544 /* LoginController.swift in Sources */,
+				CDEA328B29C07A8C005D6FFB /* FileManager+Extension.swift in Sources */,
 				CD18DAFD29964795005D6544 /* ChatTabBarController.swift in Sources */,
 				CD3C2350298BD897002A1A05 /* MessageView.swift in Sources */,
 				CD565F292972F49200B26FC7 /* MessageInputView.swift in Sources */,
 				CD18DAF62994F9CB005D6544 /* KeyboardLayoutObserver.swift in Sources */,
 				CD18DADA2990FEAE005D6544 /* UITextField+Extension.swift in Sources */,
+				CDEA328E29C1AB94005D6FFB /* ConversationRealmModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

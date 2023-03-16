@@ -47,7 +47,7 @@ class MessageViewCell: UITableViewCell {
 
     func setupContent() {
         guard let viewModel = viewModel else {
-            messageView.presentText(sender: .myself, content: "", time: "")
+            messageView.presentText(sender: .myself(nil), content: "", time: "")
             return
         }
 
