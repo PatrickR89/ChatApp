@@ -40,11 +40,15 @@ struct MessageViewModel {
     init(realmMessage: MessageRealmModel) {
         self.id = realmMessage.id
 
-        switch realmMessage.sender.sender {
+        guard let sender = realmMessage.sender else {
+            fatalError("❌ error in sender - message view model created from ralm model")
+        }
+
+        switch sender.sender {
         case .myself:
-            self.sender = .myself(realmMessage.sender.isSent)
+            self.sender = .myself(sender.isSent)
         case .other:
-            self.sender = .other(realmMessage.sender.name ?? "unknown")
+            self.sender = .other(sender.name ?? "unknown")
         }
         self.timestamp = DateFormatters.formatMessageTimestamp(realmMessage.timestamp)
         self.content = realmMessage.content

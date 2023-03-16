@@ -37,7 +37,7 @@ class ConversationRealmModel: Object {
 
 class MessageRealmModel: Object {
     @Persisted (primaryKey: true) var id: UUID
-    @Persisted var sender: SenderRealmModel
+    @Persisted var sender: SenderRealmModel?
     @Persisted var timestamp: Double
     @Persisted var content: String
 
@@ -62,6 +62,7 @@ class SenderRealmModel: Object {
 
     convenience init(messageSender: Sender) {
         self.init()
+        self.sender = .myself
         switch messageSender {
         case .myself(let isSent):
             self.sender = .myself

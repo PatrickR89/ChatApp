@@ -10,6 +10,7 @@ import UIKit
 class ChatCoordinator {
     let navController: UINavigationController
     let chatService: ChatService
+    let databaseService: DatabaseService
     private(set) var activeUsersController: ActiveUsersController?
     private(set) var tabBarController: ChatTabBarController?
     private(set) var conversationsController = ConversationsController()
@@ -17,7 +18,8 @@ class ChatCoordinator {
     private(set) var convViewController: ConversationsViewController?
     let appearance = UITabBarAppearance()
 
-    init(with navController: UINavigationController, and service: ChatService) {
+    init(with navController: UINavigationController, _ service: ChatService, _ databaseService: DatabaseService) {
+        self.databaseService = databaseService
         self.navController = navController
         self.chatService = service
     }

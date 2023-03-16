@@ -8,13 +8,19 @@
 import Foundation
 import RealmSwift
 
+protocol DatabaseServiceUserDelegate: AnyObject {
+    func databaseService(didRecieve token: String)
+}
+
 class DatabaseService {
     private let realm: Realm
     private var username: String?
     private var token: String?
+    weak var userDelegate: DatabaseServiceUserDelegate?
 
     init(realm: Realm) {
         self.realm = realm
+        loadUser()
     }
 
     func saveUser(username: String, name: String, lastname: String) {
@@ -46,11 +52,26 @@ class DatabaseService {
     func loadUser() {
         let result = realm.objects(CurrenUserModel.self)
 
+        guard !result.isEmpty else {
+            print("❌ no user in database")
+            return
+        }
+
         let currentUser = result[0]
         username = currentUser.username
+    }
 
-        let token = realm.object(ofType: TokenModel.self, forPrimaryKey: currentUser.username)
-        self.token = token?.token
+    func loadToken() {
+        guard let username else {
+            print("❌ user was not found")
+            return
+        }
+        guard let token = realm.object(ofType: TokenModel.self, forPrimaryKey: username) else {
+            print("❌ error loading token")
+            return
+        }
+        self.token = token.token
+        userDelegate?.databaseService(didRecieve: token.token)
     }
 
     func deleteUser() {
@@ -123,7 +144,7 @@ class DatabaseService {
 
         do {
             try realm.write {
-                message.sender.isSent = isSent
+                message.sender?.isSent = isSent
             }
         } catch {
             print("❌ error saving message", error.localizedDescription)

@@ -16,7 +16,8 @@ protocol ChatServiceUsersDelegate: AnyObject {
 }
 
 protocol ChatServiceActions: AnyObject {
-    func recieveId(_ id: String)
+    func recieveId(for username: String, token id: String)
+    func registeredUser(_ user: LoginRequest)
     func errorOccured(_ error: String)
 }
 
@@ -45,6 +46,10 @@ class ChatService: NSObject {
     weak var actions: ChatServiceActions?
     weak var responseDelegate: ChatServiceResponse?
     weak var usersDelegate: ChatServiceUsersDelegate?
+
+    func setToken(_ token: String) {
+        self.token = token
+    }
 
     func sendMessage(_ message: SentMessage) {
         let url = URL(string: "\(APIConstants.baseURL)\(APIConstants.sendMessageAPI)")!
@@ -120,11 +125,11 @@ class ChatService: NSObject {
                 self?.actions?.errorOccured("Error in retrieved data")
                 return
             }
-            let userDefaults = UserDefaults.standard
-            userDefaults.set(respData.token, forKey: "CHAT_ID")
 
+            self?.setToken(respData.token)
             self?.waitingForResponse = false
-            self?.actions?.recieveId(respData.token)
+            self?.actions?.recieveId(for: model.username, token: respData.token)
+            self?.actions?.registeredUser(model)
             self?.listenForMessages()
         }
 

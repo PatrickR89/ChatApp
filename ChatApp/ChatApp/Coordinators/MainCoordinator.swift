@@ -10,23 +10,37 @@ import Combine
 
 class MainCoordinator {
 
-    @Published var token: String? = UserDefaults().string(forKey: "CHAT_ID")
+    @Published var token: String? {
+        didSet {
+            selectViewController()
+        }
+    }
+
     let navController: UINavigationController
     var chatService: ChatService
+    let databaseService: DatabaseService
     var childCoordinator: ChatCoordinator?
 
-    init(_ navController: UINavigationController, _ chatService: ChatService) {
+    init(_ navController: UINavigationController, _ chatService: ChatService, _ databaseService: DatabaseService) {
         self.chatService = chatService
+        self.databaseService = databaseService
         self.navController = navController
         self.chatService.actions = self
+        self.databaseService.userDelegate = self
     }
 
     func start() {
-//        if token == nil {
-//            presentLoginScreen()
-//        } else {
+        databaseService.loadUser()
+        databaseService.loadToken()
+        selectViewController()
+    }
+
+    func selectViewController() {
+        if token == nil {
+            presentLoginScreen()
+        } else {
             presentChatView()
-//        }
+        }
     }
 
     func presentLoginScreen() {
@@ -43,7 +57,7 @@ class MainCoordinator {
             navController.popViewController(animated: true)
         }
 
-        self.childCoordinator = ChatCoordinator(with: navController, and: chatService)
+        self.childCoordinator = ChatCoordinator(with: navController, chatService, databaseService)
         childCoordinator?.start()
     }
 
@@ -68,14 +82,26 @@ class MainCoordinator {
 }
 
 extension MainCoordinator: ChatServiceActions {
+    func registeredUser(_ user: LoginRequest) {
+        databaseService.saveUser(username: user.username, name: user.name, lastname: user.surname)
+    }
+
+    func recieveId(for username: String, token id: String) {
+        self.token = id
+        databaseService.saveToken(username: username, token: id)
+        start()
+    }
+
     func errorOccured(_ error: String) {
         DispatchQueue.main.async {
             self.presentServiceNotification(error)
         }
     }
+}
 
-    func recieveId(_ id: String) {
-        self.token = id
-        start()
+extension MainCoordinator: DatabaseServiceUserDelegate {
+    func databaseService(didRecieve token: String) {
+        self.token = token
+        chatService.setToken(token)
     }
 }
