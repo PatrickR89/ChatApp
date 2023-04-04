@@ -85,12 +85,12 @@ class ChatController {
 
 extension ChatController: MessageInputViewDelegate {
     func messageInputView(didSend message: String) {
-
+        let id = UUID()
         let sentMessage = SentMessage(content: message, chatId: self.chatId)
-        let messageViewModel = MessageViewModel(message: sentMessage)
+        let messageViewModel = MessageViewModel(message: sentMessage, id: id)
         actions?.chatControllerDidSendMessage(chatId, messageViewModel)
         messages.append(messageViewModel)
-        chatService.sendMessage(sentMessage)
+        chatService.sendMessage(sentMessage, messageId: id)
     }
 }
 

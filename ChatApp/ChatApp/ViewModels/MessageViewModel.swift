@@ -14,13 +14,18 @@ enum Sender {
 
 struct MessageViewModel {
     let id: UUID
-    let sender: Sender
+    var sender: Sender
     let timestamp: String
     let content: String
     var isExpanded: Bool
 
-    init(message: SentMessage) {
-        self.id = UUID()
+    init(message: SentMessage, id: UUID?) {
+
+        if let id {
+            self.id = id
+        } else {
+            self.id = UUID()
+        }
         self.sender = Sender.myself(nil)
         self.content = message.content
         let currentDate = Date().timeIntervalSince1970
@@ -41,7 +46,7 @@ struct MessageViewModel {
         self.id = realmMessage.id
 
         guard let sender = realmMessage.sender else {
-            fatalError("❌ error in sender - message view model created from ralm model")
+            fatalError("❌ error in sender - message view model created from realm model")
         }
 
         switch sender.sender {

@@ -9,6 +9,7 @@ import Foundation
 
 protocol ChatServiceDelegate: AnyObject {
     func recieveMessage(_ message: RecievedMessage)
+    func chatService(didSendMessage id: UUID, to user: String, withSuccess success: Bool)
 }
 
 protocol ChatServiceUsersDelegate: AnyObject {
@@ -37,6 +38,8 @@ class ChatService: NSObject {
         }
     }
 
+    private var pendingMessages = [PendingMessage]()
+
     override init() {
         self.token = UserDefaults.standard.string(forKey: "CHAT_ID")
         super.init()
@@ -51,7 +54,7 @@ class ChatService: NSObject {
         self.token = token
     }
 
-    func sendMessage(_ message: SentMessage) {
+    func sendMessage(_ message: SentMessage, messageId: UUID) {
         let url = URL(string: "\(APIConstants.baseURL)\(APIConstants.sendMessageAPI)")!
 
         var request = URLRequest(url: url)
@@ -62,12 +65,20 @@ class ChatService: NSObject {
 
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             if let error = error {
+                let pendingMessage = PendingMessage(message: message, id: messageId)
+                self?.pendingMessages.append(pendingMessage)
+                self?.backthreadMessageOutput(message: pendingMessage)
+                self?.delegate?.chatService(didSendMessage: messageId, to: message.chatId, withSuccess: false)
                 self?.actions?.errorOccured(error.localizedDescription)
                 return
             }
 
             guard let response = response as? HTTPURLResponse else { return }
             guard response.statusCode == 200 else {
+                let pendingMessage = PendingMessage(message: message, id: messageId)
+                self?.pendingMessages.append(pendingMessage)
+                self?.backthreadMessageOutput(message: pendingMessage)
+                self?.delegate?.chatService(didSendMessage: messageId, to: message.chatId, withSuccess: false)
                 if response.statusCode >= 400 && response.statusCode < 500 {
                     self?.actions?.errorOccured("Error in request")
                 } else if response.statusCode >= 500 {
@@ -76,13 +87,47 @@ class ChatService: NSObject {
 
                 return
             }
-
+            self?.delegate?.chatService(didSendMessage: messageId, to: message.chatId, withSuccess: true)
             if let data = data {
                 print("send response: \(String(data: data, encoding: .utf8) ?? "<error>")")
             }
         }
 
         task.resume()
+    }
+
+    func backthreadMessageOutput(message: PendingMessage) {
+        DispatchQueue.global(qos: .userInteractive).asyncAfter(deadline: .now() + 2) { [weak self] in
+            let url = URL(string: "\(APIConstants.baseURL)\(APIConstants.sendMessageAPI)")!
+
+            var request = URLRequest(url: url)
+            request.httpMethod = "POST"
+            request.allHTTPHeaderFields = ["mojToken": self?.token ?? ""]
+            let outputMessage = SentMessage(content: message.content, chatId: message.chatId)
+            request.httpBody = try? JSONEncoder().encode(outputMessage)
+
+            let task = URLSession.shared.dataTask(with: request) { data, response, error in
+                if error != nil {
+                    self?.backthreadMessageOutput(message: message)
+                    return
+                }
+
+                guard let response = response as? HTTPURLResponse else { return }
+                guard response.statusCode == 200 else {
+
+                    self?.backthreadMessageOutput(message: message)
+                    return
+                }
+
+                if let data = data {
+                    print("send response: \(String(data: data, encoding: .utf8) ?? "<error>")")
+                }
+                self?.delegate?.chatService(didSendMessage: message.id, to: message.chatId, withSuccess: true)
+                self?.pendingMessages.removeAll(where: {$0.id == message.id})
+            }
+
+            task.resume()
+        }
     }
 
     func login(_ model: LoginRequest) {

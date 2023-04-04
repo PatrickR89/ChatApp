@@ -83,6 +83,12 @@ class ConversationsController {
 }
 
 extension ConversationsController: ChatServiceDelegate {
+    func chatService(didSendMessage id: UUID, to user: String, withSuccess success: Bool) {
+        if let messageIndex = conversations[user]?.firstIndex(where: {$0.id == id}) {
+            conversations[user]?[messageIndex].sender = .myself(success)
+        }
+    }
+
     func recieveMessage(_ message: RecievedMessage) {
         let messageViewModel = MessageViewModel(message: message)
         conversations[message.sourceUsername, default: []].append(messageViewModel)
