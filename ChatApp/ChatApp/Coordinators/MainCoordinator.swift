@@ -20,6 +20,8 @@ class MainCoordinator {
     var chatService: ChatService
     let databaseService: DatabaseService
     var childCoordinator: ChatCoordinator?
+    var windowScene: UIWindowScene?
+    var notificationWindow: UIWindow?
 
     init(_ navController: UINavigationController, _ chatService: ChatService, _ databaseService: DatabaseService) {
         self.chatService = chatService
@@ -76,8 +78,27 @@ class MainCoordinator {
             height: UIScreen.main.bounds.height / 2)
 
         let serviceNotification = ServiceNotificationView(frame: frame, message: message)
+        serviceNotification.delegate = self
+        createNotificationWindow(in: frame)
+        notificationWindow?.addSubview(serviceNotification)
+    }
 
-        navController.viewControllers.last?.view.addSubview(serviceNotification)
+    func addWindowScene(_ windowScene: UIWindowScene) {
+        self.windowScene = windowScene
+    }
+
+    func createNotificationWindow(in frame: CGRect) {
+        notificationWindow = UIWindow(frame: frame)
+        notificationWindow?.windowLevel = .alert
+        notificationWindow?.layer.zPosition = CGFloat(Float.greatestFiniteMagnitude) - 10
+        notificationWindow?.isUserInteractionEnabled = false
+        notificationWindow?.isHidden = false
+        guard let windowScene else {return}
+        notificationWindow?.windowScene = windowScene
+    }
+
+    func destroyNotificationWindow() {
+        notificationWindow = nil
     }
 }
 
@@ -113,5 +134,11 @@ extension MainCoordinator: DatabaseServiceDelegate {
     func databaseService(didRecieve token: String) {
         self.token = token
         chatService.setToken(token)
+    }
+}
+
+extension MainCoordinator: ServiceNotificationViewDelegate {
+    func notificationViewDidRemoveSelf() {
+        destroyNotificationWindow()
     }
 }

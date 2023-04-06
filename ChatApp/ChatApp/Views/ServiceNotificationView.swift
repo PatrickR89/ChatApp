@@ -7,7 +7,13 @@
 
 import UIKit
 
+protocol ServiceNotificationViewDelegate: AnyObject {
+    func notificationViewDidRemoveSelf()
+}
+
 class ServiceNotificationView: UIView {
+
+    weak var delegate: ServiceNotificationViewDelegate?
 
     let notificationLabel: UILabel = {
         let label = UILabel()
@@ -53,6 +59,7 @@ class ServiceNotificationView: UIView {
     func removeSelf() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             self.removeFromSuperview()
+            self.delegate?.notificationViewDidRemoveSelf()
         }
     }
 }

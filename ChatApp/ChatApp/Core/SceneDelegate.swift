@@ -24,6 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 navigationController,
                 ChatService(),
                 DatabaseService(realm: DatabaseProvider.initiateRealm()))
+            mainCoordinator?.addWindowScene(windowScene)
             mainCoordinator?.start()
             window = UIWindow(frame: windowScene.coordinateSpace.bounds)
             window?.windowScene = windowScene
