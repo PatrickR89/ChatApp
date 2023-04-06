@@ -20,7 +20,7 @@ protocol ChatServiceActions: AnyObject {
     func chatService(didRecieve username: String, and token: String)
     func chatService(didRegister user: LoginRequest)
     func chatService(didRecieveError error: String)
-    func requestSavedMessages()
+    func chatServiceDidRequestPendingMessages()
 }
 
 protocol ChatServiceResponse: AnyObject {
@@ -42,9 +42,8 @@ class ChatService: NSObject {
     private var pendingMessages = [PendingMessage]()
 
     override init() {
-        self.token = UserDefaults.standard.string(forKey: "CHAT_ID")
         super.init()
-        actions?.requestSavedMessages()
+        actions?.chatServiceDidRequestPendingMessages()
     }
 
     weak var delegate: ChatServiceDelegate?

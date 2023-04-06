@@ -80,11 +80,17 @@ class DatabaseService {
         let conversations = realm.objects(ConversationRealmModel.self)
         let messages = realm.objects(MessageRealmModel.self)
         let token = realm.object(ofType: TokenModel.self, forPrimaryKey: username)
+        let pendingMessages = realm.object(ofType: PendingMessages.self, forPrimaryKey: username)
 
         do {
             try realm.write {
                 realm.delete(messages)
                 realm.delete(conversations)
+
+                if let pendingMessages {
+                    realm.delete(pendingMessages)
+                }
+
                 if let user {
                     realm.delete(user)
                 }
@@ -110,7 +116,7 @@ class DatabaseService {
                     realm.add(model)
                 }
             } catch {
-                print("❌ error saving message", error.localizedDescription)
+                print("❌ error saving message for existing conversation", error.localizedDescription)
             }
         } else {
             let newConversation = ConversationRealmModel(user: user, conversation: [message.id])
@@ -121,7 +127,7 @@ class DatabaseService {
                     realm.add(newConversation)
                 }
             } catch {
-                print("❌ error saving message", error.localizedDescription)
+                print("❌ error saving message for new conversation", error.localizedDescription)
             }
         }
     }
@@ -143,7 +149,7 @@ class DatabaseService {
     func savePendingMessages(messages: [PendingMessage]) {
         let messageIds = messages.map { $0.id }
         guard let token else { return }
-        guard let pendingMessages = realm.object(ofType: PendingMessages.self, forPrimaryKey: token) else {
+        guard let pendingMessages = realm.object(ofType: PendingMessages.self, forPrimaryKey: username) else {
             let model = PendingMessages(token: token, ids: messageIds)
 
             do {
@@ -156,7 +162,7 @@ class DatabaseService {
 
             return
         }
-        var idList = List<UUID>()
+        let idList = List<UUID>()
         messageIds.forEach { id in
             idList.append(id)
         }
@@ -171,8 +177,7 @@ class DatabaseService {
     }
 
     func loadPendingMessages() {
-        guard let token else { return }
-        guard let messageModel = realm.object(ofType: PendingMessages.self, forPrimaryKey: token) else { return }
+        guard let messageModel = realm.object(ofType: PendingMessages.self, forPrimaryKey: username) else { return }
 
         var pendingMessages = [PendingMessage]()
         messageModel.messageIds.forEach { id in
@@ -188,8 +193,6 @@ class DatabaseService {
 
         delegate?.databaseService(didLoadMessages: pendingMessages)
     }
-
-
 
     func flagMessage(_ id: UUID, isSent: Bool) {
         guard let message = realm.object(ofType: MessageRealmModel.self, forPrimaryKey: id) else { return }

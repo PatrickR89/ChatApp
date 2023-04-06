@@ -96,7 +96,8 @@ extension ChatController: MessageInputViewDelegate {
 
 extension ChatController: ChatServiceDelegate {
     func chatService(didSendMessage id: UUID, to user: String, withSuccess success: Bool) {
-        // reconstruct ChatServiceDelegate to remove this delegate method from ChatController, and use only for ConversationController
+        // reconstruct ChatServiceDelegate to remove this delegate method from ChatController,
+        // and use only for ConversationController
     }
 
     func chatService(didRecieve message: RecievedMessage) {

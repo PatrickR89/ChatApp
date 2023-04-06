@@ -81,8 +81,10 @@ class MainCoordinator {
     }
 }
 
+// MARK: chatService <-> databaseService intersection
+
 extension MainCoordinator: ChatServiceActions {
-    func requestSavedMessages() {
+    func chatServiceDidRequestPendingMessages() {
         databaseService.loadPendingMessages()
     }
 
