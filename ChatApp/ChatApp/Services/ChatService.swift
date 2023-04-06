@@ -64,30 +64,34 @@ class ChatService: NSObject {
         request.httpBody = try? JSONEncoder().encode(message)
 
         let task = URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
+            guard let self else {
+                return
+            }
             if let error = error {
                 let pendingMessage = PendingMessage(message: message, id: messageId)
-                self?.pendingMessages.append(pendingMessage)
-                self?.backthreadMessageOutput(message: pendingMessage)
-                self?.delegate?.chatService(didSendMessage: messageId, to: message.chatId, withSuccess: false)
-                self?.actions?.errorOccured(error.localizedDescription)
+                self.pendingMessages.append(pendingMessage)
+                self.backthreadMessageOutput()
+                self.delegate?.chatService(didSendMessage: messageId, to: message.chatId, withSuccess: false)
+                self.actions?.errorOccured(error.localizedDescription)
                 return
             }
 
             guard let response = response as? HTTPURLResponse else { return }
             guard response.statusCode == 200 else {
                 let pendingMessage = PendingMessage(message: message, id: messageId)
-                self?.pendingMessages.append(pendingMessage)
-                self?.backthreadMessageOutput(message: pendingMessage)
-                self?.delegate?.chatService(didSendMessage: messageId, to: message.chatId, withSuccess: false)
+                self.pendingMessages.append(pendingMessage)
+                self.backthreadMessageOutput()
+
+                self.delegate?.chatService(didSendMessage: messageId, to: message.chatId, withSuccess: false)
                 if response.statusCode >= 400 && response.statusCode < 500 {
-                    self?.actions?.errorOccured("Error in request")
+                    self.actions?.errorOccured("Error in request")
                 } else if response.statusCode >= 500 {
-                    self?.actions?.errorOccured("Error occured on server")
+                    self.actions?.errorOccured("Error occured on server")
                 }
 
                 return
             }
-            self?.delegate?.chatService(didSendMessage: messageId, to: message.chatId, withSuccess: true)
+            self.delegate?.chatService(didSendMessage: messageId, to: message.chatId, withSuccess: true)
             if let data = data {
                 print("send response: \(String(data: data, encoding: .utf8) ?? "<error>")")
             }
@@ -96,7 +100,14 @@ class ChatService: NSObject {
         task.resume()
     }
 
-    func backthreadMessageOutput(message: PendingMessage) {
+    func backthreadMessageOutput() {
+        guard !pendingMessages.isEmpty else {
+            return
+        }
+        guard let message = pendingMessages.first else {
+            return
+        }
+
         DispatchQueue.global(qos: .userInteractive).asyncAfter(deadline: .now() + 2) { [weak self] in
             let url = URL(string: "\(APIConstants.baseURL)\(APIConstants.sendMessageAPI)")!
 
@@ -108,14 +119,14 @@ class ChatService: NSObject {
 
             let task = URLSession.shared.dataTask(with: request) { data, response, error in
                 if error != nil {
-                    self?.backthreadMessageOutput(message: message)
+                    self?.backthreadMessageOutput()
                     return
                 }
 
                 guard let response = response as? HTTPURLResponse else { return }
                 guard response.statusCode == 200 else {
 
-                    self?.backthreadMessageOutput(message: message)
+                    self?.backthreadMessageOutput()
                     return
                 }
 
@@ -123,7 +134,8 @@ class ChatService: NSObject {
                     print("send response: \(String(data: data, encoding: .utf8) ?? "<error>")")
                 }
                 self?.delegate?.chatService(didSendMessage: message.id, to: message.chatId, withSuccess: true)
-                self?.pendingMessages.removeAll(where: {$0.id == message.id})
+                self?.pendingMessages.removeFirst()
+                self?.backthreadMessageOutput()
             }
 
             task.resume()
