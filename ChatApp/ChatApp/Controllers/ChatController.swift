@@ -99,7 +99,7 @@ extension ChatController: ChatServiceDelegate {
         // reconstruct ChatServiceDelegate to remove this delegate method from ChatController, and use only for ConversationController
     }
 
-    func recieveMessage(_ message: RecievedMessage) {
+    func chatService(didRecieve message: RecievedMessage) {
         let messageViewModel = MessageViewModel(message: message)
         messages.append(messageViewModel)
     }

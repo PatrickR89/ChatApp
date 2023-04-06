@@ -83,7 +83,7 @@ class ActiveUsersController {
 }
 
 extension ActiveUsersController: ChatServiceUsersDelegate {
-    func service(didRecieve users: [User]) {
+    func chatService(didRecieve users: [User]) {
         self.users = users
     }
 }

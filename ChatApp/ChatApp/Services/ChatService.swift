@@ -8,18 +8,19 @@
 import Foundation
 
 protocol ChatServiceDelegate: AnyObject {
-    func recieveMessage(_ message: RecievedMessage)
+    func chatService(didRecieve message: RecievedMessage)
     func chatService(didSendMessage id: UUID, to user: String, withSuccess success: Bool)
 }
 
 protocol ChatServiceUsersDelegate: AnyObject {
-    func service(didRecieve users: [User])
+    func chatService(didRecieve users: [User])
 }
 
 protocol ChatServiceActions: AnyObject {
-    func recieveId(for username: String, token id: String)
-    func registeredUser(_ user: LoginRequest)
-    func errorOccured(_ error: String)
+    func chatService(didRecieve username: String, and token: String)
+    func chatService(didRegister user: LoginRequest)
+    func chatService(didRecieveError error: String)
+    func requestSavedMessages()
 }
 
 protocol ChatServiceResponse: AnyObject {
@@ -43,6 +44,7 @@ class ChatService: NSObject {
     override init() {
         self.token = UserDefaults.standard.string(forKey: "CHAT_ID")
         super.init()
+        actions?.requestSavedMessages()
     }
 
     weak var delegate: ChatServiceDelegate?
@@ -72,7 +74,7 @@ class ChatService: NSObject {
                 self.pendingMessages.append(pendingMessage)
                 self.backthreadMessageOutput()
                 self.delegate?.chatService(didSendMessage: messageId, to: message.chatId, withSuccess: false)
-                self.actions?.errorOccured(error.localizedDescription)
+                self.actions?.chatService(didRecieveError: error.localizedDescription)
                 return
             }
 
@@ -84,9 +86,9 @@ class ChatService: NSObject {
 
                 self.delegate?.chatService(didSendMessage: messageId, to: message.chatId, withSuccess: false)
                 if response.statusCode >= 400 && response.statusCode < 500 {
-                    self.actions?.errorOccured("Error in request")
+                    self.actions?.chatService(didRecieveError: "Error in request")
                 } else if response.statusCode >= 500 {
-                    self.actions?.errorOccured("Error occured on server")
+                    self.actions?.chatService(didRecieveError: "Error occured on server")
                 }
 
                 return
@@ -142,6 +144,10 @@ class ChatService: NSObject {
         }
     }
 
+    public func populatePendingMessages(_ messages: [PendingMessage]) {
+        self.pendingMessages = messages
+    }
+
     func login(_ model: LoginRequest) {
 
         let url = URL(string: "\(APIConstants.baseURL)\(APIConstants.loginAPI)")!
@@ -155,7 +161,7 @@ class ChatService: NSObject {
 
             if let error = error {
                 self?.waitingForResponse = false
-                self?.actions?.errorOccured(error.localizedDescription)
+                self?.actions?.chatService(didRecieveError: error.localizedDescription)
                 return
             }
 
@@ -163,30 +169,30 @@ class ChatService: NSObject {
             guard response.statusCode == 200 else {
                 self?.waitingForResponse = false
                 if response.statusCode == 403 || response.statusCode == 401 {
-                    self?.actions?.errorOccured("Authentication failed")
+                    self?.actions?.chatService(didRecieveError: "Authentication failed")
                 } else if response.statusCode >= 400 && response.statusCode < 500 {
-                    self?.actions?.errorOccured("Error in request")
+                    self?.actions?.chatService(didRecieveError: "Error in request")
                 } else if response.statusCode >= 500 {
-                    self?.actions?.errorOccured("Error occured on server")
+                    self?.actions?.chatService(didRecieveError: "Error occured on server")
                 }
 
                 return
             }
 
             guard let data = data else {
-                self?.actions?.errorOccured("Error occured while fetching data")
+                self?.actions?.chatService(didRecieveError: "Error occured while fetching data")
                 return
             }
 
             guard let respData = try? JSONDecoder().decode(LoginResponse.self, from: data) else {
-                self?.actions?.errorOccured("Error in retrieved data")
+                self?.actions?.chatService(didRecieveError: "Error in retrieved data")
                 return
             }
 
             self?.setToken(respData.token)
             self?.waitingForResponse = false
-            self?.actions?.recieveId(for: model.username, token: respData.token)
-            self?.actions?.registeredUser(model)
+            self?.actions?.chatService(didRecieve: model.username, and: respData.token)
+            self?.actions?.chatService(didRegister: model)
             self?.listenForMessages()
         }
 
@@ -237,7 +243,7 @@ class ChatService: NSObject {
     func recieveMessageData(_ data: Data) {
         guard let message = try? JSONDecoder().decode(RecievedMessage.self, from: data) else {return}
         DispatchQueue.main.async {
-            self.delegate?.recieveMessage(message)
+            self.delegate?.chatService(didRecieve: message)
         }
     }
 
@@ -252,7 +258,7 @@ class ChatService: NSObject {
 
             if let error = error {
                 self?.waitingForResponse = false
-                self?.actions?.errorOccured(error.localizedDescription)
+                self?.actions?.chatService(didRecieveError: error.localizedDescription)
                 return
             }
 
@@ -260,26 +266,26 @@ class ChatService: NSObject {
             guard response.statusCode == 200 else {
                 self?.waitingForResponse = false
                 if response.statusCode >= 400 && response.statusCode < 500 {
-                    self?.actions?.errorOccured("Error in request")
+                    self?.actions?.chatService(didRecieveError: "Error in request")
                 } else if response.statusCode >= 500 {
-                    self?.actions?.errorOccured("Error occured on server")
+                    self?.actions?.chatService(didRecieveError: "Error occured on server")
                 }
 
                 return
             }
 
             guard let data = data else {
-                self?.actions?.errorOccured("Error occured while fetching data")
+                self?.actions?.chatService(didRecieveError: "Error occured while fetching data")
                 return
             }
 
             guard let users = try? JSONDecoder().decode([User].self, from: data) else {
-                self?.actions?.errorOccured("Error in retrieved data")
+                self?.actions?.chatService(didRecieveError: "Error in retrieved data")
                 return
             }
 
             DispatchQueue.main.async {
-                self?.usersDelegate?.service(didRecieve: users)
+                self?.usersDelegate?.chatService(didRecieve: users)
             }
         }
 

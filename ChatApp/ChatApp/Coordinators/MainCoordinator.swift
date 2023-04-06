@@ -26,7 +26,7 @@ class MainCoordinator {
         self.databaseService = databaseService
         self.navController = navController
         self.chatService.actions = self
-        self.databaseService.userDelegate = self
+        self.databaseService.delegate = self
     }
 
     func start() {
@@ -82,24 +82,32 @@ class MainCoordinator {
 }
 
 extension MainCoordinator: ChatServiceActions {
-    func registeredUser(_ user: LoginRequest) {
+    func requestSavedMessages() {
+        databaseService.loadPendingMessages()
+    }
+
+    func chatService(didRegister user: LoginRequest) {
         databaseService.saveUser(username: user.username, name: user.name, lastname: user.surname)
     }
 
-    func recieveId(for username: String, token id: String) {
+    func chatService(didRecieve username: String, and id: String) {
         self.token = id
         databaseService.saveToken(username: username, token: id)
         start()
     }
 
-    func errorOccured(_ error: String) {
+    func chatService(didRecieveError error: String) {
         DispatchQueue.main.async {
             self.presentServiceNotification(error)
         }
     }
 }
 
-extension MainCoordinator: DatabaseServiceUserDelegate {
+extension MainCoordinator: DatabaseServiceDelegate {
+    func databaseService(didLoadMessages messages: [PendingMessage]) {
+        chatService.populatePendingMessages(messages)
+    }
+
     func databaseService(didRecieve token: String) {
         self.token = token
         chatService.setToken(token)

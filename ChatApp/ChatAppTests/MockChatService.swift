@@ -101,11 +101,11 @@ class MockChatService: ChatService {
             sourceUsername: "someuser",
             timestamp: Date.now.timeIntervalSince1970,
             content: "test message")
-        delegate?.recieveMessage(message)
+        delegate?.chatService(didRecieve: message)
     }
 
     override func fetchActiveUsers() {
         let activeUsers = [User(username: "asddas"), User(username: "asjdhjkas"), User(username: "user")]
-        usersDelegate?.service(didRecieve: activeUsers)
+        usersDelegate?.chatService(didRecieve: activeUsers)
     }
 }

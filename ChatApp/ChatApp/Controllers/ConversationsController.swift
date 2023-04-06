@@ -89,7 +89,7 @@ extension ConversationsController: ChatServiceDelegate {
         }
     }
 
-    func recieveMessage(_ message: RecievedMessage) {
+    func chatService(didRecieve message: RecievedMessage) {
         let messageViewModel = MessageViewModel(message: message)
         conversations[message.sourceUsername, default: []].append(messageViewModel)
         listConversations(message.sourceUsername)

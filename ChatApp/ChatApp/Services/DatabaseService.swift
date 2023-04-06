@@ -8,15 +8,16 @@
 import Foundation
 import RealmSwift
 
-protocol DatabaseServiceUserDelegate: AnyObject {
+protocol DatabaseServiceDelegate: AnyObject {
     func databaseService(didRecieve token: String)
+    func databaseService(didLoadMessages messages: [PendingMessage])
 }
 
 class DatabaseService {
     private let realm: Realm
     private var username: String?
     private var token: String?
-    weak var userDelegate: DatabaseServiceUserDelegate?
+    weak var delegate: DatabaseServiceDelegate?
 
     init(realm: Realm) {
         self.realm = realm
@@ -71,7 +72,7 @@ class DatabaseService {
             return
         }
         self.token = token.token
-        userDelegate?.databaseService(didRecieve: token.token)
+        delegate?.databaseService(didRecieve: token.token)
     }
 
     func deleteUser() {
@@ -138,6 +139,57 @@ class DatabaseService {
             // name of conversations with array of viewModels
         }
     }
+
+    func savePendingMessages(messages: [PendingMessage]) {
+        let messageIds = messages.map { $0.id }
+        guard let token else { return }
+        guard let pendingMessages = realm.object(ofType: PendingMessages.self, forPrimaryKey: token) else {
+            let model = PendingMessages(token: token, ids: messageIds)
+
+            do {
+                try realm.write({
+                    realm.add(model)
+                })
+            } catch {
+                print("❌ error occured while creating pending messages")
+            }
+
+            return
+        }
+        var idList = List<UUID>()
+        messageIds.forEach { id in
+            idList.append(id)
+        }
+        do {
+            try realm.write {
+                pendingMessages.messageIds = idList
+            }
+        } catch {
+            print("❌ error occured while saving pending messages")
+        }
+
+    }
+
+    func loadPendingMessages() {
+        guard let token else { return }
+        guard let messageModel = realm.object(ofType: PendingMessages.self, forPrimaryKey: token) else { return }
+
+        var pendingMessages = [PendingMessage]()
+        messageModel.messageIds.forEach { id in
+            guard let message = realm.object(ofType: MessageRealmModel.self, forPrimaryKey: id) else {
+                return
+            }
+            guard let sender = message.sender?.name else {
+                return
+            }
+            let pendingMessage = PendingMessage(message: SentMessage(content: message.content, chatId: sender), id: id)
+            pendingMessages.append(pendingMessage)
+        }
+
+        delegate?.databaseService(didLoadMessages: pendingMessages)
+    }
+
+
 
     func flagMessage(_ id: UUID, isSent: Bool) {
         guard let message = realm.object(ofType: MessageRealmModel.self, forPrimaryKey: id) else { return }

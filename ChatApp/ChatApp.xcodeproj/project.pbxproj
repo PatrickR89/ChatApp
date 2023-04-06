@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		30CE821E3859BAB40A9768C0 /* Pods_ChatApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFB45F5B0EEEE1DA855BD1D8 /* Pods_ChatApp.framework */; };
+		CD0E2BD829DEDD8E00C7E2DE /* PendingMessagesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD0E2BD729DEDD8E00C7E2DE /* PendingMessagesModel.swift */; };
 		CD18DAD72990FDC6005D6544 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAD62990FDC6005D6544 /* LoginController.swift */; };
 		CD18DADA2990FEAE005D6544 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DAD92990FEAE005D6544 /* UITextField+Extension.swift */; };
 		CD18DADE29911EC7005D6544 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CD18DADD29911EC7005D6544 /* MainCoordinator.swift */; };
@@ -87,6 +88,7 @@
 /* Begin PBXFileReference section */
 		4235E75FDAE2176D98494694 /* Pods-ChatApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.release.xcconfig"; path = "Target Support Files/Pods-ChatApp/Pods-ChatApp.release.xcconfig"; sourceTree = "<group>"; };
 		5160C5BF4AA1509CB0181E98 /* Pods-ChatApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChatApp.debug.xcconfig"; path = "Target Support Files/Pods-ChatApp/Pods-ChatApp.debug.xcconfig"; sourceTree = "<group>"; };
+		CD0E2BD729DEDD8E00C7E2DE /* PendingMessagesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PendingMessagesModel.swift; sourceTree = "<group>"; };
 		CD18DAD62990FDC6005D6544 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
 		CD18DAD92990FEAE005D6544 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		CD18DADD29911EC7005D6544 /* MainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCoordinator.swift; sourceTree = "<group>"; };
@@ -440,6 +442,7 @@
 			children = (
 				CDEA328D29C1AB94005D6FFB /* ConversationRealmModel.swift */,
 				CDEA328F29C1B32E005D6FFB /* CurrentUserModel.swift */,
+				CD0E2BD729DEDD8E00C7E2DE /* PendingMessagesModel.swift */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
@@ -677,6 +680,7 @@
 				CD18DAF62994F9CB005D6544 /* KeyboardLayoutObserver.swift in Sources */,
 				CD18DADA2990FEAE005D6544 /* UITextField+Extension.swift in Sources */,
 				CDEA328E29C1AB94005D6FFB /* ConversationRealmModel.swift in Sources */,
+				CD0E2BD829DEDD8E00C7E2DE /* PendingMessagesModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
