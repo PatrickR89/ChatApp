@@ -29,7 +29,7 @@ protocol ChatServiceResponse: AnyObject {
 
 protocol ChatServiceType {
     func setToken(_ token: String)
-    func setResponseDelegate(controller: LoginController)
+    func setDelegacy(controller: DelegateType)
     func sendMessage(_ message: SentMessage, messageId: UUID)
     func backthreadMessageOutput()
     func populatePendingMessages(_ messages: [PendingMessage])
@@ -38,6 +38,29 @@ protocol ChatServiceType {
     func receiveWebSocketMessage()
     func recieveMessageData(_ data: Data)
     func fetchActiveUsers()
+}
+
+enum DelegateType {
+    case login (LoginController)
+    case main (MainCoordinator)
+    case active (ActiveUsersController)
+    case conversation (ConversationsController)
+    case chat (ChatController)
+
+    var controller: Any {
+        switch self {
+        case .login(let loginController):
+            return loginController
+        case .main(let mainCoordinator):
+            return mainCoordinator
+        case .active(let activeUsersController):
+            return activeUsersController
+        case .conversation(let conversationsController):
+            return conversationsController
+        case .chat(let chatController):
+            return chatController
+        }
+    }
 }
 
 class ChatService: NSObject, ChatServiceType {
@@ -68,8 +91,19 @@ class ChatService: NSObject, ChatServiceType {
         self.token = token
     }
 
-    func setResponseDelegate(controller: LoginController) {
-        self.responseDelegate = controller
+    func setDelegacy(controller: DelegateType) {
+        switch controller {
+        case .login(let loginController):
+            self.responseDelegate = loginController
+        case .main(let mainCoordinator):
+            self.actions = mainCoordinator
+        case .active(let activeUsersController):
+            self.usersDelegate = activeUsersController
+        case .conversation(let conversationsController):
+            self.delegate = conversationsController
+        case .chat(let chatController):
+            self.delegate = chatController
+        }
     }
 
     func sendMessage(_ message: SentMessage, messageId: UUID) {
@@ -306,12 +340,6 @@ class ChatService: NSObject, ChatServiceType {
         }
 
         task.resume()
-    }
-}
-
-extension ChatService: ActiveUsersControllerDelegate {
-    func activeUsersControllerDidRequestUsers() {
-        fetchActiveUsers()
     }
 }
 

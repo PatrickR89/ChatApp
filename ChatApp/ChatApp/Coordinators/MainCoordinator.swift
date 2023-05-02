@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import Factory
 
 class MainCoordinator {
 
@@ -17,17 +18,16 @@ class MainCoordinator {
     }
 
     let navController: UINavigationController
-    var chatService: ChatService
+    @Injected(\.chatService) private var chatService
     let databaseService: DatabaseService
     var childCoordinator: ChatCoordinator?
     var windowScene: UIWindowScene?
     var notificationWindow: UIWindow?
 
-    init(_ navController: UINavigationController, _ chatService: ChatService, _ databaseService: DatabaseService) {
-        self.chatService = chatService
+    init(_ navController: UINavigationController, _ databaseService: DatabaseService) {
         self.databaseService = databaseService
         self.navController = navController
-        self.chatService.actions = self
+        chatService.setDelegacy(controller: .main(self))
         self.databaseService.delegate = self
     }
 
@@ -59,7 +59,7 @@ class MainCoordinator {
             navController.popViewController(animated: true)
         }
 
-        self.childCoordinator = ChatCoordinator(with: navController, chatService, databaseService)
+        self.childCoordinator = ChatCoordinator(with: navController, databaseService)
         childCoordinator?.start()
     }
 

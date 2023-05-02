@@ -7,12 +7,14 @@
 
 import UIKit
 import Combine
+import Factory
 
 protocol ConversationControllerActions: AnyObject {
     func conversationControllerDidSelect(_ user: String, _ conversation: [MessageViewModel])
 }
 
 class ConversationsController {
+    @Injected(\.chatService) private var chatService
     @Published private(set) var conversations: [String: [MessageViewModel]] = [:]
     private(set) var conversationsList: [String] = [] {
         didSet {
@@ -22,6 +24,10 @@ class ConversationsController {
 
     weak var actions: ConversationControllerActions?
     var diffableDataSource: UITableViewDiffableDataSource<Int, String>?
+
+    init() {
+        chatService.setDelegacy(controller: .conversation(self))
+    }
 
     func setupDataSource(for tableView: UITableView) {
         let diffableDataSource = UITableViewDiffableDataSource<

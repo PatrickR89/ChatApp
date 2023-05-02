@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import Factory
 
 class ChatCoordinator {
+    @Injected (\.chatService) private var chatService
     let navController: UINavigationController
-    let chatService: ChatService
     let databaseService: DatabaseService
     private(set) var activeUsersController: ActiveUsersController?
     private(set) var tabBarController: ChatTabBarController?
@@ -18,10 +19,9 @@ class ChatCoordinator {
     private(set) var convViewController: ConversationsViewController?
     let appearance = UITabBarAppearance()
 
-    init(with navController: UINavigationController, _ service: ChatService, _ databaseService: DatabaseService) {
+    init(with navController: UINavigationController, _ databaseService: DatabaseService) {
         self.databaseService = databaseService
         self.navController = navController
-        self.chatService = service
     }
 
     deinit {
@@ -49,9 +49,9 @@ class ChatCoordinator {
 
     private func startActiveUsersViewController() {
         activeUsersController = ActiveUsersController()
-        activeUsersController?.delegate = chatService
+//        activeUsersController?.delegate = chatService
         activeUsersController?.actions = self
-        chatService.usersDelegate = activeUsersController
+//        chatService.usersDelegate = activeUsersController
         activeUsersViewController = ActiveUsersViewController(activeUsersController ?? ActiveUsersController())
         activeUsersViewController?.titleDelegate = self
         let tabItemImage = UIImage(systemName: "person.circle")
@@ -62,7 +62,7 @@ class ChatCoordinator {
 
     private func startConversationsViewController() {
         conversationsController.actions = self
-        chatService.delegate = conversationsController
+//        chatService.delegate = conversationsController
 
         convViewController = ConversationsViewController(conversationsController)
         convViewController?.titleDelegate = self
@@ -73,7 +73,7 @@ class ChatCoordinator {
     }
 
     private func startChatTableViewController(_ user: String, _ messages: [MessageViewModel]) {
-        let chatController = ChatController(with: chatService)
+        let chatController = ChatController()
         chatController.openChat(user, messages)
         chatController.actions = conversationsController
         let chatViewController = ChatTableViewController(chatController)

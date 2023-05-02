@@ -24,7 +24,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
             mainCoordinator = MainCoordinator(
                 navigationController,
-                ChatService(),
                 DatabaseService(realm: DatabaseProvider.initiateRealm()))
             mainCoordinator?.addWindowScene(windowScene)
             mainCoordinator?.start()

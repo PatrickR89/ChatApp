@@ -26,7 +26,7 @@ class LoginController {
     init() {
         inputIsValid = false
         validateInput()
-        chatService.setResponseDelegate(controller: self)
+        chatService.setDelegacy(controller: .login(self))
     }
 
     func validateInput() {

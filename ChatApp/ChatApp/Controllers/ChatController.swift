@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Factory
 
 protocol ChatControllerDelegate: AnyObject {
     func chatControllerDidAddMessage(at index: Int)
@@ -17,7 +18,7 @@ protocol ChatControllerActions: AnyObject {
 }
 
 class ChatController {
-
+    @Injected(\.chatService) private var chatService
     var messages: [MessageViewModel] = [] {
         didSet {
             updateSnapshot()
@@ -27,15 +28,13 @@ class ChatController {
 
     var chatId: String = ""
 
-    let chatService: ChatService
     weak var delegate: ChatControllerDelegate?
     weak var actions: ChatControllerActions?
 
     var diffableDataSource: UITableViewDiffableDataSource<Int, UUID>?
 
-    init(with service: ChatService) {
-        self.chatService = service
-        chatService.delegate = self
+    init() {
+        chatService.setDelegacy(controller: .chat(self))
     }
 
     func setupDataSource(for tableView: UITableView) {
