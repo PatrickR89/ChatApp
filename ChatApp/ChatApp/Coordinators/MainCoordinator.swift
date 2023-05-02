@@ -127,13 +127,8 @@ extension MainCoordinator: ChatServiceActions {
 }
 
 extension MainCoordinator: DatabaseServiceDelegate {
-    func databaseService(didLoadMessages messages: [PendingMessage]) {
-        chatService.populatePendingMessages(messages)
-    }
-
     func databaseService(didRecieve token: String) {
         self.token = token
-        chatService.setToken(token)
     }
 }
 

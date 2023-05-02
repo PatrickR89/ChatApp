@@ -7,13 +7,14 @@
 
 import Foundation
 import RealmSwift
+import Factory
 
 protocol DatabaseServiceDelegate: AnyObject {
     func databaseService(didRecieve token: String)
-    func databaseService(didLoadMessages messages: [PendingMessage])
 }
 
 class DatabaseService {
+    @Injected(\.chatService) private var chatService
     private let realm: Realm
     private var username: String?
     private var token: String?
@@ -73,6 +74,7 @@ class DatabaseService {
         }
         self.token = token.token
         delegate?.databaseService(didRecieve: token.token)
+        chatService.setToken(token.token)
     }
 
     func deleteUser() {
@@ -191,7 +193,7 @@ class DatabaseService {
             pendingMessages.append(pendingMessage)
         }
 
-        delegate?.databaseService(didLoadMessages: pendingMessages)
+        chatService.populatePendingMessages(pendingMessages)
     }
 
     func flagMessage(_ id: UUID, isSent: Bool) {
