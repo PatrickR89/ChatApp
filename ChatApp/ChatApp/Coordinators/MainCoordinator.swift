@@ -11,6 +11,8 @@ import Factory
 
 class MainCoordinator {
 
+    @Injected(\.chatService) private var chatService
+    @Injected(\.databaseService) private var databaseService
     @Published var token: String? {
         didSet {
             selectViewController()
@@ -18,14 +20,11 @@ class MainCoordinator {
     }
 
     let navController: UINavigationController
-    @Injected(\.chatService) private var chatService
-    let databaseService: DatabaseService
     var childCoordinator: ChatCoordinator?
     var windowScene: UIWindowScene?
     var notificationWindow: UIWindow?
 
     init(_ navController: UINavigationController, _ databaseService: DatabaseService) {
-        self.databaseService = databaseService
         self.navController = navController
         chatService.setDelegacy(controller: .main(self))
         self.databaseService.delegate = self
@@ -59,7 +58,7 @@ class MainCoordinator {
             navController.popViewController(animated: true)
         }
 
-        self.childCoordinator = ChatCoordinator(with: navController, databaseService)
+        self.childCoordinator = ChatCoordinator(with: navController)
         childCoordinator?.start()
     }
 
@@ -102,20 +101,10 @@ class MainCoordinator {
     }
 }
 
-// MARK: chatService <-> databaseService intersection
-
 extension MainCoordinator: ChatServiceActions {
-    func chatServiceDidRequestPendingMessages() {
-        databaseService.loadPendingMessages()
-    }
-
-    func chatService(didRegister user: LoginRequest) {
-        databaseService.saveUser(username: user.username, name: user.name, lastname: user.surname)
-    }
 
     func chatService(didRecieve username: String, and id: String) {
         self.token = id
-        databaseService.saveToken(username: username, token: id)
         start()
     }
 
@@ -127,8 +116,13 @@ extension MainCoordinator: ChatServiceActions {
 }
 
 extension MainCoordinator: DatabaseServiceDelegate {
+    func databaseService(didRecieve messages: [PendingMessage]) {
+        chatService.populatePendingMessages(messages)
+    }
+
     func databaseService(didRecieve token: String) {
         self.token = token
+        chatService.setToken(token)
     }
 }
 

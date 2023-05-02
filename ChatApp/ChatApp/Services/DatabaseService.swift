@@ -11,10 +11,10 @@ import Factory
 
 protocol DatabaseServiceDelegate: AnyObject {
     func databaseService(didRecieve token: String)
+    func databaseService(didRecieve messages: [PendingMessage])
 }
 
 class DatabaseService {
-    @Injected(\.chatService) private var chatService
     private let realm: Realm
     private var username: String?
     private var token: String?
@@ -74,7 +74,6 @@ class DatabaseService {
         }
         self.token = token.token
         delegate?.databaseService(didRecieve: token.token)
-        chatService.setToken(token.token)
     }
 
     func deleteUser() {
@@ -179,6 +178,7 @@ class DatabaseService {
     }
 
     func loadPendingMessages() {
+        guard let username else { return }
         guard let messageModel = realm.object(ofType: PendingMessages.self, forPrimaryKey: username) else { return }
 
         var pendingMessages = [PendingMessage]()
@@ -193,7 +193,7 @@ class DatabaseService {
             pendingMessages.append(pendingMessage)
         }
 
-        chatService.populatePendingMessages(pendingMessages)
+        delegate?.databaseService(didRecieve: pendingMessages)
     }
 
     func flagMessage(_ id: UUID, isSent: Bool) {

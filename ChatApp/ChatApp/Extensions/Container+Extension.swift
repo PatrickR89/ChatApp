@@ -9,6 +9,8 @@ import Foundation
 import Factory
 
 extension Container {
-    var chatService: Factory<ChatServiceType> { self { ChatService() }.singleton }
-//    var databaseService: Factory<DatabaseService> { self {DatabaseService(realm: <#Realm#>) }.singleton }
+    var chatService: Factory<ChatService> { self { ChatService() }.singleton }
+    var databaseService: Factory<DatabaseService> { self {DatabaseService(
+        realm: DatabaseProvider.initiateRealm()
+    ) }.singleton }
 }

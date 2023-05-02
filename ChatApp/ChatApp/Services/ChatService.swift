@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Factory
 
 protocol ChatServiceDelegate: AnyObject {
     func chatService(didRecieve message: RecievedMessage)
@@ -18,53 +19,16 @@ protocol ChatServiceUsersDelegate: AnyObject {
 
 protocol ChatServiceActions: AnyObject {
     func chatService(didRecieve username: String, and token: String)
-    func chatService(didRegister user: LoginRequest)
     func chatService(didRecieveError error: String)
-    func chatServiceDidRequestPendingMessages()
 }
 
 protocol ChatServiceResponse: AnyObject {
     func chatService(_ isWaitingForResponse: Bool)
 }
 
-protocol ChatServiceType {
-    func setToken(_ token: String)
-    func setDelegacy(controller: DelegateType)
-    func sendMessage(_ message: SentMessage, messageId: UUID)
-    func backthreadMessageOutput()
-    func populatePendingMessages(_ messages: [PendingMessage])
-    func login(_ model: LoginRequest)
-    func listenForMessages()
-    func receiveWebSocketMessage()
-    func recieveMessageData(_ data: Data)
-    func fetchActiveUsers()
-}
+class ChatService: NSObject {
 
-enum DelegateType {
-    case login (LoginController)
-    case main (MainCoordinator)
-    case active (ActiveUsersController)
-    case conversation (ConversationsController)
-    case chat (ChatController)
-
-    var controller: Any {
-        switch self {
-        case .login(let loginController):
-            return loginController
-        case .main(let mainCoordinator):
-            return mainCoordinator
-        case .active(let activeUsersController):
-            return activeUsersController
-        case .conversation(let conversationsController):
-            return conversationsController
-        case .chat(let chatController):
-            return chatController
-        }
-    }
-}
-
-class ChatService: NSObject, ChatServiceType {
-
+    @Injected(\.databaseService) private var databaseService
     private var token: String?
     private var webSocket: URLSessionWebSocketTask?
     private var waitingForResponse = false {
@@ -79,7 +43,7 @@ class ChatService: NSObject, ChatServiceType {
 
     override init() {
         super.init()
-        actions?.chatServiceDidRequestPendingMessages()
+        databaseService.loadPendingMessages()
     }
 
     weak var delegate: ChatServiceDelegate?
@@ -91,7 +55,7 @@ class ChatService: NSObject, ChatServiceType {
         self.token = token
     }
 
-    func setDelegacy(controller: DelegateType) {
+    func setDelegacy(controller: ChatServiceDelegateType) {
         switch controller {
         case .login(let loginController):
             self.responseDelegate = loginController
@@ -242,7 +206,8 @@ class ChatService: NSObject, ChatServiceType {
             self?.setToken(respData.token)
             self?.waitingForResponse = false
             self?.actions?.chatService(didRecieve: model.username, and: respData.token)
-            self?.actions?.chatService(didRegister: model)
+            self?.databaseService.saveToken(username: model.username, token: respData.token)
+            self?.databaseService.saveUser(username: model.username, name: model.name, lastname: model.surname)
             self?.listenForMessages()
         }
 

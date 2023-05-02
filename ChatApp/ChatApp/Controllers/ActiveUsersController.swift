@@ -9,10 +9,6 @@ import UIKit
 import Combine
 import Factory
 
-//protocol ActiveUsersControllerDelegate: AnyObject {
-//    func activeUsersControllerDidRequestUsers()
-//}
-
 protocol ActiveUsersControllerActions: AnyObject {
     func activeUsersControllerDidSelect(user: User)
 }
@@ -24,7 +20,6 @@ class ActiveUsersController {
 
     var usersObserver: AnyCancellable?
 
-//    weak var delegate: ActiveUsersControllerDelegate?
     weak var actions: ActiveUsersControllerActions?
 
     var diffableDataSource: UITableViewDiffableDataSource<Int, String>?
@@ -74,10 +69,8 @@ class ActiveUsersController {
         diffableDataSource.apply(snapshot)
     }
 
-    // move to chatService
     func requestUsers() {
         chatService.fetchActiveUsers()
-//        delegate?.activeUsersControllerDidRequestUsers()
     }
 
     func startConversation(_ indexPath: IndexPath) {

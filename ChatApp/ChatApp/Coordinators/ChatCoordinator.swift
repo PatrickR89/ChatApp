@@ -11,7 +11,6 @@ import Factory
 class ChatCoordinator {
     @Injected (\.chatService) private var chatService
     let navController: UINavigationController
-    let databaseService: DatabaseService
     private(set) var activeUsersController: ActiveUsersController?
     private(set) var tabBarController: ChatTabBarController?
     private(set) var conversationsController = ConversationsController()
@@ -19,8 +18,7 @@ class ChatCoordinator {
     private(set) var convViewController: ConversationsViewController?
     let appearance = UITabBarAppearance()
 
-    init(with navController: UINavigationController, _ databaseService: DatabaseService) {
-        self.databaseService = databaseService
+    init(with navController: UINavigationController) {
         self.navController = navController
     }
 
@@ -49,9 +47,7 @@ class ChatCoordinator {
 
     private func startActiveUsersViewController() {
         activeUsersController = ActiveUsersController()
-//        activeUsersController?.delegate = chatService
         activeUsersController?.actions = self
-//        chatService.usersDelegate = activeUsersController
         activeUsersViewController = ActiveUsersViewController(activeUsersController ?? ActiveUsersController())
         activeUsersViewController?.titleDelegate = self
         let tabItemImage = UIImage(systemName: "person.circle")
@@ -62,7 +58,6 @@ class ChatCoordinator {
 
     private func startConversationsViewController() {
         conversationsController.actions = self
-//        chatService.delegate = conversationsController
 
         convViewController = ConversationsViewController(conversationsController)
         convViewController?.titleDelegate = self
