@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Factory
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -20,6 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             guard let windowScene: UIWindowScene = (scene as? UIWindowScene) else {return}
 
             let navigationController = UINavigationController()
+
             mainCoordinator = MainCoordinator(
                 navigationController,
                 ChatService(),

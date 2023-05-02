@@ -50,7 +50,7 @@ class MainCoordinator {
             navController.popViewController(animated: true)
         }
 
-        let loginViewController = LoginViewController(with: chatService)
+        let loginViewController = LoginViewController()
         navController.pushViewController(loginViewController, animated: true)
     }
 

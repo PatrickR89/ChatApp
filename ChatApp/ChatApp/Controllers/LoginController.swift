@@ -7,13 +7,14 @@
 
 import UIKit
 import Combine
+import Factory
 
 protocol LoginControllerDelegate: AnyObject {
     func loginView(didRequestLoginFor user: LoginRequest)
 }
 
 class LoginController {
-
+    @Injected (\.chatService) private var chatService
     @Published private(set) var inputIsValid: Bool
     @Published private(set) var isWaiting: Bool = false
     @Published private(set) var loginRequest = LoginRequest(username: "", name: "", surname: "") {
@@ -22,11 +23,10 @@ class LoginController {
         }
     }
 
-    weak var delegate: LoginControllerDelegate?
-
     init() {
         inputIsValid = false
         validateInput()
+        chatService.setResponseDelegate(controller: self)
     }
 
     func validateInput() {
@@ -49,7 +49,7 @@ class LoginController {
     }
 
     func sendLoginRequest() {
-        delegate?.loginView(didRequestLoginFor: loginRequest)
+        chatService.login(loginRequest)
     }
 }
 

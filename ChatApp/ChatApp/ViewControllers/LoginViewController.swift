@@ -13,11 +13,9 @@ class LoginViewController: UIViewControllerWithKeyboard {
     var loginController = LoginController()
     let keyboardLayoutObserver = KeyboardLayoutObserver()
 
-    init(with service: ChatService) {
+    init() {
         self.loginView = LoginView(with: loginController)
         super.init(nibName: nil, bundle: nil)
-        loginController.delegate = service
-        service.responseDelegate = loginController
     }
 
     required init?(coder: NSCoder) {

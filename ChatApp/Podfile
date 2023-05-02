@@ -6,6 +6,7 @@ target 'ChatApp' do
   use_frameworks!
   pod "Alamofire"
   pod "RealmSwift"
+  pod "Factory"
 
   # Pods for ChatApp
 

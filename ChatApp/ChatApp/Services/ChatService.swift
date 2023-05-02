@@ -27,7 +27,20 @@ protocol ChatServiceResponse: AnyObject {
     func chatService(_ isWaitingForResponse: Bool)
 }
 
-class ChatService: NSObject {
+protocol ChatServiceType {
+    func setToken(_ token: String)
+    func setResponseDelegate(controller: LoginController)
+    func sendMessage(_ message: SentMessage, messageId: UUID)
+    func backthreadMessageOutput()
+    func populatePendingMessages(_ messages: [PendingMessage])
+    func login(_ model: LoginRequest)
+    func listenForMessages()
+    func receiveWebSocketMessage()
+    func recieveMessageData(_ data: Data)
+    func fetchActiveUsers()
+}
+
+class ChatService: NSObject, ChatServiceType {
 
     private var token: String?
     private var webSocket: URLSessionWebSocketTask?
@@ -53,6 +66,10 @@ class ChatService: NSObject {
 
     func setToken(_ token: String) {
         self.token = token
+    }
+
+    func setResponseDelegate(controller: LoginController) {
+        self.responseDelegate = controller
     }
 
     func sendMessage(_ message: SentMessage, messageId: UUID) {
@@ -289,12 +306,6 @@ class ChatService: NSObject {
         }
 
         task.resume()
-    }
-}
-
-extension ChatService: LoginControllerDelegate {
-    func loginView(didRequestLoginFor user: LoginRequest) {
-        login(user)
     }
 }
 
