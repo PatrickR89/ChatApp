@@ -37,7 +37,8 @@ extension UITextField {
         return self
     }
 
-    /// Method creates `UITextField` as an input field for entering message content, with defined constraints and UI elements.
+    /// Method creates `UITextField` as an input field for entering message content,
+    ///  with defined constraints and UI elements.
     /// - Returns: Defined `UITextField` with given elements.
     func createMessageInputField() -> UITextField {
         backgroundColor = ColorConstants.lightColor

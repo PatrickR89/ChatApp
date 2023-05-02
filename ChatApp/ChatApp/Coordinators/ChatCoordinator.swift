@@ -118,7 +118,6 @@ extension ChatCoordinator: ActiveUsersControllerActions {
     /// - Parameter user: ``User`` instance of selected user in ``ActiveUsersController``
     func activeUsersControllerDidSelect(user: User) {
         conversationsController.startConversation(with: user.username)
-
     }
 }
 

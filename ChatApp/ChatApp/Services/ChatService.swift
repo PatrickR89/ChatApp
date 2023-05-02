@@ -30,10 +30,14 @@ protocol ChatServiceResponse: AnyObject {
     func chatService(_ isWaitingForResponse: Bool)
 }
 
+/// Class used for network service containing required APIs.
 class ChatService: NSObject {
 
+    /// variable containing database service instance provided by Factory.
     @Injected(\.databaseService) private var databaseService
+    /// variable containing token value returned from server, which is then also saved in `Realm`database.
     private var token: String?
+    /// `URLSessionWebSocketTask` required for aporopriate URL request of messages.
     private var webSocket: URLSessionWebSocketTask?
     private var waitingForResponse = false {
         didSet {
@@ -43,6 +47,7 @@ class ChatService: NSObject {
         }
     }
 
+    /// Variable containing the `Array` of unsent messages due to server or network connection issues.
     private var pendingMessages = [PendingMessage]()
 
     override init() {
@@ -59,6 +64,8 @@ class ChatService: NSObject {
         self.token = token
     }
 
+    /// Method which sets controllers as delegates, deending on their functionalities.
+    /// - Parameter controller: `Enum` value carying instance of the controller themselves.
     func setDelegacy(controller: ChatServiceDelegateType) {
         switch controller {
         case .login(let loginController):
@@ -74,6 +81,12 @@ class ChatService: NSObject {
         }
     }
 
+    /// Method which sends created message to defined destination via given server API.
+    /// - Parameters:
+    ///   - message: Instance of ``SentMessage`` containing content and destination.
+    ///   - messageId: `UUID` value containing message ID as saved localy.
+    /// > Method checks connection availability. In case message was not sent, it is appended to `pendingMessages`.
+    ///  Both error and all responses are handled.
     func sendMessage(_ message: SentMessage, messageId: UUID) {
         let url = URL(string: "\(APIConstants.baseURL)\(APIConstants.sendMessageAPI)")!
 
@@ -120,6 +133,7 @@ class ChatService: NSObject {
         task.resume()
     }
 
+    /// Method with loop which repeatedly tries connection to server, and sends messages if server is reachable.
     func backthreadMessageOutput() {
         guard !pendingMessages.isEmpty else {
             return
@@ -166,6 +180,8 @@ class ChatService: NSObject {
         self.pendingMessages = messages
     }
 
+    /// Method targeting server API with credentials in order to recieve required token.
+    /// - Parameter model: Instance of ``LoginRequest`` containing al required information for succesfull auth.
     func login(_ model: LoginRequest) {
 
         let url = URL(string: "\(APIConstants.baseURL)\(APIConstants.loginAPI)")!
@@ -220,6 +236,7 @@ class ChatService: NSObject {
         task.resume()
     }
 
+    /// Recursive web socket method which listens for new messages.
     func listenForMessages() {
         let url = URL(string: "\(APIConstants.webSocketURL)\(APIConstants.chatAPI)")!
         var request = URLRequest(url: url)
@@ -233,6 +250,7 @@ class ChatService: NSObject {
         self.webSocket?.resume()
     }
 
+    /// Method for storing and presenting recieved message localy. With call on new web socket awaiting for messages.
     func receiveWebSocketMessage() {
         webSocket?.receive { [weak self] message in
             switch message {
@@ -259,6 +277,8 @@ class ChatService: NSObject {
         }
     }
 
+    /// Method wich decodes content from JSON, and sends to responding class via delegate.
+    /// - Parameter data: recieved data from server
     func recieveMessageData(_ data: Data) {
         guard let message = try? JSONDecoder().decode(RecievedMessage.self, from: data) else {return}
         DispatchQueue.main.async {
@@ -266,6 +286,7 @@ class ChatService: NSObject {
         }
     }
 
+    /// Method for fetching all active users available on server.
     func fetchActiveUsers() {
         let url = URL(string: "\(APIConstants.baseURL)\(APIConstants.fetchUsersAPI)")!
         var request = URLRequest(url: url)
