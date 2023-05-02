@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Enum defining position of input on login screen, for populating credentials required to register user.
 enum InputType {
     case username
     case firstName

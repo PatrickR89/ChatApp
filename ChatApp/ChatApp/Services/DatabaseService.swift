@@ -7,7 +7,6 @@
 
 import Foundation
 import RealmSwift
-import Factory
 
 protocol DatabaseServiceDelegate: AnyObject {
     func databaseService(didRecieve token: String)

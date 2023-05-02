@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Container containing `Supreme` font, which is used in application
 struct SupremeFont {
     static let regular = "Supreme-Regular"
     static let italic = "Supreme-Italic"

@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Experimantal enum, used to reduce code for delegates contained in ``ChatService`` in order to register classes for required delegates
 enum ChatServiceDelegateType {
     case login (LoginController)
     case main (MainCoordinator)
@@ -14,6 +15,7 @@ enum ChatServiceDelegateType {
     case conversation (ConversationsController)
     case chat (ChatController)
 
+    /// Variable containing selected class, providing it to ``ChatService``
     var controller: Any {
         switch self {
         case .login(let loginController):

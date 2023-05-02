@@ -13,6 +13,10 @@ protocol ChatServiceDelegate: AnyObject {
     func chatService(didSendMessage id: UUID, to user: String, withSuccess success: Bool)
 }
 
+extension ChatServiceDelegate {
+    func chatService(didSendMessage id: UUID, to user: String, withSuccess success: Bool) {}
+}
+
 protocol ChatServiceUsersDelegate: AnyObject {
     func chatService(didRecieve users: [User])
 }
