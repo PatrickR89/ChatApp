@@ -12,6 +12,10 @@ class KeyboardLayoutObserver {
 
     private var cancellables: Set<AnyCancellable> = []
 
+    /// Method creating `KeyboardFrame` observer, modifying UI layout depending on presence of keyboard,
+    /// in order to avoid covering UI elements with keyboard.
+    /// - Parameter viewController: Instance of `UIViewController` conforming to ``UIViewControllerWithKeyboard`` class,
+    /// in order to make required changes on (dis)appearance of keyboard.
     func startKeyboardObserver(for viewController: UIViewControllerWithKeyboard) {
         NotificationCenter.default.publisher(
             for: UIApplication.keyboardWillShowNotification)

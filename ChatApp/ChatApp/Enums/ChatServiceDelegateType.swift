@@ -7,7 +7,8 @@
 
 import Foundation
 
-/// Experimantal enum, used to reduce code for delegates contained in ``ChatService`` in order to register classes for required delegates
+/// Experimantal enum, used to reduce code for delegates contained in ``ChatService``
+///  in order to register classes for required delegates
 enum ChatServiceDelegateType {
     case login (LoginController)
     case main (MainCoordinator)

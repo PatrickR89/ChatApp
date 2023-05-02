@@ -31,7 +31,8 @@ class ChatCoordinator {
         convViewController = nil
     }
 
-    /// Main method in ``ChatCoordinator`` which creates an instance of and presents `UITabBarController` and creates instances of it's children
+    /// Main method in ``ChatCoordinator`` which creates an instance of and presents
+    /// `UITabBarController` and creates instances of it's children
     func start() {
 
         startActiveUsersViewController()
@@ -48,7 +49,8 @@ class ChatCoordinator {
         navController.pushViewController(tabBarController, animated: true)
     }
 
-    /// Method which creates ``activeUsersViewController`` with corresponding `Controller` generating `UITabBarItem` accordingly
+    /// Method which creates ``activeUsersViewController`` with corresponding
+    /// `Controller` generating `UITabBarItem` accordingly
     /// > Method is called in ``start()``
     private func startActiveUsersViewController() {
         activeUsersController = ActiveUsersController()
@@ -61,7 +63,8 @@ class ChatCoordinator {
         activeUsersViewController?.tabBarItem = tabBarItem
     }
 
-    /// Method creates ``ConversationsViewController``, providing it with required controller, and generating required `UITabBarItem`
+    /// Method creates ``ConversationsViewController``, providing it with required controller,
+    /// and generating required `UITabBarItem`
     /// > Method is called in ``start()``
     private func startConversationsViewController() {
         conversationsController.actions = self
@@ -93,7 +96,8 @@ extension ChatCoordinator: ChatTabBarControllerDelegate {
         activeUsersController?.requestUsers()
     }
 
-    /// Method connected to "logout" button in ``ChatTabBarController`` requesting destruction of instance of ``TokenModel``
+    /// Method connected to "logout" button in ``ChatTabBarController``
+    /// requesting destruction of instance of ``TokenModel``
     /// > Method is still undeveloped
     func chatTabBarDidRequestLogout() {
         print("logout request")
@@ -109,7 +113,8 @@ extension ChatCoordinator: ChatTabBarChildDelegate {
 }
 
 extension ChatCoordinator: ActiveUsersControllerActions {
-    /// Delegate method which requests presentation of ``ChatTableViewController`` from ``ActiveUsersController`` upon selection in `tableView`
+    /// Delegate method which requests presentation of ``ChatTableViewController``
+    /// from ``ActiveUsersController`` upon selection in `tableView`
     /// - Parameter user: ``User`` instance of selected user in ``ActiveUsersController``
     func activeUsersControllerDidSelect(user: User) {
         conversationsController.startConversation(with: user.username)
@@ -118,7 +123,8 @@ extension ChatCoordinator: ActiveUsersControllerActions {
 }
 
 extension ChatCoordinator: ConversationControllerActions {
-    /// Delegate method which requests presentation of ``ChatTableViewController`` from ``ConversationsViewController`` upon selection of a conversation in `tableView`
+    /// Delegate method which requests presentation of ``ChatTableViewController``
+    /// from ``ConversationsViewController`` upon selection of a conversation in `tableView`
     /// - Parameters:
     ///   - user: `String` value containing name of the user from conversation
     ///   - conversation: `Array` of messages already sent between users

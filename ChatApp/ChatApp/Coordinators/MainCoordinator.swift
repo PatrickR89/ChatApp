@@ -9,14 +9,16 @@ import UIKit
 import Combine
 import Factory
 
-/// MainCoordinator is a class which is primarily responsible for UI and functionality coordination, as also a network of require delegacies.
+/// MainCoordinator is a class which is primarily responsible for UI and functionality coordination,
+///  as also a network of require delegacies.
 class MainCoordinator {
 
     /// ChatService instance initiated in Factory Container
     @Injected(\.chatService) private var chatService
     /// DatabaseService instance initiated in Factory Container
     @Injected(\.databaseService) private var databaseService
-    /// Primary dependency required for communication with server, published via Combine, in order to report to required classes about every change.
+    /// Primary dependency required for communication with server, published via Combine,
+    /// in order to report to required classes about every change.
     @Published var token: String? {
         didSet {
             selectViewController()
@@ -34,7 +36,8 @@ class MainCoordinator {
         self.databaseService.delegate = self
     }
 
-    /// Main method which starts application, is calles from `SceneDelegate`, just after creating an instance of ``MainCoordinator``. Method loads user and token from database if they exists.
+    /// Main method which starts application, is calles from `SceneDelegate`, just after creating an instance of ``MainCoordinator``.
+    /// Method loads user and token from database if they exists.
     func start() {
         databaseService.loadUser()
         databaseService.loadToken()
@@ -50,7 +53,8 @@ class MainCoordinator {
 //        }
     }
 
-    /// Method creating a new instance of ``LoginViewController``, pushing it to active ``navController``, removing previous `ViewControllers` if any exist.
+    /// Method creating a new instance of ``LoginViewController``, pushing it to active ``navController``,
+    /// removing previous `ViewControllers` if any exist.
     func presentLoginScreen() {
         if !navController.viewControllers.isEmpty {
             navController.popViewController(animated: true)
@@ -60,7 +64,8 @@ class MainCoordinator {
         navController.pushViewController(loginViewController, animated: true)
     }
 
-    /// Method responsible for creating an instance of ``ChatCoordinator``, removing loginViewController if not required any more. Method also calls child coordinator's `start()` method.
+    /// Method responsible for creating an instance of ``ChatCoordinator``, removing loginViewController if not required any more.
+    /// Method also calls child coordinator's `start()` method.
     func presentChatView() {
         if !navController.viewControllers.isEmpty {
             navController.popViewController(animated: true)
@@ -112,7 +117,8 @@ class MainCoordinator {
         notificationWindow?.windowScene = windowScene
     }
 
-    /// Method which destroys notification window after timeout to avoid stacking notification windows, and remove the overlay of the same over UI.
+    /// Method which destroys notification window after timeout to avoid stacking notification windows,
+    /// and remove the overlay of the same over UI.
     func destroyNotificationWindow() {
         notificationWindow = nil
     }

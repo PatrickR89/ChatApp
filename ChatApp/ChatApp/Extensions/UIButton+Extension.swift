@@ -8,6 +8,8 @@
 import UIKit
 
 extension UIButton {
+    /// Method creates `UIButton` instance with defined characteristics and UI elements.
+    /// - Returns: Defined instance of `UIButton`
     func createPaperPlaneButton() -> UIButton {
         let buttonImage = UIImage(
             systemName: "paperplane.fill",
@@ -21,6 +23,9 @@ extension UIButton {
         return self
     }
 
+    /// Method creates instance of `UIButton` for ``LoginView``
+    /// - Returns: Defined instance of `UIButton`
+    /// > Button element contains title colors defined for normal and disabled cases.
     func createLoginButton() -> UIButton {
         layer.cornerRadius = 22
         setTitle("Register", for: .normal)
